@@ -45,10 +45,10 @@ export function AltarStage({
     >
       <CelestialBackdrop />
 
-      {/* CHẾ ĐỘ THU GỌN TRÊN MOBILE KHI ĐÃ RÚT XONG 3 LÁ (Nhường không gian cho khung đọc luận giải) */}
+      {/* CHẾ ĐỘ THU GỌN TRÊN MOBILE KHI ĐÃ RÚT XONG 3 LÁ (Chừa khoảng trống bên trái cho Logo thu gọn) */}
       {!isDrawingPhase && (
-        <div className="relative z-10 flex flex-col gap-2 px-4 py-2.5 lg:hidden">
-          <div className="flex items-center justify-between gap-3">
+        <div className="relative z-10 flex flex-col gap-2 pl-16 pr-4 py-2.5 lg:hidden safe-area-top">
+          <div className="flex items-center justify-between gap-2.5">
             <p className="font-serif text-sm font-medium ink-primary line-clamp-2 flex-1">
               &ldquo;{session.question}&rdquo;
             </p>
@@ -81,10 +81,10 @@ export function AltarStage({
         </div>
       )}
 
-      {/* BỐ CỤC CHÍNH: Luôn hiện khi đang rút bài (Mobile + PC), và luôn hiện trên PC */}
+      {/* BỐ CỤC CHÍNH */}
       <div
         className={cn(
-          "relative z-10 flex-1 min-h-0 flex-col items-center justify-center px-4 pt-3 pb-2 lg:px-8",
+          "relative z-10 flex-1 min-h-0 flex-col items-center justify-center px-4 pt-14 pb-2 sm:pt-16 lg:px-8 lg:pt-14",
           isDrawingPhase ? "flex" : "hidden lg:flex",
         )}
       >
@@ -97,6 +97,7 @@ export function AltarStage({
             <div className="mt-2 flex flex-col items-center gap-1">
               <StatusBadge
                 variant="accent"
+                shape="pill"
                 icon={<Sparkles className="h-3.5 w-3.5" />}
               >
                 {remainingInitialCount > 0
@@ -135,7 +136,7 @@ export function AltarStage({
                 ) : (
                   <div
                     className={cn(
-                      "flex items-center justify-center w-[94px] sm:w-[130px] lg:w-[144px] aspect-[2/3.15] rounded-2xl transition-all duration-300",
+                      "flex items-center justify-center w-[94px] sm:w-[130px] lg:w-[144px] aspect-[2/3.15] rounded-xl transition-all duration-300",
                       isNextTargetSlot
                         ? "empty-slot-surface-next"
                         : "empty-slot-surface",
@@ -149,7 +150,7 @@ export function AltarStage({
 
                 <span
                   className={cn(
-                    "rounded-md px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-center",
+                    "px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-center",
                     drawnCard || isNextTargetSlot
                       ? "slot-label-pill-active"
                       : "slot-label-pill",
@@ -197,7 +198,7 @@ export function AltarStage({
         )}
       </div>
 
-      {/* DÀN BÀI VÒNG CUNG ĐỂ NGƯỜI DÙNG TỰ RÚT */}
+      {/* DÀN BÀI VÒNG CUNG */}
       {isDrawingPhase && (
         <div className="relative z-20 w-full mt-auto shrink-0">
           <FannedDeckSpread
@@ -208,9 +209,9 @@ export function AltarStage({
         </div>
       )}
 
-      {/* BỘ BÀI PHỤ TRƯỢT RA KHI CHỌN CÂU HỎI ĐÀO SÂU */}
+      {/* BỘ BÀI PHỤ KHI HỎI ĐÀO SÂU */}
       {!isDrawingPhase && isClarifierFanActive && (
-        <div className="relative z-20 border-t line-accent-active surface-header pt-3 animate-in slide-in-from-bottom-6 fade-in duration-300">
+        <div className="relative z-20 border-t line-accent-active surface-header pt-3 motion-veil-panel">
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4">
             <div className="min-w-0">
               <p className="font-serif text-sm sm:text-lg font-semibold ink-accent">
@@ -222,7 +223,7 @@ export function AltarStage({
             </div>
 
             <Button
-              variant="outline"
+              variant="icon"
               size="icon"
               onClick={onCancelClarifierFan}
               aria-label={UI_TEXTS.DRAWING.BTN_CANCEL_CLARIFIER}

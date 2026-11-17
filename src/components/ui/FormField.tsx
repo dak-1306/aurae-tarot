@@ -5,6 +5,7 @@ interface TextInputProps {
   readonly onChange: (value: string) => void;
   readonly placeholder?: string;
   readonly disabled?: boolean;
+  readonly hasError?: boolean;
   readonly "aria-label"?: string;
 }
 
@@ -13,6 +14,7 @@ export function TextInput({
   onChange,
   placeholder,
   disabled,
+  hasError = false,
   "aria-label": ariaLabel,
 }: TextInputProps) {
   return (
@@ -20,6 +22,7 @@ export function TextInput({
       type="text"
       value={value}
       disabled={disabled}
+      data-error={hasError}
       placeholder={placeholder}
       aria-label={ariaLabel}
       onChange={(e) => onChange(e.target.value)}
@@ -34,6 +37,7 @@ interface TextAreaProps {
   readonly placeholder?: string;
   readonly rows?: number;
   readonly disabled?: boolean;
+  readonly hasError?: boolean;
   readonly "aria-label"?: string;
 }
 
@@ -43,6 +47,7 @@ export function TextArea({
   placeholder,
   rows = 3,
   disabled,
+  hasError = false,
   "aria-label": ariaLabel,
 }: TextAreaProps) {
   return (
@@ -50,6 +55,7 @@ export function TextArea({
       rows={rows}
       value={value}
       disabled={disabled}
+      data-error={hasError}
       placeholder={placeholder}
       aria-label={ariaLabel}
       onChange={(e) => onChange(e.target.value)}
@@ -81,7 +87,7 @@ export function ToggleSwitch({
       <span
         className={cn(
           "ui-switch-thumb",
-          checked ? "translate-x-6" : "translate-x-1",
+          checked ? "translate-x-5" : "translate-x-1",
         )}
       />
     </button>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ImageDown, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ChipButton } from "@/components/ui/ChipButton";
+import { Collapsible } from "@/components/ui/Collapsible";
 import { TextInput } from "@/components/ui/FormField";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { TAROT_CONFIG, TOPIC_PRESETS, UI_TEXTS } from "@/constants/app";
@@ -63,7 +64,7 @@ export function ReadingPanel({
       {/* Vùng cuộn nội bộ duy nhất của bảng luận giải */}
       <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar space-y-5 px-4 py-4 sm:px-6 sm:py-5">
         {/* Luận giải tổng quan 3 lá */}
-        <div className="surface-glass rounded-2xl p-4 sm:p-5">
+        <div className="surface-glass rounded-xl p-4 sm:p-5">
           <div className="flex items-center justify-between gap-2 border-b line-accent-subtle pb-3 mb-3.5">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 ink-accent" />
@@ -72,7 +73,7 @@ export function ReadingPanel({
               </h2>
             </div>
 
-            <StatusBadge variant="accent">
+            <StatusBadge variant="accent" shape="pill">
               {isStreamingSynthesis
                 ? UI_TEXTS.SYNTHESIS.STREAMING_BADGE
                 : UI_TEXTS.SYNTHESIS.COMPLETE_BADGE}
@@ -82,7 +83,7 @@ export function ReadingPanel({
           <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
             {session.synthesisText}
             {isStreamingSynthesis && (
-              <span className="ml-1 inline-block h-4 w-1.5 animate-pulse stream-cursor-jade align-middle" />
+              <span className="ml-1 inline-block h-4 w-1.5 stream-cursor-jade align-middle" />
             )}
           </div>
         </div>
@@ -95,10 +96,10 @@ export function ReadingPanel({
           return (
             <div
               key={`round_${round.round}`}
-              className="rounded-2xl surface-card p-4 sm:p-5 space-y-3 animate-in fade-in slide-in-from-bottom-3 duration-300"
+              className="rounded-xl surface-card p-4 sm:p-5 space-y-3 motion-veil-panel"
             >
               <div className="flex flex-wrap items-center justify-between gap-2 border-b line-accent-subtle pb-2.5">
-                <StatusBadge variant="gold">
+                <StatusBadge variant="gold" shape="plaque">
                   {UI_TEXTS.DEEP_DIVE.CLARIFIER_BADGE_PREFIX}
                   {round.round} • {clarifierDef?.nameVi}
                 </StatusBadge>
@@ -116,16 +117,16 @@ export function ReadingPanel({
               <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
                 {round.aiResponse}
                 {isRoundStreaming && (
-                  <span className="ml-1 inline-block h-4 w-1.5 animate-pulse stream-cursor-gold align-middle" />
+                  <span className="ml-1 inline-block h-4 w-1.5 stream-cursor-gold align-middle" />
                 )}
               </div>
             </div>
           );
         })}
 
-        {/* Bảng điều khiển câu hỏi Đào Sâu */}
-        {!isStreamingSynthesis && (
-          <div className="surface-glass rounded-2xl p-4 sm:p-5 space-y-4">
+        {/* Bảng điều khiển câu hỏi Đào Sâu mở mượt bằng Collapsible dùng chung */}
+        <Collapsible isOpen={!isStreamingSynthesis} direction="vertical">
+          <div className="surface-glass rounded-xl p-4 sm:p-5 space-y-4">
             <div className="flex items-center justify-between gap-2">
               <h3 className="font-serif text-lg font-semibold ink-primary">
                 {UI_TEXTS.DEEP_DIVE.SECTION_TITLE}
@@ -147,7 +148,7 @@ export function ReadingPanel({
                       disabled={!canDeepDive}
                       onClick={() => handleChipClick(suggestion)}
                     >
-                      + {suggestion}
+                      {suggestion}
                     </ChipButton>
                   ))}
                 </div>
@@ -157,6 +158,7 @@ export function ReadingPanel({
                     <TextInput
                       value={customFollowUp}
                       disabled={!canDeepDive}
+                      hasError={Boolean(errorMessage)}
                       onChange={setCustomFollowUp}
                       placeholder={
                         UI_TEXTS.DEEP_DIVE.CUSTOM_QUESTION_PLACEHOLDER
@@ -165,11 +167,11 @@ export function ReadingPanel({
                   </div>
                   <Button
                     type="submit"
-                    variant="primary"
+                    variant="icon"
                     size="icon"
                     disabled={!canDeepDive}
                     aria-label={UI_TEXTS.DEEP_DIVE.BTN_DRAW_CLARIFIER}
-                    icon={<Send className="h-4 w-4" />}
+                    icon={<Send className="h-4 w-4 ink-accent" />}
                   />
                 </form>
 
@@ -183,14 +185,14 @@ export function ReadingPanel({
               </p>
             )}
           </div>
-        )}
+        </Collapsible>
       </div>
 
-      {/* Thanh hành động đáy cố định xuất ảnh 9:16 */}
+      {/* Thanh hành động đáy cố định xuất ảnh 9:16 dáng Thẻ bài chỉ kép vàng */}
       {!isBusyStreaming && session.synthesisText.length > 0 && (
         <div className="shrink-0 surface-footer-bar px-4 py-3 sm:px-6 safe-area-bottom">
           <Button
-            variant="primary"
+            variant="gold"
             size="lg"
             fullWidth
             onClick={onOpenShareModal}

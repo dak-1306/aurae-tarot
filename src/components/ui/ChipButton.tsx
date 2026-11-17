@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
 
-type ChipVariant = "pill" | "card";
+type ChipVariant = "tag" | "card";
 
 interface ChipButtonProps {
   readonly active?: boolean;
@@ -12,7 +12,7 @@ interface ChipButtonProps {
 
 export function ChipButton({
   active = false,
-  variant = "pill",
+  variant = "tag",
   disabled = false,
   onClick,
   children,
@@ -21,11 +21,12 @@ export function ChipButton({
     <button
       type="button"
       disabled={disabled}
+      aria-pressed={active}
+      data-active={active}
       onClick={onClick}
       className={cn(
         "ui-chip",
-        variant === "pill" ? "ui-chip-pill" : "ui-chip-card",
-        active && "ui-chip-active",
+        variant === "tag" ? "ui-chip-tag" : "ui-chip-card",
       )}
     >
       {children}

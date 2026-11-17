@@ -52,17 +52,17 @@ export function BottomDrawer({
       <div
         aria-hidden="true"
         onClick={onClose}
-        className="fixed inset-0 surface-overlay-backdrop transition-opacity cursor-pointer"
+        className="fixed inset-0 surface-overlay-backdrop motion-veil-backdrop cursor-pointer"
       />
 
       <div
         className={cn(
-          "relative z-10 w-full rounded-t-3xl md:rounded-2xl surface-elevated flex flex-col max-h-[88dvh] overflow-hidden animate-in fade-in slide-in-from-bottom-6 md:zoom-in-95 duration-200",
+          "relative z-10 w-full rounded-t-3xl md:rounded-2xl surface-elevated flex flex-col max-h-[88dvh] overflow-hidden motion-veil-panel",
           maxWidthClass,
         )}
       >
         <div className="flex justify-center pt-2.5 pb-1 md:hidden shrink-0">
-          <span className="h-1.5 w-11 rounded-full drawer-grab-pill" />
+          <span className="h-1 w-10 rounded-full drawer-grab-pill" />
         </div>
 
         <div className="flex items-start justify-between gap-3 border-b line-accent-subtle px-5 py-3.5 shrink-0">
@@ -79,11 +79,11 @@ export function BottomDrawer({
           </div>
 
           <Button
-            variant="ghost"
+            variant="icon"
             size="icon"
             onClick={onClose}
             aria-label={UI_TEXTS.ARIA.CLOSE_OVERLAY}
-            icon={<X className="h-5 w-5" />}
+            icon={<X className="h-4 w-4" />}
           />
         </div>
 

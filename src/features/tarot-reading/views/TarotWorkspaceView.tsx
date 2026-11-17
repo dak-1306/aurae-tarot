@@ -50,6 +50,7 @@ export function TarotWorkspaceView() {
         theme={theme}
         historyCount={history.length}
         hasActiveSession={Boolean(session)}
+        sessionKey={session?.id ?? null}
         onToggleTheme={toggleTheme}
         onOpenHistory={() => setHistoryOpen(true)}
         onStartNewReading={() => void resetToNewReading()}
@@ -58,7 +59,7 @@ export function TarotWorkspaceView() {
       <main className="flex-1 min-h-0 overflow-hidden">
         {!isHydrated ? (
           <div className="flex h-full items-center justify-center">
-            <span className="text-sm ink-secondary animate-pulse">
+            <span className="text-sm ink-secondary">
               {UI_TEXTS.COMMON.LOADING}
             </span>
           </div>

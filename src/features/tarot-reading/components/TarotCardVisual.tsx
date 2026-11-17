@@ -39,7 +39,7 @@ function SuitEmblem({
 }
 
 const SIZE_STYLES = {
-  xs: "w-[68px] aspect-[2/3.1]",
+  xs: "w-[64px] aspect-[2/3.1]",
   sm: "w-[86px] sm:w-[106px] aspect-[2/3.15]",
   md: "w-[94px] sm:w-[130px] lg:w-[144px] aspect-[2/3.15]",
   lg: "w-[172px] sm:w-[196px] aspect-[2/3.15]",
@@ -69,7 +69,10 @@ export function TarotCardVisual({
   return (
     <div className="flex flex-col items-center gap-1.5 select-none">
       {!hideTopLabel && (
-        <StatusBadge variant={drawnCard.isClarifier ? "gold" : "accent"}>
+        <StatusBadge
+          variant={drawnCard.isClarifier ? "gold" : "accent"}
+          shape="plaque"
+        >
           <span className="max-w-[96px] sm:max-w-[144px] truncate">
             {drawnCard.isClarifier && drawnCard.clarifierRound
               ? `${UI_TEXTS.DEEP_DIVE.CLARIFIER_BADGE_PREFIX}${drawnCard.clarifierRound}`
@@ -82,7 +85,7 @@ export function TarotCardVisual({
         type="button"
         onClick={onClick}
         className={cn(
-          "group relative rounded-2xl perspective-1000 focus:outline-none cursor-pointer tarot-card-interactive",
+          "group relative rounded-xl perspective-1000 focus:outline-none cursor-pointer tarot-card-interactive",
           SIZE_STYLES[size],
         )}
       >
@@ -100,13 +103,13 @@ export function TarotCardVisual({
           {/* MẶT NGỬA (180 deg) */}
           <div
             className={cn(
-              "absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between overflow-hidden rounded-2xl card-face-surface",
+              "absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between overflow-hidden rounded-xl card-face-surface",
               isMiniCard ? "p-1" : "p-1.5 sm:p-2",
             )}
           >
             <div
               className={cn(
-                "relative flex-1 w-full overflow-hidden rounded-xl card-art-frame transition-transform duration-500",
+                "relative flex-1 w-full overflow-hidden rounded-lg card-art-frame transition-transform duration-500",
                 isReversed && "rotate-180",
               )}
             >

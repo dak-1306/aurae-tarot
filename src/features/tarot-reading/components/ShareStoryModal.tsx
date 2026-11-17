@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { toPng } from "html-to-image";
-import { Download, Loader2 } from "lucide-react";
-import { BottomDrawer } from "@/components/ui/BottomDrawer";
-import { Button } from "@/components/ui/Button";
-import { UI_TEXTS } from "@/constants/app";
-import { ShareStoryTemplate } from "@/features/tarot-reading/components/ShareStoryTemplate";
-import type { ReadingSession } from "@/types/tarot";
+import { useEffect, useRef, useState } from 'react';
+import { toPng } from 'html-to-image';
+import { Download, Loader2 } from 'lucide-react';
+import { BottomDrawer } from '@/components/ui/BottomDrawer';
+import { Button } from '@/components/ui/Button';
+import { UI_TEXTS } from '@/constants/app';
+import { ShareStoryTemplate } from '@/features/tarot-reading/components/ShareStoryTemplate';
+import type { ReadingSession } from '@/types/tarot';
 
 interface ShareStoryModalProps {
   readonly isOpen: boolean;
@@ -68,7 +68,7 @@ export function ShareStoryModal({
 
   function handleDownload() {
     if (!previewDataUrl) return;
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.download = `${UI_TEXTS.CLOSURE.TEMPLATE_FILENAME_PREFIX}${session.id}.png`;
     link.href = previewDataUrl;
     link.click();
@@ -88,7 +88,7 @@ export function ShareStoryModal({
         maxWidthClass="md:max-w-md"
       >
         <div className="flex flex-col items-center gap-4">
-          <div className="relative flex aspect-[9/16] w-full max-w-[230px] items-center justify-center overflow-hidden rounded-2xl surface-inset">
+          <div className="relative flex aspect-[9/16] w-full max-w-[230px] items-center justify-center overflow-hidden rounded-xl surface-inset">
             {isGenerating ? (
               <div className="flex flex-col items-center gap-2 px-4 text-center">
                 <Loader2 className="h-6 w-6 ink-accent animate-spin" />
@@ -109,7 +109,7 @@ export function ShareStoryModal({
           {statusMessage && (
             <p
               className={`text-center text-xs ${
-                hasError ? "ink-warning" : "ink-accent"
+                hasError ? 'ink-warning' : 'ink-accent'
               }`}
             >
               {statusMessage}
@@ -123,7 +123,8 @@ export function ShareStoryModal({
             <Button
               variant="primary"
               fullWidth
-              disabled={!previewDataUrl || isGenerating}
+              isLoading={isGenerating}
+              disabled={!previewDataUrl}
               onClick={handleDownload}
               icon={<Download className="h-4 w-4" />}
             >
