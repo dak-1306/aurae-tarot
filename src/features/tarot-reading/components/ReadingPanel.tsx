@@ -10,6 +10,7 @@ import { TextInput } from "@/components/ui/FormField";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { TAROT_CONFIG, TOPIC_PRESETS, UI_TEXTS } from "@/constants/app";
 import { TAROT_CARD_MAP } from "@/constants/tarot-deck";
+import { EditorialMarkdown } from "@/features/tarot-reading/components/EditorialMarkdown";
 import type { DeepDiveRoundNumber, ReadingSession } from "@/types/tarot";
 
 interface ReadingPanelProps {
@@ -66,7 +67,7 @@ export function ReadingPanel({
       <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar space-y-5 px-4 py-4 sm:px-6 sm:py-5">
         {/* Luận giải tổng quan 3 lá */}
         <div className="surface-glass rounded-xl p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-2 border-b line-accent-subtle pb-3 mb-3.5">
+          <div className="flex items-center justify-between gap-2 border-b line-accent-subtle pb-3 mb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 ink-accent" />
               <h2 className="font-serif text-lg sm:text-xl font-semibold ink-accent">
@@ -82,27 +83,19 @@ export function ReadingPanel({
           </div>
 
           {isStreamingSynthesis && !session.synthesisText ? (
-            /* (2) Trạng thái chờ khi Gemini đang xử lý những chữ đầu tiên */
             <AuraeLoader
               variant="block"
               label="Đang kết nối mạch liên kết của ba lá bài..."
             />
+          ) : session.synthesisText ? (
+            <EditorialMarkdown
+              content={session.synthesisText}
+              isStreaming={isStreamingSynthesis}
+            />
           ) : (
-            <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
-              {session.synthesisText || (
-                <span className="text-xs italic ink-secondary">
-                  Chưa nhận được nội dung luận giải. Vui lòng thử lại.
-                </span>
-              )}
-              {/* (4) Con trỏ tinh bàn đồng bộ khi chữ đang stream */}
-              {isStreamingSynthesis && (
-                <AuraeLoader
-                  variant="inline"
-                  size="sm"
-                  className="ml-1.5 align-middle"
-                />
-              )}
-            </div>
+            <p className="text-xs italic ink-secondary">
+              Chưa nhận được nội dung luận giải. Vui lòng thử lại.
+            </p>
           )}
         </div>
 
@@ -114,7 +107,7 @@ export function ReadingPanel({
           return (
             <div
               key={`round_${round.round}`}
-              className="rounded-xl surface-card p-4 sm:p-5 space-y-3 motion-veil-panel"
+              className="rounded-xl surface-card p-4 sm:p-5 space-y-3.5 motion-veil-panel"
             >
               <div className="flex flex-wrap items-center justify-between gap-2 border-b line-accent-subtle pb-2.5">
                 <StatusBadge variant="gold" shape="plaque">
@@ -133,29 +126,20 @@ export function ReadingPanel({
               </p>
 
               {isRoundStreaming && !round.aiResponse ? (
-                /* (3) Trạng thái chờ khi Gemini đang soi chiếu lá bài bổ trợ */
                 <AuraeLoader
                   variant="inline"
                   label="Đang soi chiếu lá bài bổ trợ..."
                   className="py-2"
                 />
+              ) : round.aiResponse ? (
+                <EditorialMarkdown
+                  content={round.aiResponse}
+                  isStreaming={isRoundStreaming}
+                />
               ) : (
-                <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
-                  {round.aiResponse || (
-                    <span className="text-xs italic ink-secondary">
-                      Chưa nhận được phản hồi cho vòng này. Vui lòng bấm Thử
-                      lại.
-                    </span>
-                  )}
-                  {/* (4) Con trỏ tinh bàn đồng bộ khi vòng hỏi sâu đang stream */}
-                  {isRoundStreaming && (
-                    <AuraeLoader
-                      variant="inline"
-                      size="sm"
-                      className="ml-1.5 align-middle"
-                    />
-                  )}
-                </div>
+                <p className="text-xs italic ink-secondary">
+                  Chưa nhận được phản hồi cho vòng này. Vui lòng bấm Thử lại.
+                </p>
               )}
             </div>
           );
