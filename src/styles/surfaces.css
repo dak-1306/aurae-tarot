@@ -1,0 +1,127 @@
+/* ==================== BẢNG MÀU CHỮ & VIỀN CHUẨN HÓA ==================== */
+.ink-primary {
+  color: var(--text-primary);
+}
+
+.ink-secondary {
+  color: var(--text-secondary);
+}
+
+.ink-accent {
+  color: var(--accent-jade);
+}
+
+.ink-accent-light {
+  color: var(--accent-jade-light);
+}
+
+.ink-gold {
+  color: var(--accent-gold);
+}
+
+.ink-warning {
+  color: var(--status-warning);
+}
+
+.ink-danger {
+  color: var(--status-danger);
+}
+
+.line-accent-subtle {
+  border-color: var(--border-jade-subtle);
+}
+
+.line-accent-active {
+  border-color: var(--border-jade-active);
+}
+
+.line-neutral-subtle {
+  border-color: var(--border-neutral-subtle);
+}
+
+/* ==================== BỀ MẶT & KHUNG THẺ ==================== */
+.surface-canvas {
+  background-color: var(--bg-canvas);
+}
+
+.surface-canvas-deep {
+  background-color: var(--bg-canvas-deep);
+}
+
+.surface-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.surface-glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.surface-elevated {
+  background: linear-gradient(
+    160deg,
+    var(--surface-card-elevated) 0%,
+    var(--surface-card) 100%
+  );
+  border: 1px solid var(--border-jade-subtle);
+  box-shadow: var(--shadow-panel-elevated);
+}
+
+.surface-inset {
+  background-color: var(--bg-canvas-deep);
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.surface-header {
+  background: var(--surface-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-jade-subtle);
+}
+
+.surface-floating-capsule {
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-jade-active);
+  box-shadow: var(--shadow-floating-bar);
+}
+
+.surface-reading-aside {
+  background-color: var(--surface-card);
+  border-color: var(--border-jade-subtle);
+}
+
+.surface-footer-bar {
+  background: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-jade-subtle);
+}
+
+.surface-overlay-backdrop {
+  background-color: var(--surface-overlay);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.brand-orb {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-jade-active);
+}
+
+.drawer-grab-pill {
+  background-color: var(--border-jade-active);
+}
+
+.editorial-guide-divider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-jade-active) 50%,
+    transparent 100%
+  );
+}

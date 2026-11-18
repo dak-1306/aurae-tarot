@@ -1,0 +1,381 @@
+/* ==================== HỆ THỐNG HIỆU ỨNG THU / MỞ DÙNG CHUNG ==================== */
+.motion-accordion-y {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--duration-morph) var(--ease-editorial),
+    opacity var(--duration-morph) var(--ease-editorial);
+}
+
+.motion-accordion-y[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.motion-accordion-y-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.motion-morph-x {
+  display: inline-grid;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-columns var(--duration-morph) var(--ease-editorial),
+    opacity 200ms var(--ease-editorial);
+}
+
+.motion-morph-x[data-open="true"] {
+  grid-template-columns: 1fr;
+  opacity: 1;
+}
+
+.motion-morph-x-inner {
+  overflow: hidden;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+@keyframes veil-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes veil-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.motion-veil-backdrop {
+  animation: veil-fade-in 220ms var(--ease-editorial) forwards;
+}
+
+.motion-veil-panel {
+  animation: veil-panel-in var(--duration-morph) var(--ease-editorial) forwards;
+}
+
+/* ==================== NỀN CÁNH CỔNG & MASCOT ==================== */
+.portal-stage-bg {
+  background:
+    radial-gradient(
+      ellipse 56% 48% at 50% 40%,
+      var(--tint-jade-medium) 0%,
+      var(--tint-jade-subtle) 48%,
+      transparent 78%
+    ),
+    radial-gradient(
+      ellipse 68% 32% at 50% 92%,
+      var(--tint-gold-subtle) 0%,
+      transparent 66%
+    );
+}
+
+@keyframes portal-sanctuary-breath {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes portal-oculus-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes portal-arch-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes portal-star-glint {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.portal-glow-layer {
+  will-change: transform, opacity;
+  animation: portal-sanctuary-breath 7s ease-in-out infinite;
+}
+
+.portal-oculus-pc {
+  transform-box: view-box;
+  transform-origin: 800px 104px;
+  will-change: transform;
+  animation: portal-oculus-rotate 90s linear infinite;
+}
+
+.portal-oculus-mobile {
+  transform-box: view-box;
+  transform-origin: 215px 112px;
+  will-change: transform;
+  animation: portal-oculus-rotate 90s linear infinite;
+}
+
+.portal-arch-shimmer {
+  will-change: opacity;
+  animation: portal-arch-pulse 6.5s ease-in-out infinite;
+}
+
+.portal-star-glint {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: portal-star-glint 4.8s ease-in-out infinite;
+}
+
+.mascot-aura-ring {
+  background: radial-gradient(
+    circle at 50% 48%,
+    var(--tint-jade-medium) 0%,
+    var(--tint-gold-subtle) 48%,
+    transparent 74%
+  );
+  animation: aura-breathe 4.4s ease-in-out infinite;
+}
+
+@keyframes aura-breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes mascot-levitate {
+  0%,
+  100% {
+    transform: translateY(2px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes mascot-halo-float {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: translateY(0px) scaleX(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px) scaleX(1.04);
+  }
+}
+
+@keyframes mascot-wing-left-flap {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes mascot-wing-right-flap {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes astrolabe-orbit-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes astrolabe-orbit-ccw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes star-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.88);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+.mascot-float-group {
+  animation: mascot-levitate 4.4s ease-in-out infinite;
+}
+
+.mascot-halo-group {
+  transform-box: view-box;
+  transform-origin: 180px 64px;
+  animation: mascot-halo-float 4.4s ease-in-out infinite;
+}
+
+.mascot-wing-left {
+  transform-box: view-box;
+  transform-origin: 165px 114px;
+  animation: mascot-wing-left-flap 4.4s ease-in-out infinite;
+}
+
+.mascot-wing-right {
+  transform-box: view-box;
+  transform-origin: 195px 114px;
+  animation: mascot-wing-right-flap 4.4s ease-in-out infinite;
+}
+
+.mascot-ring-cw {
+  transform-box: view-box;
+  transform-origin: 180px 180px;
+  animation: astrolabe-orbit-cw 64s linear infinite;
+}
+
+.mascot-ring-ccw {
+  transform-box: view-box;
+  transform-origin: 180px 180px;
+  animation: astrolabe-orbit-ccw 88s linear infinite;
+}
+
+.mascot-star-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: star-pulse-soft 3.6s ease-in-out infinite;
+}
+
+/* ==================== AURAE UNIFIED LOADER ==================== */
+@keyframes aurae-loader-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aurae-loader-ccw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes aurae-loader-star {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.84);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes aurae-loader-text-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.aurae-loader-ring-outer {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform;
+  animation: aurae-loader-cw 9s linear infinite;
+}
+
+.aurae-loader-ring-inner {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform;
+  animation: aurae-loader-ccw 6.5s linear infinite;
+}
+
+.aurae-loader-core-star {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform, opacity;
+  animation: aurae-loader-star 2.4s ease-in-out infinite;
+}
+
+.aurae-loader-caption {
+  animation: aurae-loader-text-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-glow-layer,
+  .portal-oculus-pc,
+  .portal-oculus-mobile,
+  .portal-arch-shimmer,
+  .portal-star-glint,
+  .mascot-aura-ring,
+  .mascot-float-group,
+  .mascot-halo-group,
+  .mascot-wing-left,
+  .mascot-wing-right,
+  .mascot-ring-cw,
+  .mascot-ring-ccw,
+  .mascot-star-pulse,
+  .aurae-loader-ring-outer,
+  .aurae-loader-ring-inner,
+  .aurae-loader-core-star,
+  .aurae-loader-caption {
+    animation: none;
+  }
+}

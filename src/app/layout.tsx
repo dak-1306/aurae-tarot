@@ -39,7 +39,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="vi"
       className={`${cormorantGaramond.variable} ${beVietnamPro.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var raw=localStorage.getItem('aurae_preferences_v1');var t='';if(raw){try{var parsed=JSON.parse(raw);if(typeof parsed==='string'){t=parsed;}else if(parsed&&typeof parsed.theme==='string'){t=parsed.theme;}}catch(e){t=raw.replace(/^"|"$/g,'');}}if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="app-body">{children}</body>
     </html>
   );

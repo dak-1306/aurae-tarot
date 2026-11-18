@@ -1,0 +1,172 @@
+/* ==================== SÂN KHẤU CHIÊM TINH & LÁ BÀI ==================== */
+.celestial-stage-bg {
+  background: radial-gradient(
+    circle at 50% 34%,
+    var(--tint-jade-medium) 0%,
+    var(--tint-jade-subtle) 45%,
+    transparent 76%
+  );
+}
+
+.deck-bottom-fade {
+  background: linear-gradient(to top, var(--bg-canvas) 0%, transparent 100%);
+}
+
+.deck-arc-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--bg-canvas) 6%,
+    var(--bg-canvas) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--bg-canvas) 6%,
+    var(--bg-canvas) 94%,
+    transparent 100%
+  );
+}
+
+.empty-slot-surface {
+  background-color: var(--tint-jade-subtle);
+  border: 1px dashed var(--border-jade-subtle);
+}
+
+.empty-slot-surface-next {
+  background-color: var(--tint-jade-medium);
+  border: 1px dashed var(--border-jade-active);
+}
+
+.slot-label-pill {
+  border-radius: 3px;
+  border: 1px solid var(--border-neutral-subtle);
+  background-color: var(--surface-card);
+  color: var(--text-secondary);
+}
+
+.slot-label-pill-active {
+  border-radius: 3px;
+  border: 1px solid var(--border-jade-subtle);
+  background-color: var(--tint-jade-medium);
+  color: var(--accent-jade);
+}
+
+.card-back-surface {
+  background: linear-gradient(
+    180deg,
+    var(--card-back-top) 0%,
+    var(--card-back-mid) 52%,
+    var(--card-back-bottom) 100%
+  );
+  border: 1px solid var(--border-jade-active);
+  box-shadow: var(--shadow-card-rest);
+}
+
+.card-back-inner-frame {
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.card-face-surface {
+  background: linear-gradient(
+    180deg,
+    var(--surface-card-elevated) 0%,
+    var(--surface-card) 60%,
+    var(--bg-canvas-deep) 100%
+  );
+  border: 1px solid var(--border-jade-active);
+  box-shadow: var(--shadow-card-rest);
+}
+
+.card-art-frame {
+  background-color: var(--bg-canvas-deep);
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.card-art-backdrop {
+  background: radial-gradient(
+    circle at 50% 42%,
+    var(--tint-jade-medium) 0%,
+    var(--tint-jade-subtle) 58%,
+    transparent 85%
+  );
+}
+
+.card-art-medallion {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-jade-active);
+}
+
+.card-art-medallion-ring {
+  border: 1px dashed var(--border-gold-subtle);
+}
+
+/* ==================== NHỊP HÍT THỞ & XÀO BÀI ==================== */
+.breathing-aura {
+  background-color: var(--tint-jade-medium);
+}
+
+.breathing-ring-outer {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-jade-active);
+}
+
+.breathing-ring-inner {
+  background-color: var(--bg-canvas-deep);
+  border: 1px solid var(--border-jade-subtle);
+}
+
+.breathing-core-dot {
+  background-color: var(--accent-jade);
+}
+
+.shuffle-center-orb {
+  background-color: var(--bg-canvas-deep);
+  border: 1px solid var(--border-jade-active);
+}
+
+.stream-cursor-jade {
+  background-color: var(--accent-jade);
+}
+
+.stream-cursor-gold {
+  background-color: var(--accent-gold);
+}
+
+/* ==================== HIỆU ỨNG LẬT 3D & HOVER ==================== */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.tarot-card-interactive {
+  transition:
+    transform 320ms var(--ease-editorial),
+    box-shadow 320ms var(--ease-editorial),
+    border-color 240ms ease;
+}
+
+@media (hover: hover) {
+  .tarot-card-interactive:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .fan-card-hoverable:hover {
+    border-color: var(--accent-jade-light);
+    box-shadow: var(--shadow-card-hover);
+  }
+}

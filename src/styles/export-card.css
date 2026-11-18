@@ -1,0 +1,31 @@
+/* ==================== SHARE EXPORT TEMPLATE (ĐỒNG BỘ DARK & LIGHT) ==================== */
+.story-canvas-bg {
+  background-color: var(--bg-canvas);
+  background-image:
+    radial-gradient(
+      circle at 50% 0%,
+      var(--tint-jade-medium) 0%,
+      var(--tint-jade-subtle) 38%,
+      transparent 68%
+    ),
+    linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-canvas-deep) 100%);
+}
+
+.story-card-box {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-jade-subtle);
+  box-shadow: var(--shadow-panel-elevated);
+}
+
+.story-divider-top {
+  border-bottom: 1px solid var(--border-jade-subtle);
+}
+
+.story-divider-bottom {
+  border-top: 1px solid var(--border-jade-subtle);
+}
+
+.story-numeral-orb {
+  background-color: var(--bg-canvas-deep);
+  border: 1.5px solid var(--border-jade-active);
+}
