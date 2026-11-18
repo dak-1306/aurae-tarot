@@ -1,7 +1,7 @@
 "use client";
 
 import { AltarHeader } from "@/components/layout/AltarHeader";
-import { UI_TEXTS } from "@/constants/app";
+import { AuraeLoader } from "@/components/ui/AuraeLoader";
 import { AltarStage } from "@/features/tarot-reading/components/AltarStage";
 import { CardDetailDrawer } from "@/features/tarot-reading/components/CardDetailDrawer";
 import { HistoryDrawer } from "@/features/tarot-reading/components/HistoryDrawer";
@@ -40,9 +40,17 @@ export function TarotWorkspaceView() {
     setInspectedCard,
     setHistoryOpen,
     setShareModalOpen,
+    setErrorMessage,
+    retryLastFailedReading,
   } = useTarotFlow();
 
   const isDrawingStep = session?.step === "drawing";
+  const canRetryReading =
+    Boolean(session) &&
+    !isStreamingSynthesis &&
+    streamingDeepDiveRound === null &&
+    (session?.synthesisText.trim().length === 0 ||
+      session?.deepDiveRounds.some((r) => r.aiResponse.trim().length === 0));
 
   return (
     <div className="flex h-dvh max-h-dvh flex-col overflow-hidden surface-canvas ink-primary">
@@ -58,11 +66,7 @@ export function TarotWorkspaceView() {
 
       <main className="flex-1 min-h-0 overflow-hidden">
         {!isHydrated ? (
-          <div className="flex h-full items-center justify-center">
-            <span className="text-sm ink-secondary">
-              {UI_TEXTS.COMMON.LOADING}
-            </span>
-          </div>
+          <AuraeLoader variant="fullscreen" />
         ) : !session ? (
           <StepIntention
             errorMessage={errorMessage}
@@ -143,6 +147,36 @@ export function TarotWorkspaceView() {
           session={session}
           onClose={() => setShareModalOpen(false)}
         />
+      )}
+
+      {errorMessage && (
+        <div
+          role="alert"
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg rounded-2xl surface-floating-capsule px-4 py-3 shadow-lg flex items-center justify-between gap-3"
+        >
+          <p className="text-xs sm:text-sm leading-relaxed ink-primary">
+            {errorMessage}
+          </p>
+
+          <div className="flex shrink-0 items-center gap-2">
+            {canRetryReading && (
+              <button
+                type="button"
+                onClick={() => void retryLastFailedReading()}
+                className="rounded-full px-3 py-1 text-xs font-medium ink-accent border line-accent-subtle hover:opacity-85 cursor-pointer"
+              >
+                Thử lại
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setErrorMessage(null)}
+              className="rounded-full px-2.5 py-1 text-xs ink-secondary hover:ink-primary cursor-pointer"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

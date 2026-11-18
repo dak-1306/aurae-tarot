@@ -1,133 +1,123 @@
-import { TAROT_CONFIG, TOPIC_PRESETS, UI_TEXTS } from "@/constants/app";
-import { TAROT_CARD_MAP } from "@/constants/tarot-deck";
-import type { DeepDiveRound, DrawnCard, ReadingSession } from "@/types/tarot";
+import {
+  tarotStreamRequestSchema,
+  type ValidatedApiSession,
+} from "@/features/tarot-reading/schemas/tarotSchemas";
+import type { DeepDiveRound, ReadingSession } from "@/types/tarot";
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
+const STREAM_ENDPOINT = "/api/tarot/stream";
 
-function formatCardDescriptor(drawn: DrawnCard): {
-  title: string;
-  orientationLabel: string;
-  meaning: string;
-  keywords: string;
-} {
-  const def = TAROT_CARD_MAP[drawn.cardId];
-  if (!def) {
-    return {
-      title: drawn.cardId,
-      orientationLabel: UI_TEXTS.ORIENTATION.UPRIGHT,
-      meaning: "",
-      keywords: "",
-    };
-  }
-
-  const isReversed = drawn.orientation === "reversed";
+function serializeSessionForApi(session: ReadingSession): ValidatedApiSession {
   return {
-    title: `${def.nameVi} (${def.nameEn})`,
-    orientationLabel: isReversed
-      ? UI_TEXTS.ORIENTATION.REVERSED
-      : UI_TEXTS.ORIENTATION.UPRIGHT,
-    meaning: isReversed ? def.meaningReversed : def.meaningUpright,
-    keywords: (isReversed ? def.keywordsReversed : def.keywordsUpright).join(
-      ", ",
-    ),
+    id: session.id,
+    topicId: session.topicId,
+    question: session.question.trim(),
+    allowReversed: session.allowReversed,
+    step: session.step,
+    initialCards: [...session.initialCards],
+    synthesisText: session.synthesisText,
+    deepDiveRounds: session.deepDiveRounds.map((round) => ({
+      ...round,
+      question: round.question.trim(),
+    })),
+    createdAt: session.createdAt,
+    updatedAt: session.updatedAt,
   };
 }
 
-function buildSynthesisNarrative(session: ReadingSession): string {
-  const topic = TOPIC_PRESETS[session.topicId];
-  const [first, second, third] = session.initialCards;
-
-  const card1 = formatCardDescriptor(first);
-  const card2 = formatCardDescriptor(second);
-  const card3 = formatCardDescriptor(third);
-
-  return [
-    `Với tâm ý "${session.question}" thuộc lĩnh vực ${topic.label}, trải bài mở ra một dòng chảy năng lượng rõ nét qua ba điểm chạm cốt lõi.`,
-    ``,
-    `1. ${first.positionLabel} — ${card1.title} [${card1.orientationLabel}]`,
-    `Nền tảng của câu chuyện bắt đầu từ trường năng lượng của ${card1.keywords.toLowerCase()}. ${card1.meaning} Điều này lý giải vì sao tâm trí bạn đang đứng trước những chuyển động hiện tại.`,
-    ``,
-    `2. ${second.positionLabel} — ${card2.title} [${card2.orientationLabel}]`,
-    `Ở trọng tâm hiện tại, lá bài nhấn mạnh vào sắc thái ${card2.keywords.toLowerCase()}. ${card2.meaning} Đây chính là nút thắt quan trọng nhất đòi hỏi sự tỉnh táo và chân thành với chính mình.`,
-    ``,
-    `3. ${third.positionLabel} — ${card3.title} [${card3.orientationLabel}]`,
-    `Khi bạn giữ vững sự cân bằng trước hai năng lượng trên, hướng mở ra phía trước mang thông điệp của ${card3.keywords.toLowerCase()}. ${card3.meaning}`,
-    ``,
-    `Thông điệp tổng hòa: Sự kết nối giữa ${card1.title} và ${card3.title} cho thấy chuyển biến lớn nhất không nằm ở việc kiểm soát hoàn cảnh bên ngoài, mà ở cách bạn điều chỉnh góc nhìn và nhịp hành động ngay trong hiện tại.`,
-  ].join("\n");
-}
-
-function buildDeepDiveNarrative(
-  session: ReadingSession,
-  currentRound: DeepDiveRound,
-): string {
-  const clarifier = formatCardDescriptor(currentRound.clarifierCard);
-  const coreNames = session.initialCards
-    .map((c) => TAROT_CARD_MAP[c.cardId]?.nameVi ?? c.cardId)
-    .join(" – ");
-
-  const previousRoundsContext = session.deepDiveRounds
-    .filter((r) => r.round < currentRound.round)
-    .map((r) => {
-      const prevCard =
-        TAROT_CARD_MAP[r.clarifierCard.cardId]?.nameVi ??
-        r.clarifierCard.cardId;
-      return `Vòng ${r.round} (${prevCard})`;
-    })
-    .join(", ");
-
-  const continuityNote = previousRoundsContext
-    ? `Tiếp nối mạch năng lượng từ 3 lá chủ đạo (${coreNames}) cùng ${previousRoundsContext}, `
-    : `Đặt trong sự đối chiếu trực tiếp với bộ ba lá chủ đạo (${coreNames}), `;
-
-  return [
-    `${continuityNote}lá bài bổ trợ #${currentRound.round} xuất hiện cho câu hỏi "${currentRound.question}" là ${clarifier.title} [${clarifier.orientationLabel}].`,
-    ``,
-    `Trường năng lượng ${clarifier.keywords.toLowerCase()} làm sáng tỏ một góc khuất tinh tế: ${clarifier.meaning}`,
-    ``,
-    `Gợi ý ứng dụng trực tiếp: Thay vì phân tán sự chú ý sang nhiều kịch bản cùng lúc, hãy lấy từ khóa "${clarifier.keywords.split(",")[0]?.trim() ?? clarifier.title}" làm kim chỉ nam cho bước đi tiếp theo của bạn.`,
-  ].join("\n");
-}
-
-async function* streamTextByTokens(
-  fullText: string,
+async function* consumeTarotTextStream(
+  rawPayload: unknown,
   signal?: AbortSignal,
 ): AsyncGenerator<string, void, unknown> {
-  const tokens = fullText.split(/(\s+)/);
-  for (const token of tokens) {
-    if (signal?.aborted) {
-      return;
+  const parsed = tarotStreamRequestSchema.safeParse(rawPayload);
+  if (!parsed.success) {
+    const firstIssue = parsed.error.issues[0]?.message;
+    throw new Error(firstIssue ?? "Dữ liệu trải bài không hợp lệ.");
+  }
+
+  const response = await fetch(STREAM_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(parsed.data),
+    signal,
+  });
+
+  if (!response.ok) {
+    let errorDetail = `HTTP ${response.status}`;
+    try {
+      const errJson = (await response.json()) as { error?: string };
+      if (errJson.error) {
+        errorDetail = errJson.error;
+      }
+    } catch {
+      // Bỏ qua nếu response lỗi không phải JSON
     }
-    yield token;
-    if (token.trim().length > 0) {
-      await sleep(TAROT_CONFIG.STREAM_CHUNK_DELAY_MS);
+    throw new Error(errorDetail);
+  }
+
+  if (!response.body) {
+    throw new Error("Trình duyệt không hỗ trợ đọc luồng phản hồi.");
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8");
+
+  try {
+    while (true) {
+      if (signal?.aborted) {
+        await reader.cancel();
+        return;
+      }
+
+      const { done, value } = await reader.read();
+      if (done) {
+        const remaining = decoder.decode();
+        if (remaining) {
+          yield remaining;
+        }
+        break;
+      }
+
+      if (value) {
+        const textChunk = decoder.decode(value, { stream: true });
+        if (textChunk) {
+          yield textChunk;
+        }
+      }
     }
+  } finally {
+    reader.releaseLock();
   }
 }
 
-/**
- * Luận giải tổng quan 3 lá bài đầu tiên (Step 5).
- */
 export async function* streamInitialSynthesis(
   session: ReadingSession,
   signal?: AbortSignal,
 ): AsyncGenerator<string, void, unknown> {
-  const narrative = buildSynthesisNarrative(session);
-  yield* streamTextByTokens(narrative, signal);
+  yield* consumeTarotTextStream(
+    {
+      mode: "synthesis",
+      session: serializeSessionForApi(session),
+    },
+    signal,
+  );
 }
 
-/**
- * Luận giải đào sâu nối tiếp (Step 6 - tối đa 3 vòng, giữ nguyên ngữ cảnh 3 lá gốc + các lá bổ trợ trước đó).
- */
 export async function* streamCumulativeDeepDive(
-  session: ReadingSession,
-  currentRound: DeepDiveRound,
+  sessionSnapshot: ReadingSession,
+  targetRound: DeepDiveRound,
   signal?: AbortSignal,
 ): AsyncGenerator<string, void, unknown> {
-  const narrative = buildDeepDiveNarrative(session, currentRound);
-  yield* streamTextByTokens(narrative, signal);
+  yield* consumeTarotTextStream(
+    {
+      mode: "deep-dive",
+      session: serializeSessionForApi(sessionSnapshot),
+      targetRound: {
+        ...targetRound,
+        question: targetRound.question.trim(),
+      },
+    },
+    signal,
+  );
 }

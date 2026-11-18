@@ -23,6 +23,7 @@ import {
 } from "@/features/tarot-reading/utils/sessionPersistence";
 import { useTarotStore } from "@/stores/useTarotStore";
 import type { ReadingSession, ThemeMode, TopicId } from "@/types/tarot";
+import { intentionFormSchema } from "@/features/tarot-reading/schemas/tarotSchemas";
 
 export type { BreathingPhase } from "@/features/tarot-reading/hooks/useRitualTimers";
 
@@ -129,9 +130,17 @@ export function useTarotFlow() {
 
   const startNewIntention = useCallback(
     async (topicId: TopicId, rawQuestion: string, allowReversed: boolean) => {
-      const trimmedQuestion = rawQuestion.trim();
-      if (!trimmedQuestion) {
-        setErrorMessage(UI_TEXTS.INTENTION.ERROR_EMPTY_QUESTION);
+      const parsed = intentionFormSchema.safeParse({
+        topicId,
+        question: rawQuestion,
+        allowReversed,
+      });
+
+      if (!parsed.success) {
+        setErrorMessage(
+          parsed.error.issues[0]?.message ??
+            UI_TEXTS.INTENTION.ERROR_EMPTY_QUESTION,
+        );
         return;
       }
 
@@ -139,14 +148,14 @@ export function useTarotFlow() {
       const nowIso = new Date().toISOString();
       const fanPool = createShuffledFanPool(
         TAROT_CONFIG.INITIAL_FAN_POOL_SIZE,
-        allowReversed,
+        parsed.data.allowReversed,
       );
 
       const newSession: ReadingSession = {
         id: createSessionId(),
-        topicId,
-        question: trimmedQuestion,
-        allowReversed,
+        topicId: parsed.data.topicId,
+        question: parsed.data.question,
+        allowReversed: parsed.data.allowReversed,
         step: "breathing",
         fanPool,
         initialCards: [],
@@ -203,6 +212,39 @@ export function useTarotFlow() {
     [setHistory],
   );
 
+  const retryLastFailedReading = useCallback(async () => {
+    if (!session) return;
+
+    // 1. Nếu có vòng hỏi sâu chưa có nội dung AI (do lỗi mạng), thử lại vòng đó
+    const incompleteRound = session.deepDiveRounds.find(
+      (r) => r.aiResponse.trim().length === 0,
+    );
+    if (incompleteRound) {
+      setErrorMessage(null);
+      await triggerDeepDiveStream(session, incompleteRound);
+      return;
+    }
+
+    // 2. Ngược lại, thử lại phần luận giải tổng quan 3 lá
+    if (session.initialCards.length > 0) {
+      const resetSession: ReadingSession = {
+        ...session,
+        step: "synthesis",
+        synthesisText: "",
+        updatedAt: new Date().toISOString(),
+      };
+      setErrorMessage(null);
+      setSession(resetSession);
+      await triggerSynthesisStream(resetSession);
+    }
+  }, [
+    session,
+    setErrorMessage,
+    setSession,
+    triggerDeepDiveStream,
+    triggerSynthesisStream,
+  ]);
+
   return {
     theme,
     session,
@@ -230,5 +272,8 @@ export function useTarotFlow() {
     setInspectedCard,
     setHistoryOpen,
     setShareModalOpen,
+
+    setErrorMessage,
+    retryLastFailedReading,
   };
 }

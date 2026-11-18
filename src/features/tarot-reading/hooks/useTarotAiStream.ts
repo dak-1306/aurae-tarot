@@ -70,10 +70,14 @@ export function useTarotAiStream({
         if (latestSession) {
           await persistSessionSnapshot(latestSession);
         }
-      } catch {
+      } catch (error) {
         if (!controller.signal.aborted) {
           setStreamingSynthesis(false);
-          setErrorMessage(UI_TEXTS.ERRORS.AI_STREAM_FAILED);
+          const message =
+            error instanceof Error && error.message
+              ? error.message
+              : UI_TEXTS.ERRORS.AI_STREAM_FAILED;
+          setErrorMessage(message);
         }
       }
     },
@@ -113,10 +117,14 @@ export function useTarotAiStream({
         if (latestSession) {
           await persistSessionSnapshot(latestSession);
         }
-      } catch {
+      } catch (error) {
         if (!controller.signal.aborted) {
           setStreamingDeepDiveRound(null);
-          setErrorMessage(UI_TEXTS.ERRORS.AI_STREAM_FAILED);
+          const message =
+            error instanceof Error && error.message
+              ? error.message
+              : UI_TEXTS.ERRORS.AI_STREAM_FAILED;
+          setErrorMessage(message);
         }
       }
     },

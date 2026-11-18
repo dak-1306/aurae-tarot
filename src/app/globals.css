@@ -1266,3 +1266,78 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* ==================== AURAE UNIFIED LOADER ==================== */
+@keyframes aurae-loader-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes aurae-loader-ccw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes aurae-loader-star {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.84);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes aurae-loader-text-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.aurae-loader-ring-outer {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform;
+  animation: aurae-loader-cw 9s linear infinite;
+}
+
+.aurae-loader-ring-inner {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform;
+  animation: aurae-loader-ccw 6.5s linear infinite;
+}
+
+.aurae-loader-core-star {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  will-change: transform, opacity;
+  animation: aurae-loader-star 2.4s ease-in-out infinite;
+}
+
+.aurae-loader-caption {
+  animation: aurae-loader-text-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurae-loader-ring-outer,
+  .aurae-loader-ring-inner,
+  .aurae-loader-core-star,
+  .aurae-loader-caption {
+    animation: none;
+  }
+}

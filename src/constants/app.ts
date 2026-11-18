@@ -232,6 +232,8 @@ export const UI_TEXTS = {
   ERRORS: {
     AI_STREAM_FAILED: "Kết nối luận giải bị gián đoạn, vui lòng thử lại.",
     DECK_EXHAUSTED: "Không còn đủ lá bài trong bộ để rút thêm.",
+    STORAGE_READ_FAILED: "Không thể đọc dữ liệu lưu trữ trên trình duyệt.",
+    STORAGE_WRITE_FAILED: "Không thể lưu phiên trải bài vào trình duyệt.",
   },
   COMMON: {
     LOADING: "Đang chuẩn bị...",

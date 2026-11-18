@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ImageDown, Send, Sparkles } from "lucide-react";
+import { AuraeLoader } from "@/components/ui/AuraeLoader";
 import { Button } from "@/components/ui/Button";
 import { ChipButton } from "@/components/ui/ChipButton";
 import { Collapsible } from "@/components/ui/Collapsible";
@@ -80,12 +81,29 @@ export function ReadingPanel({
             </StatusBadge>
           </div>
 
-          <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
-            {session.synthesisText}
-            {isStreamingSynthesis && (
-              <span className="ml-1 inline-block h-4 w-1.5 stream-cursor-jade align-middle" />
-            )}
-          </div>
+          {isStreamingSynthesis && !session.synthesisText ? (
+            /* (2) Trạng thái chờ khi Gemini đang xử lý những chữ đầu tiên */
+            <AuraeLoader
+              variant="block"
+              label="Đang kết nối mạch liên kết của ba lá bài..."
+            />
+          ) : (
+            <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
+              {session.synthesisText || (
+                <span className="text-xs italic ink-secondary">
+                  Chưa nhận được nội dung luận giải. Vui lòng thử lại.
+                </span>
+              )}
+              {/* (4) Con trỏ tinh bàn đồng bộ khi chữ đang stream */}
+              {isStreamingSynthesis && (
+                <AuraeLoader
+                  variant="inline"
+                  size="sm"
+                  className="ml-1.5 align-middle"
+                />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Các vòng Đào Sâu cộng dồn */}
@@ -114,12 +132,31 @@ export function ReadingPanel({
                 &ldquo;{round.question}&rdquo;
               </p>
 
-              <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
-                {round.aiResponse}
-                {isRoundStreaming && (
-                  <span className="ml-1 inline-block h-4 w-1.5 stream-cursor-gold align-middle" />
-                )}
-              </div>
+              {isRoundStreaming && !round.aiResponse ? (
+                /* (3) Trạng thái chờ khi Gemini đang soi chiếu lá bài bổ trợ */
+                <AuraeLoader
+                  variant="inline"
+                  label="Đang soi chiếu lá bài bổ trợ..."
+                  className="py-2"
+                />
+              ) : (
+                <div className="whitespace-pre-line text-sm sm:text-[15px] leading-relaxed ink-primary">
+                  {round.aiResponse || (
+                    <span className="text-xs italic ink-secondary">
+                      Chưa nhận được phản hồi cho vòng này. Vui lòng bấm Thử
+                      lại.
+                    </span>
+                  )}
+                  {/* (4) Con trỏ tinh bàn đồng bộ khi vòng hỏi sâu đang stream */}
+                  {isRoundStreaming && (
+                    <AuraeLoader
+                      variant="inline"
+                      size="sm"
+                      className="ml-1.5 align-middle"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           );
         })}
