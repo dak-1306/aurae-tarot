@@ -1,15 +1,13 @@
 import type { ReactNode } from "react";
 import { AuraeLoader } from "@/components/ui/AuraeLoader";
+import { cn } from "@/utils/cn";
 
 interface EditorialMarkdownProps {
   readonly content: string;
   readonly isStreaming?: boolean;
+  readonly variant?: "panel" | "export";
 }
 
-/**
- * Làm sạch tạm thời các dấu * mở chưa kịp đóng ở cuối dòng đang stream
- * để tránh chớp ký tự thô trên màn hình.
- */
 function sanitizeStreamingTail(text: string): string {
   return text.replace(
     /(\*{1,3})([^*]*)$/,
@@ -17,9 +15,6 @@ function sanitizeStreamingTail(text: string): string {
   );
 }
 
-/**
- * Phân tách định dạng nội dòng: ***nhấn mạnh nghiêng***, **in đậm**, *in nghiêng*
- */
 function renderInlineNodes(
   rawLine: string,
   stripUnclosedTail: boolean,
@@ -76,13 +71,14 @@ function renderInlineNodes(
 export function EditorialMarkdown({
   content,
   isStreaming = false,
+  variant = "panel",
 }: EditorialMarkdownProps) {
   const normalized = content.replace(/\r\n/g, "\n").trim();
   if (!normalized) return null;
 
+  const isExport = variant === "export";
   const rawLines = normalized.split("\n");
 
-  // Xác định chỉ số dòng có nội dung cuối cùng để gắn con trỏ loading inline
   let lastContentLineIdx = -1;
   for (let i = rawLines.length - 1; i >= 0; i -= 1) {
     if (rawLines[i]?.trim().length) {
@@ -106,25 +102,31 @@ export function EditorialMarkdown({
       />
     ) : null;
 
-    // 1. Đường phân cách ngang (***, ---, ___)
     if (/^(\*{3,}|-{3,}|_{3,})$/.test(trimmed)) {
       elements.push(
         <hr
           key={`hr_${idx}`}
-          className="my-3.5 h-px border-0 editorial-guide-divider"
+          className={cn(
+            "h-px border-0 editorial-guide-divider",
+            isExport ? "my-5" : "my-3.5",
+          )}
         />,
       );
       return;
     }
 
-    // 2. Tiêu đề phân đoạn (###, ##, #)
     const headingMatch = /^#{1,3}\s+(.+)$/.exec(trimmed);
     if (headingMatch) {
       const headingText = headingMatch[1] ?? "";
       elements.push(
         <h3
           key={`h_${idx}`}
-          className="font-serif text-base sm:text-[17px] font-semibold tracking-wide ink-accent pt-2.5 first:pt-0"
+          className={cn(
+            "font-serif font-semibold tracking-wide ink-accent first:pt-0",
+            isExport
+              ? "text-[27px] pt-4 pb-0.5"
+              : "text-base sm:text-[17px] pt-2.5",
+          )}
         >
           {renderInlineNodes(headingText, isLastActiveLine)}
           {inlineCursor}
@@ -133,17 +135,32 @@ export function EditorialMarkdown({
       return;
     }
 
-    // 3. Gạch đầu dòng (- , * , • )
     const bulletMatch = /^[-*•]\s+(.+)$/.exec(trimmed);
     if (bulletMatch) {
       const itemText = bulletMatch[1] ?? "";
       elements.push(
-        <div key={`li_${idx}`} className="flex items-start gap-2.5 pl-0.5">
+        <div
+          key={`li_${idx}`}
+          className={cn(
+            "flex items-start pl-0.5",
+            isExport ? "gap-3.5" : "gap-2.5",
+          )}
+        >
           <span
             aria-hidden="true"
-            className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-current ink-gold opacity-80"
+            className={cn(
+              "shrink-0 rounded-full bg-current ink-gold opacity-80",
+              isExport ? "mt-[15px] h-2 w-2" : "mt-[9px] h-1.5 w-1.5",
+            )}
           />
-          <p className="flex-1 text-sm sm:text-[15px] leading-[1.78] ink-primary">
+          <p
+            className={cn(
+              "flex-1 ink-primary",
+              isExport
+                ? "text-[22px] leading-[1.72]"
+                : "text-sm sm:text-[15px] leading-[1.78]",
+            )}
+          >
             {renderInlineNodes(itemText, isLastActiveLine)}
             {inlineCursor}
           </p>
@@ -152,11 +169,15 @@ export function EditorialMarkdown({
       return;
     }
 
-    // 4. Đoạn văn chiêm nghiệm thông thường
     elements.push(
       <p
         key={`p_${idx}`}
-        className="text-sm sm:text-[15px] leading-[1.78] ink-primary"
+        className={cn(
+          "ink-primary",
+          isExport
+            ? "text-[22px] leading-[1.72]"
+            : "text-sm sm:text-[15px] leading-[1.78]",
+        )}
       >
         {renderInlineNodes(trimmed, isLastActiveLine)}
         {inlineCursor}
@@ -164,5 +185,7 @@ export function EditorialMarkdown({
     );
   });
 
-  return <div className="space-y-3">{elements}</div>;
+  return (
+    <div className={cn(isExport ? "space-y-4" : "space-y-3")}>{elements}</div>
+  );
 }
