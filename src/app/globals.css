@@ -333,19 +333,94 @@ body {
   animation: veil-panel-in var(--duration-morph) var(--ease-editorial) forwards;
 }
 
-/* ==================== NỀN TRANG MỞ ĐẦU & MASCOT ==================== */
-.intention-stage-bg {
+/* ==================== NỀN CÁNH CỔNG & MASCOT ==================== */
+.portal-stage-bg {
   background:
     radial-gradient(
-      circle at 50% 42%,
-      var(--tint-jade-subtle) 0%,
-      transparent 64%
+      ellipse 56% 48% at 50% 40%,
+      var(--tint-jade-medium) 0%,
+      var(--tint-jade-subtle) 48%,
+      transparent 78%
     ),
     radial-gradient(
-      circle at 50% 88%,
+      ellipse 68% 32% at 50% 92%,
       var(--tint-gold-subtle) 0%,
-      transparent 55%
+      transparent 66%
     );
+}
+
+@keyframes portal-sanctuary-breath {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes portal-oculus-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes portal-arch-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes portal-star-glint {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.portal-glow-layer {
+  will-change: transform, opacity;
+  animation: portal-sanctuary-breath 7s ease-in-out infinite;
+}
+
+.portal-oculus-pc {
+  transform-box: view-box;
+  transform-origin: 800px 104px;
+  will-change: transform;
+  animation: portal-oculus-rotate 90s linear infinite;
+}
+
+.portal-oculus-mobile {
+  transform-box: view-box;
+  transform-origin: 215px 112px;
+  will-change: transform;
+  animation: portal-oculus-rotate 90s linear infinite;
+}
+
+.portal-arch-shimmer {
+  will-change: opacity;
+  animation: portal-arch-pulse 6.5s ease-in-out infinite;
+}
+
+.portal-star-glint {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: portal-star-glint 4.8s ease-in-out infinite;
 }
 
 .mascot-aura-ring {
@@ -489,6 +564,24 @@ body {
     var(--border-jade-active) 50%,
     transparent 100%
   );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-glow-layer,
+  .portal-oculus-pc,
+  .portal-oculus-mobile,
+  .portal-arch-shimmer,
+  .portal-star-glint,
+  .mascot-aura-ring,
+  .mascot-float-group,
+  .mascot-halo-group,
+  .mascot-wing-left,
+  .mascot-wing-right,
+  .mascot-ring-cw,
+  .mascot-ring-ccw,
+  .mascot-star-pulse {
+    animation: none;
+  }
 }
 
 /* ==================== UI PRIMITIVES: BUTTONS (CUSTOM HÌNH KHỐI & 5 TRẠNG THÁI) ==================== */
@@ -1162,4 +1255,14 @@ body {
 
 .mystic-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--border-jade-active);
+}
+
+/* Ẩn thanh cuộn ngang nhưng vẫn giữ thao tác lướt/kéo mượt */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

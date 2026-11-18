@@ -13,7 +13,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Liều lĩnh', 'Thiếu chuẩn bị', 'Do dự', 'Bất cẩn'],
     meaningUpright: 'Khởi đầu một hành trình hoàn toàn mới với tâm thế cởi mở, tin tưởng vào trực giác và sẵn sàng đón nhận điều chưa biết.',
     meaningReversed: 'Hành động thiếu cân nhắc hoặc nỗi sợ hãi vô hình đang giữ chân bạn trước ngưỡng cửa thay đổi.',
-    imageUrl: '/cards/major-00.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2000%20Fool.jpg',
   },
   {
     id: 'major-01',
@@ -26,7 +26,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thao túng', 'Phân tán năng lượng', 'Tự ti', 'Lãng phí tiềm năng'],
     meaningUpright: 'Bạn đang nắm giữ đầy đủ công cụ, trí tuệ và nguồn lực để biến ý tưởng thành hiện thực ngay lúc này.',
     meaningReversed: 'Tài năng chưa được đặt đúng chỗ hoặc có dấu hiệu thiếu trung thực trong giao tiếp và mục tiêu.',
-    imageUrl: '/cards/major-01.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2001%20Magician.jpg',
   },
   {
     id: 'major-02',
@@ -39,7 +39,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Phớt lờ trực giác', 'Bí mật bị che giấu', 'Bất an nội tâm'],
     meaningUpright: 'Câu trả lời không nằm ở sự ồn ào bên ngoài mà ở tiếng nói tĩnh lặng bên trong bạn. Hãy quan sát và lắng nghe.',
     meaningReversed: 'Bạn đang quá phụ thuộc vào lý trí hoặc tiếng ồn bên ngoài mà bỏ qua linh cảm chính xác của chính mình.',
-    imageUrl: '/cards/major-02.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2002%20High%20Priestess.jpg',
   },
   {
     id: 'major-03',
@@ -52,7 +52,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Phụ thuộc cảm xúc', 'Kiệt sức vì cho đi', 'Bế tắc sáng tạo'],
     meaningUpright: 'Giai đoạn nở rộ của sự sáng tạo, tình yêu thương và kết quả ngọt ngào khi bạn biết chăm sóc bản thân lẫn môi trường xung quanh.',
     meaningReversed: 'Bạn đang cho đi quá mức mà quên nuôi dưỡng chính mình, dẫn đến cảm giác trống rỗng hoặc kiểm soát.',
-    imageUrl: '/cards/major-03.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2003%20Empress.jpg',
   },
   {
     id: 'major-04',
@@ -65,7 +65,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Độc đoán', 'Cứng nhắc', 'Thiếu kỷ luật', 'Kiểm soát quá mức'],
     meaningUpright: 'Thiết lập trật tự, ranh giới rõ ràng và tư duy chiến lược sẽ giúp bạn làm chủ tình huống vững vàng.',
     meaningReversed: 'Sự bảo thủ hoặc áp đặt quyền lực đang tạo ra căng thẳng không cần thiết trong công việc hoặc quan hệ.',
-    imageUrl: '/cards/major-04.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2004%20Emperor.jpg',
   },
   {
     id: 'major-05',
@@ -78,7 +78,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Phá vỡ khuôn mẫu', 'Tự do tư tưởng', 'Nghi ngờ giáo điều'],
     meaningUpright: 'Tìm kiếm lời khuyên từ người có kinh nghiệm hoặc tuân thủ những giá trị cốt lõi bền vững sẽ mang lại sự an tâm.',
     meaningReversed: 'Đã đến lúc bạn tự định nghĩa con đường riêng thay vì sống theo kỳ vọng hay khuôn khổ của người khác.',
-    imageUrl: '/cards/major-05.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2005%20Hierophant.jpg',
   },
   {
     id: 'major-06',
@@ -91,7 +91,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mất cân bằng', 'Lệch pha giá trị', 'Tránh né quyết định'],
     meaningUpright: 'Một sự kết nối chân thành hoặc một ngã rẽ quan trọng đòi hỏi bạn lựa chọn dựa trên giá trị thật của trái tim.',
     meaningReversed: 'Sự xung đột giữa lý trí và cảm xúc khiến bạn chần chừ, hoặc mối quan hệ đang thiếu sự đồng thuận.',
-    imageUrl: '/cards/major-06.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2006%20Lovers.jpg',
   },
   {
     id: 'major-07',
@@ -104,7 +104,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mất phương hướng', 'Nóng vội', 'Thiếu kiểm soát'],
     meaningUpright: 'Bằng sự tập trung cao độ và ý chí kiên định, bạn hoàn toàn có thể vượt qua lực cản để tiến thẳng tới mục tiêu.',
     meaningReversed: 'Bạn đang cố gắng thúc ép mọi thứ đi quá nhanh trong khi nội tâm chưa thống nhất được hướng đi.',
-    imageUrl: '/cards/major-07.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2007%20Chariot.jpg',
   },
   {
     id: 'major-08',
@@ -117,7 +117,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tự nghi ngờ', 'Yếu lòng', 'Bùng nổ cảm xúc'],
     meaningUpright: 'Sức mạnh thật sự không nằm ở sự gồng mình đối đầu, mà ở lòng kiên nhẫn và sự điềm tĩnh chế ngự nỗi sợ bên trong.',
     meaningReversed: 'Bạn đang tự hạ thấp bản thân hoặc để cảm xúc tiêu cực tạm thời lấn át sự bình tĩnh vốn có.',
-    imageUrl: '/cards/major-08.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2008%20Strength.jpg',
   },
   {
     id: 'major-09',
@@ -130,7 +130,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Cô lập', 'Thu mình quá mức', 'Trốn tránh thực tại'],
     meaningUpright: 'Khoảng lặng rút lui khỏi sự xô bồ là cần thiết để bạn tự soi chiếu và tìm thấy ngọn đèn dẫn lối từ bên trong.',
     meaningReversed: 'Sự tĩnh lặng đang biến thành nỗi cô đơn khép kín; hãy mở lòng kết nối lại khi đã chiêm nghiệm đủ.',
-    imageUrl: '/cards/major-09.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2009%20Hermit.jpg',
   },
   {
     id: 'major-10',
@@ -143,7 +143,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kháng cự thay đổi', 'Trì hoãn', 'Vòng lặp cũ'],
     meaningUpright: 'Vòng quay vận mệnh đang chuyển dịch sang một chương mới. Sự linh hoạt đón nhận thay đổi sẽ mang lại cơ hội bất ngờ.',
     meaningReversed: 'Bạn đang cố níu giữ những điều đã hết chu kỳ, khiến quá trình chuyển hóa trở nên nặng nề hơn.',
-    imageUrl: '/cards/major-10.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2010%20Wheel%20of%20Fortune.jpg',
   },
   {
     id: 'major-11',
@@ -156,7 +156,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thiên vị', 'Trốn tránh trách nhiệm', 'Thiếu minh bạch'],
     meaningUpright: 'Mọi quyết định sáng suốt lúc này cần dựa trên sự khách quan, trung thực và sẵn sàng chịu trách nhiệm với lựa chọn của mình.',
     meaningReversed: 'Có sự thiếu công bằng trong cách đánh giá tình huống, hoặc bạn đang né tránh đối diện với sự thật.',
-    imageUrl: '/cards/major-11.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2011%20Justice.jpg',
   },
   {
     id: 'major-12',
@@ -169,7 +169,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Trì trệ vô ích', 'Bướng bỉnh', 'Sốt ruột'],
     meaningUpright: 'Sự tạm dừng hiện tại không phải là thất bại, mà là khoảng không gian giúp bạn đảo ngược góc nhìn để thấy lối ra mới.',
     meaningReversed: 'Bạn đang vùng vẫy chống lại tình thế không thể ép buộc, làm tiêu hao năng lượng một cách vô ích.',
-    imageUrl: '/cards/major-12.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2012%20Hanged%20Man.jpg',
   },
   {
     id: 'major-13',
@@ -182,7 +182,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Sợ buông bỏ', 'Mắc kẹt quá khứ', 'Chậm chuyển hóa'],
     meaningUpright: 'Một chương cũ khép lại dứt khoát để nhường chỗ cho sự tái sinh mạnh mẽ. Hãy can đảm buông tay điều không còn phù hợp.',
     meaningReversed: 'Nỗi sợ hãi trước sự thay đổi khiến bạn bám víu vào những thói quen hoặc mối quan hệ đã cạn năng lượng.',
-    imageUrl: '/cards/major-13.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2013%20Death.jpg',
   },
   {
     id: 'major-14',
@@ -195,7 +195,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thái quá', 'Mất kiên nhẫn', 'Lệch nhịp'],
     meaningUpright: 'Sự chữa lành và hài hòa đến từ việc dung hòa các thái cực một cách từ tốn, không vội vàng cực đoan.',
     meaningReversed: 'Nhịp sống hoặc cảm xúc đang bị đẩy sang một thái cực quá mức, cần sớm điều chỉnh lại điểm cân bằng.',
-    imageUrl: '/cards/major-14.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2014%20Temperance.jpg',
   },
   {
     id: 'major-15',
@@ -208,7 +208,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Giải thoát', 'Thức tỉnh', 'Cắt đứt xiềng xích'],
     meaningUpright: 'Nhận diện những thói quen, nỗi sợ hoặc sự phụ thuộc đang trói buộc tự do của bạn — sợi xích thực ra lỏng hơn bạn nghĩ.',
     meaningReversed: 'Bạn đang bắt đầu nhìn thấu ảo ảnh và lấy lại quyền tự chủ để bước ra khỏi vùng độc hại.',
-    imageUrl: '/cards/major-15.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2015%20Devil.jpg',
   },
   {
     id: 'major-16',
@@ -221,7 +221,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Trì hoãn sụp đổ', 'Sợ hãi biến động', 'Tái thiết nội tâm'],
     meaningUpright: 'Một sự chấn động bất ngờ phá vỡ những nền tảng thiếu vững chắc, giải phóng bạn khỏi ảo tưởng để xây lại từ sự thật.',
     meaningReversed: 'Bạn đang cố gắng chống đỡ một cấu trúc đã lung lay từ bên trong; chấp nhận thay đổi sớm sẽ nhẹ nhàng hơn.',
-    imageUrl: '/cards/major-16.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2016%20Tower.jpg',
   },
   {
     id: 'major-17',
@@ -234,7 +234,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mất niềm tin', 'Bi quan', 'Cạn kiệt cảm hứng'],
     meaningUpright: 'Ánh sáng dịu dàng của sự chữa lành và niềm tin đang trở lại. Hãy mở lòng đón nhận nguồn năng lượng tươi mới.',
     meaningReversed: 'Sự mệt mỏi tinh thần khiến bạn tạm thời đánh mất niềm tin vào tương lai; hãy bắt đầu từ những điều nhỏ bé nhất.',
-    imageUrl: '/cards/major-17.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2017%20Star.jpg',
   },
   {
     id: 'major-18',
@@ -247,7 +247,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Sáng tỏ dần', 'Vượt qua nỗi sợ', 'Giải tỏa nghi ngờ'],
     meaningUpright: 'Mọi thứ chưa hoàn toàn rõ ràng dưới ánh trăng mờ; đừng vội kết luận theo nỗi sợ, hãy lắng nghe thông điệp từ tiềm thức.',
     meaningReversed: 'Lớp sương mù hoang mang đang dần tan biến, giúp bạn nhìn rõ sự thật đằng sau những lo âu vô căn cứ.',
-    imageUrl: '/cards/major-18.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2018%20Moon.jpg',
   },
   {
     id: 'major-19',
@@ -260,7 +260,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tạm khuất nắng', 'Kỳ vọng quá cao', 'Thiếu tự tin'],
     meaningUpright: 'Nguồn năng lượng ấm áp, minh bạch và thành công rực rỡ đang chiếu rọi con đường bạn đi.',
     meaningReversed: 'Niềm vui vẫn ở đó nhưng đang bị che mờ bởi sự cầu toàn hoặc cái nhìn hơi khắt khe với bản thân.',
-    imageUrl: '/cards/major-19.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2019%20Sun.jpg',
   },
   {
     id: 'major-20',
@@ -273,7 +273,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tự trách móc', 'Nghi ngờ tiếng gọi', 'Chần chừ đổi mới'],
     meaningUpright: 'Khoảnh khắc nhìn lại toàn bộ hành trình đã qua với sự bao dung, sẵn sàng bước sang một tầm cao nhận thức mới.',
     meaningReversed: 'Sự phán xét khắt khe với lỗi lầm cũ đang ngăn cản bạn đón nhận cơ hội làm lại từ đầu.',
-    imageUrl: '/cards/major-20.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2020%20Judgement.jpg',
   },
   {
     id: 'major-21',
@@ -286,7 +286,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Dang dở', 'Thiếu mảnh ghép cuối', 'Chưa khép lại chu kỳ'],
     meaningUpright: 'Một chu kỳ lớn khép lại viên mãn với đầy đủ bài học và thành quả, mở ra cánh cửa bước lên hành trình cao hơn.',
     meaningReversed: 'Bạn đã đi gần hết chặng đường nhưng vẫn còn một việc nhỏ chưa hoàn tất để thực sự khép lại quá khứ.',
-    imageUrl: '/cards/major-21.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/RWS%20Tarot%2021%20World.jpg',
   },
 
   // ==================== SUIT OF WANDS (14 LÁ BỘ GẬY - LỬA / HÀNH ĐỘNG) ====================
@@ -301,7 +301,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Trì hoãn ý tưởng', 'Thiếu động lực', 'Chậm khởi động'],
     meaningUpright: 'Một nguồn cảm hứng hoặc cơ hội hành động đầy nhiệt huyết vừa nhen nhóm — hãy nắm bắt ngay khi ngọn lửa còn rực sáng.',
     meaningReversed: 'Ý tưởng đã có nhưng bạn đang thiếu năng lượng khởi động hoặc còn vướng bận nhiều do dự.',
-    imageUrl: '/cards/wands-01.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands01.jpg',
   },
   {
     id: 'wands-02',
@@ -314,7 +314,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Sợ bước ra ngoài', 'Kế hoạch mơ hồ', 'Thiếu quyết đoán'],
     meaningUpright: 'Bạn đang đứng ở vị thế thuận lợi để vạch ra kế hoạch mở rộng tầm nhìn vượt ra khỏi giới hạn quen thuộc.',
     meaningReversed: 'Nỗi lo lắng trước những điều chưa biết khiến bạn chần chừ giữa an toàn và khám phá.',
-    imageUrl: '/cards/wands-02.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands02.jpg',
   },
   {
     id: 'wands-03',
@@ -327,7 +327,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Chậm tiến độ', 'Trở ngại đường xa', 'Thiếu kiên nhẫn'],
     meaningUpright: 'Những nỗ lực gieo trồng trước đó đang bắt đầu vươn ra biển lớn; hãy giữ vững tầm nhìn và đón nhận cơ hội đang tới.',
     meaningReversed: 'Kế hoạch mở rộng gặp một vài chậm trễ nhỏ đòi hỏi bạn rà soát lại khâu chuẩn bị.',
-    imageUrl: '/cards/wands-03.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands03.jpg',
   },
   {
     id: 'wands-04',
@@ -340,7 +340,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bất ổn nội bộ', 'Chưa trọn vẹn niềm vui', 'Thiếu gắn kết'],
     meaningUpright: 'Một cột mốc đáng tự hào và không khí ấm áp, gắn kết đang hiện hữu — hãy cho phép mình tận hưởng thành quả này.',
     meaningReversed: 'Sự thiếu đồng điệu trong môi trường gần gũi khiến bạn chưa thực sự cảm thấy bình yên.',
-    imageUrl: '/cards/wands-04.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands04.jpg',
   },
   {
     id: 'wands-05',
@@ -353,7 +353,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tránh né xung đột', 'Hòa giải', 'Căng thẳng nội tâm'],
     meaningUpright: 'Những ý kiến trái chiều hoặc sự cạnh tranh xung quanh đang thúc đẩy bạn rèn giũa bản lĩnh và làm rõ lập trường.',
     meaningReversed: 'Bạn đang mệt mỏi vì những tranh cãi vụn vặt và cần tìm cách hạ nhiệt thay vì tiếp tục đối đầu.',
-    imageUrl: '/cards/wands-05.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands05.jpg',
   },
   {
     id: 'wands-06',
@@ -366,7 +366,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thiếu tự tin', 'Kỳ vọng sự tán thưởng', 'Chậm ghi nhận'],
     meaningUpright: 'Nỗ lực bền bỉ của bạn đang được ghi nhận xứng đáng. Hãy đón nhận sự tán thưởng với tâm thế tự tin nhưng khiêm nhường.',
     meaningReversed: 'Bạn đang quá phụ thuộc vào lời khen từ bên ngoài hoặc cảm thấy công sức chưa được nhìn nhận đúng mức.',
-    imageUrl: '/cards/wands-06.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands06.jpg',
   },
   {
     id: 'wands-07',
@@ -379,7 +379,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kiệt sức phòng thủ', 'Nhượng bộ', 'Choáng ngợp áp lực'],
     meaningUpright: 'Dù có nhiều áp lực vây quanh, bạn vẫn đang ở thế thượng phong nếu kiên định bảo vệ giá trị và ranh giới của mình.',
     meaningReversed: 'Việc luôn phải gồng mình chống đỡ mọi thứ đang khiến bạn mệt mỏi; hãy chọn lọc điều gì thực sự đáng giữ.',
-    imageUrl: '/cards/wands-07.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands07.jpg',
   },
   {
     id: 'wands-08',
@@ -392,7 +392,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Trì hoãn', 'Hiểu lầm thông tin', 'Vội vàng hấp tấp'],
     meaningUpright: 'Mọi nút thắt được tháo gỡ nhanh chóng, tin tức và cơ hội đang dồn dập bay tới đòi hỏi sự phản hồi linh hoạt.',
     meaningReversed: 'Nhịp độ bị chững lại do trục trặc giao tiếp hoặc hành động quá vội trước khi nắm đủ thông tin.',
-    imageUrl: '/cards/wands-08.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands08.jpg',
   },
   {
     id: 'wands-09',
@@ -405,7 +405,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kiệt quệ', 'Đa nghi quá mức', 'Muốn bỏ cuộc'],
     meaningUpright: 'Bạn đã đi qua nhiều thử thách và chỉ còn cách đích đến một bước nữa — hãy giữ vững sự bền bỉ cuối cùng.',
     meaningReversed: 'Những vết thương cũ khiến bạn phòng thủ quá mức hoặc cảm thấy cạn kiệt sức lực để đi tiếp.',
-    imageUrl: '/cards/wands-09.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands09.jpg',
   },
   {
     id: 'wands-10',
@@ -418,7 +418,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Buông bớt gánh nặng', 'Ủy thác', 'Sắp chạm ngưỡng kiệt sức'],
     meaningUpright: 'Bạn đang ôm đồm quá nhiều trách nhiệm trên vai; thành công sẽ nhẹ nhàng hơn nếu bạn biết san sẻ bớt.',
     meaningReversed: 'Đã đến lúc đặt xuống những việc không thuộc trách nhiệm của mình trước khi sức khỏe tinh thần bị bào mòn.',
-    imageUrl: '/cards/wands-10.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands10.jpg',
   },
   {
     id: 'wands-11',
@@ -431,7 +431,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thiếu kiên nhẫn', 'Cả thèm chóng chán', 'Bốc đồng'],
     meaningUpright: 'Một thông điệp hào hứng hoặc khao khát trải nghiệm điều mới mẻ đang thổi luồng sinh khí tươi vui vào cuộc sống của bạn.',
     meaningReversed: 'Sự hứng khởi ban đầu dễ nguội lạnh nếu bạn thiếu kế hoạch duy trì kỷ luật.',
-    imageUrl: '/cards/wands-11.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands11.jpg',
   },
   {
     id: 'wands-12',
@@ -444,7 +444,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Nóng nảy', 'Thiếu nhất quán', 'Bốc đồng'],
     meaningUpright: 'Nguồn năng lượng bứt phá mạnh mẽ thúc đẩy bạn lao vào hành động với trọn vẹn đam mê và sự tự tin.',
     meaningReversed: 'Nhiệt huyết thiếu định hướng dễ biến thành sự nóng vội, bỏ dở giữa chừng khi gặp cản trở.',
-    imageUrl: '/cards/wands-12.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands12.jpg',
   },
   {
     id: 'wands-13',
@@ -457,7 +457,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Ghen tị', 'Bất an ngầm', 'Kiểm soát cảm xúc'],
     meaningUpright: 'Sự tự tin tỏa sáng từ bên trong giúp bạn thu hút cơ hội và truyền cảm hứng tích cực cho những người xung quanh.',
     meaningReversed: 'Khi đánh mất sự kết nối với giá trị bản thân, bạn dễ rơi vào trạng thái so sánh hoặc nhạy cảm quá mức.',
-    imageUrl: '/cards/wands-13.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands13.jpg',
   },
   {
     id: 'wands-14',
@@ -470,7 +470,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Độc đoán', 'Nóng tính', 'Kỳ vọng phi thực tế'],
     meaningUpright: 'Năng lượng của người kiến tạo tầm nhìn lớn: hãy dẫn dắt tình huống bằng sự quyết đoán, hào sảng và tư duy dài hạn.',
     meaningReversed: 'Sự nóng vội muốn đạt kết quả ngay lập tức có thể khiến bạn thiếu lắng nghe góc nhìn của người khác.',
-    imageUrl: '/cards/wands-14.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wands14.jpg',
   },
 
   // ==================== SUIT OF CUPS (14 LÁ BỘ CỐC - NƯỚC / CẢM XÚC) ====================
@@ -485,7 +485,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kìm nén cảm xúc', 'Tổn thương chưa lành', 'Khép lòng'],
     meaningUpright: 'Trái tim bạn đang mở ra đón nhận một dòng chảy cảm xúc thuần khiết, sự thấu cảm hoặc khởi đầu tình cảm mới.',
     meaningReversed: 'Bạn đang giữ chặt cảm xúc bên trong vì sợ tổn thương; hãy dịu dàng cho phép mình được chữa lành trước.',
-    imageUrl: '/cards/cups-01.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups01.jpg',
   },
   {
     id: 'cups-02',
@@ -498,7 +498,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mất cân bằng cho-nhận', 'Hiểu lầm', 'Rạn nứt nhẹ'],
     meaningUpright: 'Sự thấu hiểu, tôn trọng và đồng điệu sâu sắc giữa hai tâm hồn tạo nên nền tảng gắn kết bền vững.',
     meaningReversed: 'Sự trao đổi cảm xúc đang bị lệch nhịp; cần một cuộc trò chuyện chân thành để tìm lại tiếng nói chung.',
-    imageUrl: '/cards/cups-02.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups02.jpg',
   },
   {
     id: 'cups-03',
@@ -511,7 +511,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Quá đà', 'Thị phi', 'Cảm giác lạc lõng'],
     meaningUpright: 'Niềm vui được nhân đôi khi sẻ chia cùng những người bạn đồng điệu và cộng đồng ủng hộ bạn.',
     meaningReversed: 'Hãy cẩn trọng với những lời đồn thổi hoặc dành thời gian tĩnh lặng cho riêng mình thay vì chạy theo đám đông.',
-    imageUrl: '/cards/cups-03.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups03.jpg',
   },
   {
     id: 'cups-04',
@@ -524,7 +524,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bừng tỉnh', 'Đón nhận cơ hội mới', 'Thoát khỏi trì trệ'],
     meaningUpright: 'Sự mải mê nhìn vào những điều chưa như ý khiến bạn vô tình bỏ qua chiếc cốc cơ hội đang được trao ngay trước mắt.',
     meaningReversed: 'Bạn đang dần thoát khỏi trạng thái khép mình và sẵn sàng mở mắt đón nhận những trải nghiệm tươi mới.',
-    imageUrl: '/cards/cups-04.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups04.jpg',
   },
   {
     id: 'cups-05',
@@ -537,7 +537,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Chấp nhận', 'Tha thứ', 'Quay lại với hiện tại'],
     meaningUpright: 'Nỗi buồn về những chiếc cốc đã đổ là có thật, nhưng đừng quên phía sau bạn vẫn còn những giá trị nguyên vẹn đang chờ.',
     meaningReversed: 'Bạn đang bắt đầu buông xuống nỗi tiếc nuối để hướng ánh nhìn về phía trước với tâm thế nhẹ nhõm hơn.',
-    imageUrl: '/cards/cups-05.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups05.jpg',
   },
   {
     id: 'cups-06',
@@ -550,7 +550,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mắc kẹt quá khứ', 'Lý tưởng hóa kỷ niệm', 'Chưa trưởng thành'],
     meaningUpright: 'Những ký ức đẹp, sự tử tế vô điều kiện hoặc kết nối từ quá khứ mang lại sự ấm áp và xoa dịu tâm hồn.',
     meaningReversed: 'Hoài niệm chỉ đẹp khi tiếp sức cho hiện tại; đừng để quá khứ ngăn bạn sống trọn vẹn với ngày hôm nay.',
-    imageUrl: '/cards/cups-06.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups06.jpg',
   },
   {
     id: 'cups-07',
@@ -563,7 +563,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tỉnh táo', 'Chốt lựa chọn thực tế', 'Thoát khỏi mơ hồ'],
     meaningUpright: 'Có rất nhiều viễn cảnh hấp dẫn đang bày ra, nhưng không phải chiếc cốc nào cũng chứa giá trị thật — hãy chọn bằng sự tỉnh táo.',
     meaningReversed: 'Sương mù ảo tưởng tan đi, giúp bạn gạt bỏ những lựa chọn viển vông để tập trung vào mục tiêu cốt lõi.',
-    imageUrl: '/cards/cups-07.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups07.jpg',
   },
   {
     id: 'cups-08',
@@ -576,7 +576,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Sợ rời bỏ', 'Quay lại lối cũ', 'Do dự trước ngưỡng cửa'],
     meaningUpright: 'Dù mọi thứ bề ngoài có vẻ ổn, tiếng gọi sâu thẳm bên trong thôi thúc bạn rời đi để tìm kiếm giá trị chân thực hơn.',
     meaningReversed: 'Bạn biết mình cần bước tiếp nhưng nỗi sợ cô đơn hoặc thói quen cũ vẫn khiến bạn ngoái nhìn lại.',
-    imageUrl: '/cards/cups-08.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups08.jpg',
   },
   {
     id: 'cups-09',
@@ -589,7 +589,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tự mãn', 'Trống rỗng sau thành công', 'Tham cầu quá mức'],
     meaningUpright: 'Lá bài của sự viên mãn cảm xúc: điều bạn mong cầu đang tiến gần tới hiện thực, hãy đón nhận với lòng biết ơn.',
     meaningReversed: 'Sự thỏa mãn bên ngoài chưa lấp đầy được khoảng trống bên trong; hãy tìm kiếm niềm vui có chiều sâu hơn.',
-    imageUrl: '/cards/cups-09.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups09.jpg',
   },
   {
     id: 'cups-10',
@@ -602,7 +602,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Lệch nhịp gia đình', 'Kỳ vọng hình thức', 'Thiếu kết nối thật'],
     meaningUpright: 'Sự bình yên sâu sắc, tình yêu thương lan tỏa và cảm giác thuộc về một nơi chốn ấm áp đang hiện diện.',
     meaningReversed: 'Đừng cố giữ vẻ ngoài hoàn hảo nếu bên trong các mối quan hệ đang cần sự lắng nghe và chữa lành thật sự.',
-    imageUrl: '/cards/cups-10.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups10.jpg',
   },
   {
     id: 'cups-11',
@@ -615,7 +615,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Mơ mộng thiếu thực tế', 'Dễ tự ái', 'Trốn tránh cảm xúc'],
     meaningUpright: 'Một lời nhắn dịu dàng, một trực giác bất chợt hoặc cảm hứng sáng tạo tinh tế đang gõ cửa trái tim bạn.',
     meaningReversed: 'Sự nhạy cảm quá mức khiến bạn dễ bị tổn thương bởi những chuyện nhỏ; hãy giữ tâm thế vững vàng hơn.',
-    imageUrl: '/cards/cups-11.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups11.jpg',
   },
   {
     id: 'cups-12',
@@ -628,7 +628,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thất thường', 'Lý tưởng hóa', 'Dễ thay đổi cảm xúc'],
     meaningUpright: 'Một lời đề nghị đầy thiện chí hoặc bước tiến lãng mạn đang tới, mời gọi bạn sống cởi mở và giàu chất thơ hơn.',
     meaningReversed: 'Cảm xúc lên xuống thất thường có thể dẫn đến những lời hứa thiếu thực tế — hãy quan sát hành động cụ thể.',
-    imageUrl: '/cards/cups-12.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups12.jpg',
   },
   {
     id: 'cups-13',
@@ -641,7 +641,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Quá tải cảm xúc', 'Phụ thuộc', 'Mất ranh giới cá nhân'],
     meaningUpright: 'Trực giác sắc bén và trái tim giàu lòng trắc ẩn giúp bạn thấu hiểu người khác mà vẫn giữ được sự tĩnh tại.',
     meaningReversed: 'Bạn đang hấp thụ quá nhiều năng lượng cảm xúc từ xung quanh; hãy thiết lập ranh giới để bảo vệ bình yên nội tâm.',
-    imageUrl: '/cards/cups-13.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups13.jpg',
   },
   {
     id: 'cups-14',
@@ -654,7 +654,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kìm nén lạnh lùng', 'Thao túng cảm xúc', 'Bất ổn ngầm'],
     meaningUpright: 'Giữa những con sóng cảm xúc, bạn giữ được sự điềm đạm, bao dung và sáng suốt để đưa ra lời khuyên đúng đắn.',
     meaningReversed: 'Việc cố tỏ ra bình thản bên ngoài trong khi bên trong dậy sóng chỉ làm kéo dài sự căng thẳng.',
-    imageUrl: '/cards/cups-14.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cups14.jpg',
   },
 
   // ==================== SUIT OF SWORDS (14 LÁ BỘ KIẾM - KHÍ / TRÍ TUỆ) ====================
@@ -669,7 +669,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Rối trí', 'Giao tiếp sắc bén gây tổn thương', 'Thiếu rõ ràng'],
     meaningUpright: 'Một tia sáng nhận thức cắt ngang mọi màn sương mơ hồ, mang lại sự rõ ràng và chân lý để bạn ra quyết định.',
     meaningReversed: 'Tâm trí đang bị quá tải thông tin hoặc lời nói thiếu tinh tế dễ gây hiểu lầm không đáng có.',
-    imageUrl: '/cards/swords-01.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords01.jpg',
   },
   {
     id: 'swords-02',
@@ -682,7 +682,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Phá vỡ bế tắc', 'Đối diện sự thật', 'Quá tải lựa chọn'],
     meaningUpright: 'Bạn đang tự bịt mắt trước một lựa chọn khó khăn để giữ sự yên ổn tạm thời — nhưng sự thật vẫn cần được nhìn thẳng.',
     meaningReversed: 'Tấm băng che mắt được tháo xuống: dù lựa chọn không dễ dàng, bạn đã sẵn sàng bước ra khỏi thế bế tắc.',
-    imageUrl: '/cards/swords-02.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords02.jpg',
   },
   {
     id: 'swords-03',
@@ -695,7 +695,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Hồi phục vết thương', 'Tha thứ', 'Buông bỏ nỗi đau cũ'],
     meaningUpright: 'Cơn mưa nước mắt gột rửa ảo tưởng để trái tim nhận ra sự thật — nỗi đau này là bước đầu của sự giải phóng.',
     meaningReversed: 'Những mũi kiếm tổn thương đang dần được rút ra; trái tim bạn đang trong quá trình hồi phục và khép miệng.',
-    imageUrl: '/cards/swords-03.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords03.jpg',
   },
   {
     id: 'swords-04',
@@ -708,7 +708,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Kiệt sức vì không nghỉ', 'Sẵn sàng trở lại', 'Bồn chồn'],
     meaningUpright: 'Tâm trí bạn cần một khoảng nghỉ ngơi sâu để tái tạo năng lượng trước khi bước vào chặng hành động tiếp theo.',
     meaningReversed: 'Bạn đang ép bản thân hoạt động khi chưa hồi phục đủ, hoặc đã đến lúc kết thúc kỳ nghỉ để quay lại nhịp sống.',
-    imageUrl: '/cards/swords-04.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords04.jpg',
   },
   {
     id: 'swords-05',
@@ -721,7 +721,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Buông bỏ tranh chấp', 'Làm hòa', 'Rút kinh nghiệm'],
     meaningUpright: 'Hãy tự hỏi liệu việc giành phần thắng trong cuộc tranh luận này có xứng đáng với sự rạn nứt mà nó để lại hay không.',
     meaningReversed: 'Bạn chọn sự bình yên thay vì cố chứng minh mình đúng, mở ra cơ hội khép lại xung đột.',
-    imageUrl: '/cards/swords-05.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords05.jpg',
   },
   {
     id: 'swords-06',
@@ -734,7 +734,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Chưa thể rời đi', 'Mang theo hành lý cũ', 'Chuyển tiếp chậm'],
     meaningUpright: 'Con thuyền đang lặng lẽ đưa bạn rời khỏi vùng nước động để tiến về phía bến bờ bình yên và sáng tỏ hơn.',
     meaningReversed: 'Dù hoàn cảnh bên ngoài đã đổi khác, tâm trí bạn vẫn còn vương vấn những trăn trở cũ chưa kịp buông.',
-    imageUrl: '/cards/swords-06.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords06.jpg',
   },
   {
     id: 'swords-07',
@@ -747,7 +747,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thú nhận sự thật', 'Thay đổi chiến thuật', 'Bị phơi bày'],
     meaningUpright: 'Tình huống đòi hỏi sự khôn ngoan, giữ kín bài chiến lược và quan sát kỹ xem xung quanh có điều gì đang bị giấu giếm.',
     meaningReversed: 'Việc đi đường vòng không còn hiệu quả; sự thẳng thắn và minh bạch sẽ giải phóng bạn khỏi áp lực.',
-    imageUrl: '/cards/swords-07.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords07.jpg',
   },
   {
     id: 'swords-08',
@@ -760,7 +760,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tự giải phóng', 'Thay đổi góc nhìn', 'Thoát khỏi nạn nhân'],
     meaningUpright: 'Sự bế tắc hiện tại phần lớn được dựng lên bởi những suy nghĩ tự giới hạn — bạn hoàn toàn có quyền tự tháo dây trói.',
     meaningReversed: 'Bạn nhận ra mình không hề bất lực như từng nghĩ và bắt đầu bước ra khỏi vòng luẩn quẩn tâm lý.',
-    imageUrl: '/cards/swords-08.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords08.jpg',
   },
   {
     id: 'swords-09',
@@ -773,7 +773,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bình minh sau lo âu', 'Chia sẻ nỗi lòng', 'Nhẹ nhõm dần'],
     meaningUpright: 'Những kịch bản tồi tệ trong tâm trí đang phóng đại nỗi sợ lớn hơn thực tế rất nhiều — hãy hít thở và quay về hiện tại.',
     meaningReversed: 'Cơn ác mộng tinh thần đang lùi lại phía sau khi bạn dám đối diện và chia sẻ nỗi lo với người tin cậy.',
-    imageUrl: '/cards/swords-09.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords09.jpg',
   },
   {
     id: 'swords-10',
@@ -786,7 +786,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Hồi phục sau biến cố', 'Kháng cự cái kết', 'Tái sinh'],
     meaningUpright: 'Mọi khó khăn đã chạm điểm tận cùng và không thể tệ hơn được nữa — ánh bình minh vàng ở chân trời báo hiệu sự hồi sinh.',
     meaningReversed: 'Bạn đang từng bước đứng dậy sau một cú ngã lớn, mang theo bài học tỉnh táo và sức mạnh mới.',
-    imageUrl: '/cards/swords-10.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords10.jpg',
   },
   {
     id: 'swords-11',
@@ -799,7 +799,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Lời nói vội vàng', 'Suy diễn', 'Thiếu tập trung'],
     meaningUpright: 'Tư duy nhanh nhạy và tinh thần ham học hỏi giúp bạn nhanh chóng nắm bắt thông tin quan trọng đang xuất hiện.',
     meaningReversed: 'Hãy kiểm chứng kỹ thông tin trước khi phát ngôn để tránh rơi vào những tranh luận thiếu cơ sở.',
-    imageUrl: '/cards/swords-11.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords11.jpg',
   },
   {
     id: 'swords-12',
@@ -812,7 +812,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Hấp tấp', 'Lời nói sắc nhọn', 'Thiếu kiên nhẫn'],
     meaningUpright: 'Sự quyết đoán và tốc độ tư duy cao giúp bạn xông thẳng vào trọng tâm vấn đề để giải quyết dứt điểm.',
     meaningReversed: 'Sự vội vã thiếu cân nhắc hậu quả có thể khiến bạn vô tình làm tổn thương người khác bằng lời nói thẳng thừng.',
-    imageUrl: '/cards/swords-12.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords12.jpg',
   },
   {
     id: 'swords-13',
@@ -825,7 +825,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Lạnh lùng khắt khe', 'Cay đắng', 'Khép kín vì tổn thương'],
     meaningUpright: 'Sự tỉnh táo, trung thực và khả năng nhìn thấu bản chất vấn đề giúp bạn giữ vững ranh giới lành mạnh.',
     meaningReversed: 'Đừng để những trải nghiệm cũ biến sự sáng suốt của bạn thành bức tường lạnh lẽo ngăn cách sự thấu cảm.',
-    imageUrl: '/cards/swords-13.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords13.jpg',
   },
   {
     id: 'swords-14',
@@ -838,7 +838,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Cứng nhắc', 'Lạm dụng lý trí', 'Phán xét khắt khe'],
     meaningUpright: 'Lá bài kêu gọi sự phân tích khách quan, chuẩn mực đạo đức cao và quyết định dựa trên lẽ phải rõ ràng.',
     meaningReversed: 'Lý trí sắc lạnh nếu thiếu đi sự thấu hiểu con người sẽ dễ trở nên cứng nhắc và xa cách.',
-    imageUrl: '/cards/swords-14.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Swords14.jpg',
   },
 
   // ==================== SUIT OF PENTACLES (14 LÁ BỘ TIỀN - ĐẤT / VẬT CHẤT) ====================
@@ -853,7 +853,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bỏ lỡ cơ hội', 'Thiếu kế hoạch tài chính', 'Chậm sinh lời'],
     meaningUpright: 'Một cơ hội thực tế, vững chắc về tài chính, công việc hoặc sức khỏe đang được đặt vào tay bạn để vun trồng.',
     meaningReversed: 'Cơ hội đang ở gần nhưng cần sự chuẩn bị kỹ lưỡng và quản lý nguồn lực chặt chẽ hơn để không tuột mất.',
-    imageUrl: '/cards/pentacles-01.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents01.jpg',
   },
   {
     id: 'pentacles-02',
@@ -866,7 +866,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Quá tải đầu việc', 'Mất cân đối thu chi', 'Chênh vênh'],
     meaningUpright: 'Bạn đang khéo léo giữ nhịp cân bằng giữa nhiều trách nhiệm cùng lúc; sự linh hoạt chính là chìa khóa.',
     meaningReversed: 'Việc tung hứng quá nhiều ưu tiên cùng lúc đang khiến bạn hụt hơi; hãy sắp xếp lại thứ tự quan trọng.',
-    imageUrl: '/cards/pentacles-02.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents02.jpg',
   },
   {
     id: 'pentacles-03',
@@ -879,7 +879,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Thiếu phối hợp', 'Làm việc rời rạc', 'Chưa thống nhất'],
     meaningUpright: 'Sự kết hợp hài hòa giữa kỹ năng của bạn và tinh thần đồng đội đang tạo nên một công trình bền vững.',
     meaningReversed: 'Mỗi người đang nhìn về một hướng khác nhau; cần thống nhất lại vai trò và tiêu chuẩn chung.',
-    imageUrl: '/cards/pentacles-03.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents03.jpg',
   },
   {
     id: 'pentacles-04',
@@ -892,7 +892,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Nới lỏng kiểm soát', 'Sợ thiếu thốn', 'Mở lòng chia sẻ'],
     meaningUpright: 'Bạn đang ưu tiên sự an toàn và bảo toàn thành quả — điều này tốt miễn là không biến thành sự khép kín quá mức.',
     meaningReversed: 'Đã đến lúc nới lỏng nỗi sợ mất mát để dòng chảy nguồn lực và cơ hội mới được lưu thông tự nhiên.',
-    imageUrl: '/cards/pentacles-04.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents04.jpg',
   },
   {
     id: 'pentacles-05',
@@ -905,7 +905,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Khởi sắc dần', 'Tìm thấy điểm tựa', 'Thoát khỏi khó khăn'],
     meaningUpright: 'Giai đoạn chật vật hoặc cảm giác đơn độc chỉ là tạm thời — cánh cửa ấm áp của sự hỗ trợ luôn ở ngay bên cạnh nếu bạn mở lời.',
     meaningReversed: 'Những khó khăn vật chất và tinh thần đang dần qua đi, nhường chỗ cho sự hồi phục ổn định.',
-    imageUrl: '/cards/pentacles-05.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents05.jpg',
   },
   {
     id: 'pentacles-06',
@@ -918,7 +918,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Cho đi có điều kiện', 'Lệ thuộc', 'Mất cân bằng nguồn lực'],
     meaningUpright: 'Dòng chảy cho và nhận đang vận hành công bằng; sự sẻ chia hoặc trợ giúp đúng thời điểm sẽ mang lại phước lành.',
     meaningReversed: 'Hãy lưu ý sự cân bằng trong các mối quan hệ hỗ trợ để tránh cảm giác nợ nần hoặc kiểm soát ngầm.',
-    imageUrl: '/cards/pentacles-06.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents06.jpg',
   },
   {
     id: 'pentacles-07',
@@ -931,7 +931,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Sốt ruột kết quả', 'Đầu tư dàn trải', 'Cần điều chỉnh hướng'],
     meaningUpright: 'Hạt giống bạn gieo đang âm thầm lớn lên dưới lòng đất; hãy kiên nhẫn chăm sóc và đánh giá lại chiến lược dài hạn.',
     meaningReversed: 'Sự nôn nóng muốn hái quả sớm có thể khiến bạn bỏ lỡ giá trị lớn hơn ở phía trước.',
-    imageUrl: '/cards/pentacles-07.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents07.jpg',
   },
   {
     id: 'pentacles-08',
@@ -944,7 +944,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Làm việc máy móc', 'Cầu toàn quá mức', 'Thiếu đam mê'],
     meaningUpright: 'Sự tập trung bền bỉ vào từng chi tiết nhỏ mỗi ngày chính là con đường chắc chắn nhất đưa bạn tới sự tinh thông.',
     meaningReversed: 'Đừng để sự lặp lại biến công việc thành thói quen vô hồn; hãy kết nối lại với mục đích của việc bạn đang làm.',
-    imageUrl: '/cards/pentacles-08.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents08.jpg',
   },
   {
     id: 'pentacles-09',
@@ -957,7 +957,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Phụ thuộc tài chính', 'Làm việc quá sức quên hưởng thụ'],
     meaningUpright: 'Bạn hoàn toàn xứng đáng tự hào về sự độc lập và vườn hoa thành quả mà chính đôi tay mình đã dày công vun đắp.',
     meaningReversed: 'Hãy kiểm tra xem bạn có đang đánh đổi quá nhiều sự tự do cá nhân cho những tiêu chuẩn bên ngoài hay không.',
-    imageUrl: '/cards/pentacles-09.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents09.jpg',
   },
   {
     id: 'pentacles-10',
@@ -970,7 +970,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bất đồng tài sản', 'Nền tảng lung lay', 'Áp lực truyền thống'],
     meaningUpright: 'Sự ổn định lâu dài, sung túc và những giá trị bền vững vượt thời gian đang được củng cố vững chắc.',
     meaningReversed: 'Cần minh bạch và trò chuyện cởi mở về các vấn đề tài chính chung hoặc kỳ vọng dài hạn.',
-    imageUrl: '/cards/pentacles-10.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents10.jpg',
   },
   {
     id: 'pentacles-11',
@@ -983,7 +983,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Trì hoãn hành động', 'Thiếu tập trung', 'Mơ mộng'],
     meaningUpright: 'Tinh thần cầu thị và sẵn sàng bắt đầu từ những bước đi thực tế nhất sẽ mở ra một kỹ năng hoặc nguồn thu mới.',
     meaningReversed: 'Ý định tốt cần được chuyển hóa thành lịch trình hành động cụ thể thay vì chỉ dừng lại ở suy nghĩ.',
-    imageUrl: '/cards/pentacles-11.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents11.jpg',
   },
   {
     id: 'pentacles-12',
@@ -996,7 +996,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Bảo thủ', 'Trì trệ', 'Quá cứng nhắc theo lối mòn'],
     meaningUpright: 'Không phô trương ồn ào, chính sự kỷ luật, trách nhiệm và từng bước đi vững chãi sẽ đưa bạn tới đích an toàn.',
     meaningReversed: 'Sự an toàn quá mức đôi khi biến thành sự trì trệ; hãy cho phép bản thân thử nghiệm cách tiếp cận mới.',
-    imageUrl: '/cards/pentacles-12.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents12.jpg',
   },
   {
     id: 'pentacles-13',
@@ -1009,7 +1009,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Quá tải việc nhà/công việc', 'Quên chăm sóc bản thân'],
     meaningUpright: 'Sự kết hợp hài hòa giữa óc thực tế nhạy bén và trái tim ấm áp giúp bạn tạo dựng không gian sống đủ đầy, bình an.',
     meaningReversed: 'Hãy dành lại thời gian chăm sóc sức khỏe và nhu cầu của chính mình thay vì chỉ lo toan cho mọi người.',
-    imageUrl: '/cards/pentacles-13.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents13.jpg',
   },
   {
     id: 'pentacles-14',
@@ -1022,7 +1022,7 @@ export const TAROT_DECK: readonly TarotCardDefinition[] = [
     keywordsReversed: ['Tham lam vật chất', 'Cứng nhắc', 'Quá chú trọng địa vị'],
     meaningUpright: 'Năng lượng của sự sung túc, chín chắn và khả năng biến mọi nguồn lực thành giá trị bền vững cho bản thân và cộng đồng.',
     meaningReversed: 'Đừng để thước đo vật chất làm lu mờ những giá trị tinh thần và kết nối chân thành xung quanh.',
-    imageUrl: '/cards/pentacles-14.jpg',
+    imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pents14.jpg',
   },
 ];
 

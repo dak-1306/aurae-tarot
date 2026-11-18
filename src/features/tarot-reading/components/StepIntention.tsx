@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { ChipButton } from "@/components/ui/ChipButton";
 import { TextArea, ToggleSwitch } from "@/components/ui/FormField";
 import { TOPIC_LIST, TOPIC_PRESETS, UI_TEXTS } from "@/constants/app";
-import { IntentionBackdrop } from "@/features/tarot-reading/components/IntentionBackdrop";
 import { OracleMascot } from "@/features/tarot-reading/components/OracleMascot";
 import type { TopicId } from "@/types/tarot";
+import { PortalBackdrop } from "./PortalBackdrop";
 
 interface StepIntentionProps {
   readonly errorMessage: string | null;
@@ -36,7 +36,7 @@ export function StepIntention({
 
   return (
     <section className="relative flex h-full w-full flex-col overflow-hidden">
-      <IntentionBackdrop />
+      <PortalBackdrop variant="intention" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-6xl flex-col px-4 py-3 sm:py-5 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 lg:px-8">
         {/* CỘT TRÁI (PC >= lg): Mascot cỡ lớn + 3 dòng chỉ dẫn La Mã */}

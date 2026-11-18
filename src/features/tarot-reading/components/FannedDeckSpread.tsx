@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { UI_TEXTS } from '@/constants/app';
 import { CardBackArt } from '@/features/tarot-reading/components/CardBackArt';
+import { preloadCardImageById } from '@/features/tarot-reading/utils/imagePreloader';
 import type { FanCardItem } from '@/types/tarot';
 import { cn } from '@/utils/cn';
 
@@ -77,6 +78,16 @@ function CircularArcLayer({
         return (
           <div
             key={item.fanId}
+            onPointerEnter={() => {
+              if (!item.isPicked) {
+                void preloadCardImageById(item.cardId, 2500);
+              }
+            }}
+            onPointerDown={() => {
+              if (!item.isPicked) {
+                void preloadCardImageById(item.cardId, 2500);
+              }
+            }}
             onClick={(e) => {
               if (!item.isPicked) {
                 onCardTap(item.fanId, e);
@@ -97,13 +108,20 @@ function CircularArcLayer({
               disabled={disabled || item.isPicked}
               aria-label={UI_TEXTS.CARD_VISUAL.PICK_THIS_CARD}
               className={cn(
-                'relative block shrink-0 rounded-xl transition-transform duration-200 ease-out cursor-pointer focus:outline-none fan-card-hoverable disabled:pointer-events-none',
-                enableHoverLift && 'hover:-translate-y-7 hover:scale-105',
-                'active:-translate-y-5 active:scale-105',
+                'relative block shrink-0 rounded-xl cursor-pointer focus:outline-none disabled:pointer-events-none',
                 cardSizeClass
               )}
             >
-              <CardBackArt />
+              <div
+                className={cn(
+                  'h-full w-full rounded-xl transition-transform duration-200 ease-out pointer-events-none fan-card-hoverable',
+                  enableHoverLift &&
+                    'group-hover:-translate-y-7 group-hover:scale-105',
+                  'group-active:-translate-y-5 group-active:scale-105'
+                )}
+              >
+                <CardBackArt />
+              </div>
             </button>
           </div>
         );
@@ -201,9 +219,8 @@ export function FannedDeckSpread({
     }
   };
 
-  const splitIndex = Math.ceil(safePool.length / 2);
-  const pcBackLayer = compact ? [] : safePool.slice(0, splitIndex);
-  const pcFrontLayer = compact ? safePool : safePool.slice(splitIndex);
+  const pcSpacingAngle = compact ? 5.2 : 3.6;
+  const pcVisibleRange = Math.min(compact ? 9 : 16, (total - 1) / 2);
 
   return (
     <div className="w-full relative mt-auto select-none z-30">
@@ -222,7 +239,7 @@ export function FannedDeckSpread({
             radius={320}
             pivotTop={435}
             spacingAngle={11.5}
-            visibleRange={4.2}
+            visibleRange={Math.min(4.2, (total - 1) / 2)}
             cardSizeClass="w-[98px] h-[156px]"
             disabled={disabled}
             onCardTap={handleCardTap}
@@ -231,9 +248,12 @@ export function FannedDeckSpread({
         <div className="absolute bottom-0 left-0 right-0 h-5 deck-bottom-fade pointer-events-none z-40" />
       </div>
 
-      {/* PC (>= 768px): Đủ 78 lá trải 2 vòng cung xếp tầng tràn kín 2 mép & đáy */}
+      {/* PC (>= 768px): Trải trọn bộ bài trên 1 vòng cung duy nhất */}
       <div
-        className="hidden md:block w-full relative touch-none h-[265px] lg:h-[295px] overflow-hidden"
+        className={cn(
+          'hidden md:block w-full relative touch-none overflow-hidden',
+          compact ? 'h-[210px]' : 'h-[245px] lg:h-[270px]'
+        )}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -241,29 +261,18 @@ export function FannedDeckSpread({
         onWheel={handleWheel}
       >
         <div className="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing">
-          {pcBackLayer.length > 0 && (
-            <CircularArcLayer
-              cards={pcBackLayer}
-              cardPosition={cardPosition}
-              radius={840}
-              pivotTop={972}
-              spacingAngle={4.4}
-              visibleRange={13}
-              cardSizeClass="w-[114px] h-[180px] lg:w-[126px] lg:h-[200px]"
-              enableHoverLift
-              disabled={disabled}
-              onCardTap={handleCardTap}
-            />
-          )}
-
           <CircularArcLayer
-            cards={pcFrontLayer}
+            cards={safePool}
             cardPosition={cardPosition}
-            radius={800}
-            pivotTop={995}
-            spacingAngle={4.7}
-            visibleRange={13}
-            cardSizeClass="w-[120px] h-[190px] lg:w-[132px] lg:h-[210px]"
+            radius={820}
+            pivotTop={compact ? 945 : 980}
+            spacingAngle={pcSpacingAngle}
+            visibleRange={pcVisibleRange}
+            cardSizeClass={
+              compact
+                ? 'w-[104px] h-[166px]'
+                : 'w-[120px] h-[190px] lg:w-[132px] lg:h-[210px]'
+            }
             enableHoverLift
             disabled={disabled}
             onCardTap={handleCardTap}

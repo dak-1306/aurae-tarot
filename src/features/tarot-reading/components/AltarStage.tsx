@@ -4,11 +4,11 @@ import { Layers, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { TAROT_CONFIG, TOPIC_PRESETS, UI_TEXTS } from "@/constants/app";
-import { CelestialBackdrop } from "@/features/tarot-reading/components/CelestialBackdrop";
 import { FannedDeckSpread } from "@/features/tarot-reading/components/FannedDeckSpread";
 import { TarotCardVisual } from "@/features/tarot-reading/components/TarotCardVisual";
 import type { DrawnCard, ReadingSession } from "@/types/tarot";
 import { cn } from "@/utils/cn";
+import { PortalBackdrop } from "./PortalBackdrop";
 
 interface AltarStageProps {
   readonly session: ReadingSession;
@@ -43,7 +43,7 @@ export function AltarStage({
           : "shrink-0 border-b line-accent-subtle lg:border-b-0 lg:h-full lg:overflow-y-auto mystic-scrollbar",
       )}
     >
-      <CelestialBackdrop />
+      <PortalBackdrop variant="altar" />
 
       {/* CHẾ ĐỘ THU GỌN TRÊN MOBILE KHI ĐÃ RÚT XONG 3 LÁ (Chừa khoảng trống bên trái cho Logo thu gọn) */}
       {!isDrawingPhase && (
@@ -136,7 +136,7 @@ export function AltarStage({
                 ) : (
                   <div
                     className={cn(
-                      "flex items-center justify-center w-[94px] sm:w-[130px] lg:w-[144px] aspect-[2/3.15] rounded-xl transition-all duration-300",
+                      "flex items-center justify-center w-[92px] sm:w-[126px] lg:w-[138px] aspect-[2/3.8] rounded-xl transition-all duration-300",
                       isNextTargetSlot
                         ? "empty-slot-surface-next"
                         : "empty-slot-surface",

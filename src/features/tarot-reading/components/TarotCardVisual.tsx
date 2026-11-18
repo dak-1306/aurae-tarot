@@ -7,6 +7,7 @@ import { UI_TEXTS } from "@/constants/app";
 import { TAROT_CARD_MAP } from "@/constants/tarot-deck";
 import { CardBackArt } from "@/features/tarot-reading/components/CardBackArt";
 import { toRomanNumeral } from "@/features/tarot-reading/utils/deckUtils";
+import { isCardImageReady } from "@/features/tarot-reading/utils/imagePreloader";
 import type { DrawnCard, SuitType } from "@/types/tarot";
 import { cn } from "@/utils/cn";
 
@@ -39,10 +40,10 @@ function SuitEmblem({
 }
 
 const SIZE_STYLES = {
-  xs: "w-[64px] aspect-[2/3.1]",
-  sm: "w-[86px] sm:w-[106px] aspect-[2/3.15]",
-  md: "w-[94px] sm:w-[130px] lg:w-[144px] aspect-[2/3.15]",
-  lg: "w-[172px] sm:w-[196px] aspect-[2/3.15]",
+  xs: "w-[56px] sm:w-[62px] aspect-[4/7]",
+  sm: "w-[84px] sm:w-[104px] aspect-[2/3.8]",
+  md: "w-[92px] sm:w-[126px] lg:w-[138px] aspect-[2/3.8]",
+  lg: "w-[176px] sm:w-[204px] aspect-[2/3.8]",
 } as const;
 
 export function TarotCardVisual({
@@ -51,13 +52,21 @@ export function TarotCardVisual({
   hideTopLabel = false,
   onClick,
 }: TarotCardVisualProps) {
-  const [imageFailed, setImageFailed] = useState(false);
+  const [loadedCardId, setLoadedCardId] = useState<string | null>(() =>
+    isCardImageReady(drawnCard.cardId) ? drawnCard.cardId : null,
+  );
+  const [failedCardId, setFailedCardId] = useState<string | null>(null);
+
   const definition = TAROT_CARD_MAP[drawnCard.cardId];
   const isReversed = drawnCard.orientation === "reversed";
 
   if (!definition) {
     return null;
   }
+
+  const isImageLoaded =
+    loadedCardId === definition.id || isCardImageReady(definition.id);
+  const imageFailed = failedCardId === definition.id;
 
   const numeralLabel =
     definition.arcana === "major"
@@ -104,24 +113,17 @@ export function TarotCardVisual({
           <div
             className={cn(
               "absolute inset-0 backface-hidden rotate-y-180 flex flex-col justify-between overflow-hidden rounded-xl card-face-surface",
-              isMiniCard ? "p-1" : "p-1.5 sm:p-2",
+              isMiniCard ? "p-1" : "p-1.5",
             )}
           >
             <div
               className={cn(
-                "relative flex-1 w-full overflow-hidden rounded-lg card-art-frame transition-transform duration-500",
+                "relative flex-1 min-h-0 w-full flex items-center justify-center overflow-hidden rounded-lg card-art-frame transition-transform duration-500",
                 isReversed && "rotate-180",
               )}
             >
-              {!imageFailed ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={definition.imageUrl}
-                  alt={definition.nameVi}
-                  onError={() => setImageFailed(true)}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
+              {/* Lớp biểu tượng chòm sao làm nền chờ & fallback khi lỗi mạng */}
+              {(!isImageLoaded || imageFailed) && (
                 <div className="flex h-full w-full flex-col items-center justify-between card-art-backdrop p-1.5 sm:p-2">
                   <span className="font-serif text-[10px] sm:text-sm font-semibold tracking-widest ink-accent">
                     {numeralLabel}
@@ -150,23 +152,29 @@ export function TarotCardVisual({
                   )}
                 </div>
               )}
+
+              {/* Ảnh minh họa lá bài (hiển thị tức thì hoặc cross-fade mượt) */}
+              {!imageFailed && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={definition.imageUrl}
+                  alt={definition.nameVi}
+                  decoding="async"
+                  onLoad={() => setLoadedCardId(definition.id)}
+                  onError={() => setFailedCardId(definition.id)}
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+                    isImageLoaded ? "opacity-100" : "opacity-0",
+                  )}
+                />
+              )}
             </div>
 
             {!isMiniCard && (
-              <div className="pt-1.5 text-center">
-                <p className="font-serif text-xs sm:text-sm font-semibold leading-tight ink-primary line-clamp-1">
+              <div className="shrink-0 pt-1.5 pb-0.5 px-1 text-center">
+                <p className="font-serif text-[11px] sm:text-xs lg:text-[13px] font-semibold leading-tight tracking-wide ink-primary truncate">
                   {definition.nameVi}
                 </p>
-                <span
-                  className={cn(
-                    "mt-0.5 inline-block text-[9px] sm:text-[10px] font-medium tracking-wider uppercase",
-                    isReversed ? "ink-gold" : "ink-accent",
-                  )}
-                >
-                  {isReversed
-                    ? UI_TEXTS.ORIENTATION.REVERSED
-                    : UI_TEXTS.ORIENTATION.UPRIGHT}
-                </span>
               </div>
             )}
           </div>
