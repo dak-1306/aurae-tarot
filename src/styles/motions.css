@@ -134,7 +134,7 @@
 
 .portal-oculus-pc {
   transform-box: view-box;
-  transform-origin: 800px 104px;
+  transform-origin: 450px 108px;
   will-change: transform;
   animation: portal-oculus-rotate 90s linear infinite;
 }
@@ -291,6 +291,25 @@
   transform-origin: center;
   animation: star-pulse-soft 3.6s ease-in-out infinite;
 }
+@keyframes portal-vertical-sweep {
+  0%,
+  100% {
+    transform: translate3d(0, 890px, 0);
+  }
+  44%,
+  58% {
+    transform: translate3d(0, -180px, 0);
+  }
+}
+
+.portal-sweep-rect {
+  will-change: transform;
+  animation: portal-vertical-sweep 11s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+[data-variant="altar"] .portal-sweep-rect {
+  animation-duration: 16s;
+}
 
 /* ==================== AURAE UNIFIED LOADER ==================== */
 @keyframes aurae-loader-cw {
@@ -358,6 +377,123 @@
   animation: aurae-loader-text-pulse 2.4s ease-in-out infinite;
 }
 
+/* ==================== NHỊP SÓNG HÍT THỞ & XÀO BÀI ==================== */
+@keyframes breathing-concentric-wave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.32);
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.72;
+  }
+  75% {
+    opacity: 0.24;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 0;
+  }
+}
+
+.breathing-wave-1 {
+  animation: breathing-concentric-wave 5.4s var(--ease-editorial) 0s infinite;
+}
+
+.breathing-wave-2 {
+  animation: breathing-concentric-wave 5.4s var(--ease-editorial) 1.8s infinite;
+}
+
+.breathing-wave-3 {
+  animation: breathing-concentric-wave 5.4s var(--ease-editorial) 3.6s infinite;
+}
+
+@keyframes shuffle-overhand-left {
+  0% {
+    z-index: 1;
+    transform: translate3d(0, 2px, 0) rotate(0deg) scale(0.96);
+    opacity: 0.7;
+  }
+  28% {
+    z-index: 1;
+    transform: translate3d(-54px, -4px, 0) rotate(-13deg) scale(0.99);
+    opacity: 1;
+  }
+  52% {
+    z-index: 20;
+    transform: translate3d(-32px, -12px, 0) rotate(-7deg) scale(1.03);
+    opacity: 1;
+  }
+  82% {
+    z-index: 20;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    z-index: 20;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shuffle-overhand-right {
+  0% {
+    z-index: 1;
+    transform: translate3d(0, 2px, 0) rotate(0deg) scale(0.96);
+    opacity: 0.7;
+  }
+  28% {
+    z-index: 1;
+    transform: translate3d(54px, -4px, 0) rotate(13deg) scale(0.99);
+    opacity: 1;
+  }
+  52% {
+    z-index: 20;
+    transform: translate3d(32px, -12px, 0) rotate(7deg) scale(1.03);
+    opacity: 1;
+  }
+  82% {
+    z-index: 20;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    z-index: 20;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shuffle-deck-recoil {
+  0%,
+  68%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  82% {
+    transform: translate3d(0, 3px, 0) scale(0.988);
+  }
+}
+
+.shuffle-card-left {
+  will-change: transform, opacity;
+  animation: shuffle-overhand-left 1.2s var(--ease-editorial) 0s infinite;
+}
+
+.shuffle-card-right {
+  will-change: transform, opacity;
+  animation: shuffle-overhand-right 1.2s var(--ease-editorial) -0.6s infinite;
+}
+
+.shuffle-card-center {
+  will-change: transform;
+  animation: shuffle-deck-recoil 0.6s ease-out infinite;
+}
+
+.shuffle-orbit-ring {
+  will-change: transform;
+  animation: astrolabe-orbit-cw 24s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .portal-glow-layer,
   .portal-oculus-pc,
@@ -375,7 +511,20 @@
   .aurae-loader-ring-outer,
   .aurae-loader-ring-inner,
   .aurae-loader-core-star,
-  .aurae-loader-caption {
+  .aurae-loader-caption,
+  .breathing-wave-1,
+  .breathing-wave-2,
+  .breathing-wave-3,
+  .shuffle-card-left,
+  .shuffle-card-right,
+  .shuffle-card-center,
+  .shuffle-orbit-ring,
+  .portal-sweep-rect {
+    animation: none;
+    transform: translate3d(0, -180px, 0);
+  }
+  .portal-glow-layer,
+  .portal-oculus-pc {
     animation: none;
   }
 }

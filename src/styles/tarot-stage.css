@@ -107,6 +107,26 @@
   background-color: var(--tint-jade-medium);
 }
 
+.breathing-wave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.32);
+  border: 1px solid var(--border-jade-active);
+  background: radial-gradient(
+    circle,
+    transparent 52%,
+    var(--tint-jade-subtle) 68%,
+    transparent 82%
+  );
+  will-change: transform, opacity;
+}
+
 .breathing-ring-outer {
   background-color: var(--surface-card);
   border: 1px solid var(--border-jade-active);
@@ -121,17 +141,23 @@
   background-color: var(--accent-jade);
 }
 
+.shuffle-stage-aura {
+  background: radial-gradient(
+    circle,
+    var(--tint-jade-medium) 0%,
+    var(--tint-gold-subtle) 52%,
+    transparent 76%
+  );
+}
+
+.shuffle-orbit-ring {
+  border: 1px dashed var(--border-jade-subtle);
+  box-shadow: inset 0 0 0 8px var(--tint-jade-subtle);
+}
+
 .shuffle-center-orb {
   background-color: var(--bg-canvas-deep);
   border: 1px solid var(--border-jade-active);
-}
-
-.stream-cursor-jade {
-  background-color: var(--accent-jade);
-}
-
-.stream-cursor-gold {
-  background-color: var(--accent-gold);
 }
 
 /* ==================== HIỆU ỨNG LẬT 3D & HOVER ==================== */
@@ -149,24 +175,6 @@
 }
 
 .rotate-y-180 {
+  rotate: none;
   transform: rotateY(180deg);
-}
-
-.tarot-card-interactive {
-  transition:
-    transform 320ms var(--ease-editorial),
-    box-shadow 320ms var(--ease-editorial),
-    border-color 240ms ease;
-}
-
-@media (hover: hover) {
-  .tarot-card-interactive:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  .fan-card-hoverable:hover {
-    border-color: var(--accent-jade-light);
-    box-shadow: var(--shadow-card-hover);
-  }
 }

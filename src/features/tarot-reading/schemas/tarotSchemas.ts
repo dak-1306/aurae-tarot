@@ -8,6 +8,7 @@ export const topicIdSchema = z.enum([
   "finance",
   "self",
   "general",
+  "crossroads",
 ]);
 
 export const orientationSchema = z.enum(["upright", "reversed"]);

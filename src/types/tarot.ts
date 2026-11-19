@@ -4,7 +4,13 @@ export type SuitType = "major" | "wands" | "cups" | "swords" | "pentacles";
 
 export type CardOrientation = "upright" | "reversed";
 
-export type TopicId = "love" | "career" | "finance" | "self" | "general";
+export type TopicId =
+  | "general"
+  | "love"
+  | "career"
+  | "finance"
+  | "self"
+  | "crossroads";
 
 export type ThemeMode = "dark" | "light";
 

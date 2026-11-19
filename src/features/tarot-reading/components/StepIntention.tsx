@@ -36,36 +36,28 @@ export function StepIntention({
 
   return (
     <section className="relative flex h-full w-full flex-col overflow-hidden">
-      <PortalBackdrop variant="intention" />
+      {/* Nền cánh cổng cho Mobile (< lg) */}
+      <PortalBackdrop variant="intention" className="lg:hidden" />
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-6xl flex-col px-4 py-3 sm:py-5 lg:grid lg:grid-cols-12 lg:items-center lg:gap-10 lg:px-8">
-        {/* CỘT TRÁI (PC >= lg): Mascot cỡ lớn + 3 dòng chỉ dẫn La Mã */}
-        <aside className="hidden lg:flex lg:col-span-5 lg:flex-col lg:items-center lg:justify-center lg:text-center">
-          <OracleMascot variant="hero" className="h-56 w-56 xl:h-64 xl:w-64" />
-
-          <div className="my-5 h-px w-40 editorial-guide-divider" />
-
-          <ol className="w-full max-w-sm space-y-3.5 text-left">
-            {UI_TEXTS.INTENTION.GUIDE_STEPS.map((step) => (
-              <li key={step.numeral} className="flex items-baseline gap-3.5">
-                <span className="w-6 shrink-0 font-serif text-sm font-semibold tracking-widest ink-gold">
-                  {step.numeral}.
-                </span>
-                <div className="min-w-0">
-                  <p className="font-serif text-base font-semibold leading-snug ink-primary">
-                    {step.title}
-                  </p>
-                  <p className="mt-0.5 text-xs leading-relaxed ink-secondary">
-                    {step.caption}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+      <div className="relative z-10 flex h-full w-full flex-col px-4 py-3 sm:py-5 lg:grid lg:grid-cols-12 lg:p-0">
+        {/* NỬA TRÁI (PC >= lg): Cánh cổng kiến trúc & Thiên thần nằm chính giữa vòm */}
+        <aside className="hidden lg:relative lg:col-span-6 lg:flex lg:h-full lg:items-center lg:justify-center lg:overflow-hidden">
+          <PortalBackdrop variant="intention" />
+          <OracleMascot
+            variant="hero"
+            className="relative z-10 h-64 w-64 xl:h-72 xl:w-72 translate-y-4"
+          />
         </aside>
 
-        {/* CỘT PHẢI (PC) / TOÀN KHUNG (MOBILE): Form đặt ý niệm */}
-        <div className="flex flex-1 min-h-0 flex-col lg:col-span-7 lg:flex-initial lg:justify-center">
+        {/* NỬA PHẢI (PC >= lg): Trang nhập liệu mở phẳng / MOBILE: Gọn gàng không đóng hộp */}
+        <div className="relative flex flex-1 min-h-0 flex-col lg:col-span-6 lg:h-full lg:justify-center lg:px-10 xl:px-16">
+          {/* Vệt phân tách dọc mờ dần ở hai đầu trên PC */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:block absolute left-0 top-14 bottom-14 w-px editorial-vertical-divider"
+          />
+
+          {/* Tiêu đề Mobile */}
           <div className="shrink-0 text-center mb-3 lg:hidden">
             <h1 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight ink-primary">
               {UI_TEXTS.INTENTION.HEADING}
@@ -77,16 +69,21 @@ export function StepIntention({
 
           <form
             onSubmit={handleFormSubmit}
-            className="surface-elevated flex flex-1 min-h-0 flex-col rounded-2xl overflow-hidden lg:flex-initial"
+            className="flex flex-1 min-h-0 flex-col overflow-hidden lg:flex-initial lg:mx-auto lg:w-full lg:max-w-xl"
           >
-            <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar p-4 sm:p-6 lg:overflow-visible lg:p-7 space-y-4">
-              <div className="hidden lg:flex lg:items-baseline lg:justify-between lg:gap-4 lg:border-b lg:line-accent-subtle lg:pb-3.5">
-                <h1 className="font-serif text-2xl xl:text-3xl font-semibold tracking-tight ink-primary">
+            <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar px-1 py-2 sm:px-3 lg:overflow-visible lg:p-0 space-y-4 lg:space-y-5">
+              {/* Tiêu đề PC với đường kẻ mờ tan hai đầu */}
+              <div className="hidden lg:block">
+                <h1 className="font-serif text-3xl xl:text-4xl font-semibold tracking-tight ink-primary">
                   {UI_TEXTS.INTENTION.HEADING}
                 </h1>
-                <span className="text-xs ink-secondary">
+                <p className="mt-1.5 text-sm ink-secondary">
                   {UI_TEXTS.INTENTION.SUBHEADING}
-                </span>
+                </p>
+                <div
+                  aria-hidden="true"
+                  className="mt-4 h-px w-full editorial-guide-divider opacity-70"
+                />
               </div>
 
               {/* Chọn chủ đề */}
@@ -160,8 +157,8 @@ export function StepIntention({
               </div>
             </div>
 
-            {/* Nút hành động chính dáng Thẻ bài viền chỉ kép */}
-            <div className="shrink-0 surface-footer-bar px-4 py-3 sm:px-6 lg:px-7 safe-area-bottom">
+            {/* Nút hành động chính */}
+            <div className="shrink-0 px-1 pt-3 pb-1 sm:px-3 lg:px-0 lg:pt-5 lg:pb-0 safe-area-bottom">
               <Button
                 type="submit"
                 variant="primary"

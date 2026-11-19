@@ -1,19 +1,136 @@
+/* ==================== HỆ THỐNG SÓNG MẶT NƯỚC ĐA ĐỢT (NHỊP THƯ THÁI) ==================== */
+@keyframes aurae-water-crest {
+  0% {
+    transform: translate(-50%, -50%) scale(0.04);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 0;
+  }
+}
+
+@keyframes aurae-water-wash {
+  0% {
+    transform: translate(-50%, -50%) scale(0.06);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.02);
+    opacity: 0.72;
+  }
+}
+
+.ui-ripple-group {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+.ui-ripple-group[data-state="hover"] {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.ui-ripple-group[data-state="leave"] {
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+.ui-ripple-wave {
+  position: absolute;
+  left: var(--ripple-x, 50%);
+  top: var(--ripple-y, 50%);
+  width: var(--ripple-size, 140%);
+  height: var(--ripple-size, 140%);
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  will-change: transform, opacity;
+}
+
+/* Đợt 1 & Đợt 2: Hai vòng gợn nước đồng tâm lan tỏa thong thả */
+.ui-ripple-wave-1,
+.ui-ripple-wave-2 {
+  background: radial-gradient(
+    circle,
+    transparent 48%,
+    var(--wave-crest, var(--border-jade-active)) 62%,
+    transparent 74%
+  );
+}
+
+/* Đợt 3: Làn sương dịu đọng lại giữ trạng thái hover */
+.ui-ripple-wave-3 {
+  background: radial-gradient(
+    circle,
+    var(--wave-wash, var(--tint-jade-medium)) 0%,
+    transparent 76%
+  );
+}
+
+.ui-ripple-group[data-state="reset"] .ui-ripple-wave {
+  animation: none !important;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.ui-ripple-group[data-state="hover"] .ui-ripple-wave-1,
+.ui-ripple-group[data-state="leave"] .ui-ripple-wave-1 {
+  animation: aurae-water-crest 1150ms var(--ease-editorial) 0ms forwards;
+}
+
+.ui-ripple-group[data-state="hover"] .ui-ripple-wave-2,
+.ui-ripple-group[data-state="leave"] .ui-ripple-wave-2 {
+  animation: aurae-water-crest 1300ms var(--ease-editorial) 260ms forwards;
+}
+
+.ui-ripple-group[data-state="hover"] .ui-ripple-wave-3,
+.ui-ripple-group[data-state="leave"] .ui-ripple-wave-3 {
+  animation: aurae-water-wash 1100ms var(--ease-editorial) 340ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-ripple-group {
+    display: none;
+  }
+}
+
 /* ==================== UI PRIMITIVES: BUTTONS ==================== */
 .ui-btn {
   position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.01em;
   transition:
     transform 160ms var(--ease-editorial),
-    background-color 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease;
+    background-color 240ms ease,
+    border-color 240ms ease,
+    color 240ms ease,
+    box-shadow 240ms ease;
   cursor: pointer;
   user-select: none;
+}
+
+.ui-btn-content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .ui-btn:active:not(:disabled):not([aria-busy="true"]) {
@@ -60,6 +177,7 @@
   font-size: 0.9375rem;
 }
 
+/* DÁNG 1: Thẻ bài viền chỉ kép góc sắc */
 .ui-btn-plaque {
   border-radius: 4px;
   font-weight: 600;
@@ -70,29 +188,36 @@
   content: "";
   position: absolute;
   inset: 3px;
+  z-index: 1;
   border-radius: 2px;
   border: 1px solid var(--plaque-inner-line);
   pointer-events: none;
   transition:
-    inset 160ms var(--ease-editorial),
-    border-color 200ms ease;
+    inset 180ms var(--ease-editorial),
+    border-color 260ms ease;
 }
 
 .ui-btn-plaque:active:not(:disabled)::after {
   inset: 4px;
 }
 
+/* Variant 1: Primary — Sóng ánh ngọc bích trong trẻo */
 .ui-btn-primary {
+  --wave-crest: rgba(255, 255, 255, 0.46);
+  --wave-wash: rgba(255, 255, 255, 0.18);
   background-color: var(--accent-jade);
   color: var(--text-inverse);
   border: 1px solid var(--accent-jade-light);
 }
 
 .ui-btn-primary:hover:not(:disabled):not([aria-busy="true"]) {
-  background-color: var(--accent-jade-light);
+  border-color: var(--accent-jade-light);
 }
 
+/* Variant 2: Gold — Sóng nhũ vàng kim & sáng viền chỉ kép */
 .ui-btn-gold {
+  --wave-crest: color-mix(in srgb, var(--accent-gold) 44%, transparent);
+  --wave-wash: color-mix(in srgb, var(--accent-gold) 15%, transparent);
   background-color: var(--surface-card-elevated);
   color: var(--accent-gold);
   border: 1px solid var(--border-gold-subtle);
@@ -103,15 +228,22 @@
 }
 
 .ui-btn-gold:hover:not(:disabled):not([aria-busy="true"]) {
-  background-color: var(--tint-gold-subtle);
   border-color: var(--accent-gold);
 }
 
+.ui-btn-gold:hover:not(:disabled):not([aria-busy="true"])::after {
+  border-color: color-mix(in srgb, var(--accent-gold) 65%, transparent);
+}
+
+/* DÁNG 2: Viên nang kiến trúc mảnh */
 .ui-btn-pill {
   border-radius: 9999px;
 }
 
+/* Variant 3: Outline — Gợn sóng ngọc bích trên nền thẻ */
 .ui-btn-outline {
+  --wave-crest: var(--border-jade-active);
+  --wave-wash: var(--tint-jade-subtle);
   background-color: var(--surface-card);
   color: var(--text-primary);
   border: 1px solid var(--border-jade-subtle);
@@ -119,22 +251,26 @@
 
 .ui-btn-outline:hover:not(:disabled):not([aria-busy="true"]) {
   border-color: var(--border-jade-active);
-  background-color: var(--tint-jade-subtle);
   color: var(--accent-jade);
 }
 
+/* Variant 4: Subtle — Sóng ngọc chồng lớp sâu */
 .ui-btn-subtle {
+  --wave-crest: var(--border-jade-active);
+  --wave-wash: var(--tint-jade-medium);
   background-color: var(--tint-jade-medium);
   color: var(--accent-jade);
   border: 1px solid var(--border-jade-subtle);
 }
 
 .ui-btn-subtle:hover:not(:disabled):not([aria-busy="true"]) {
-  background-color: var(--tint-jade-strong);
   border-color: var(--border-jade-active);
 }
 
+/* Variant 5: Ghost — Vòng sương mờ thanh thoát */
 .ui-btn-ghost {
+  --wave-crest: var(--tint-jade-strong);
+  --wave-wash: var(--tint-jade-subtle);
   border-radius: 6px;
   background-color: transparent;
   color: var(--text-secondary);
@@ -142,11 +278,13 @@
 }
 
 .ui-btn-ghost:hover:not(:disabled):not([aria-busy="true"]) {
-  background-color: var(--tint-jade-subtle);
   color: var(--accent-jade);
 }
 
+/* Variant 6: Medallion (Icon) — Sóng đồng tâm tinh bàn & xoay nhẹ biểu tượng */
 .ui-btn-medallion {
+  --wave-crest: var(--border-jade-active);
+  --wave-wash: var(--tint-jade-medium);
   height: 44px;
   width: 44px;
   padding: 0;
@@ -168,15 +306,24 @@
   content: "";
   position: absolute;
   inset: 3px;
+  z-index: 1;
   border-radius: 9999px;
   border: 1px solid var(--border-neutral-subtle);
   pointer-events: none;
-  transition: border-color 200ms ease;
+  transition: border-color 240ms ease;
+}
+
+.ui-btn-medallion .ui-ripple-wave {
+  left: 50% !important;
+  top: 50% !important;
+}
+
+.ui-btn-medallion .ui-btn-content svg {
+  transition: transform 260ms var(--ease-editorial);
 }
 
 .ui-btn-medallion:hover:not(:disabled):not([aria-busy="true"]) {
   border-color: var(--border-jade-active);
-  background-color: var(--tint-jade-subtle);
   color: var(--accent-jade);
 }
 
@@ -184,7 +331,14 @@
   border-color: var(--border-jade-subtle);
 }
 
+.ui-btn-medallion:hover:not(:disabled) .ui-btn-content svg {
+  transform: rotate(12deg);
+}
+
+/* Variant 7: Danger Icon — Gợn sóng cảnh báo trầm đồng tâm */
 .ui-btn-danger-icon {
+  --wave-crest: var(--border-danger-subtle);
+  --wave-wash: rgba(248, 113, 113, 0.12);
   height: 44px;
   width: 44px;
   padding: 0;
@@ -200,6 +354,11 @@
     height: 40px;
     width: 40px;
   }
+}
+
+.ui-btn-danger-icon .ui-ripple-wave {
+  left: 50% !important;
+  top: 50% !important;
 }
 
 .ui-btn-danger-icon:hover:not(:disabled) {
@@ -222,9 +381,12 @@
   animation: ui-spin 700ms linear infinite;
 }
 
-/* ==================== UI PRIMITIVES: CHIPS ==================== */
+/* ==================== UI PRIMITIVES: CHIPS (ĐỒNG BỘ SÓNG MẶT NƯỚC) ==================== */
 .ui-chip {
+  --wave-crest: var(--border-jade-active);
+  --wave-wash: var(--tint-jade-subtle);
   position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   min-height: 40px;
@@ -233,16 +395,15 @@
   background-color: var(--bg-canvas-deep);
   color: var(--text-secondary);
   transition:
-    border-color 200ms ease,
-    background-color 200ms ease,
-    color 200ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
     transform 160ms var(--ease-editorial);
   cursor: pointer;
 }
 
 .ui-chip:hover:not(:disabled) {
   border-color: var(--border-jade-active);
-  background-color: var(--tint-jade-subtle);
   color: var(--text-primary);
 }
 
@@ -280,18 +441,21 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 20%;
-  bottom: 20%;
+  top: 50%;
+  bottom: 50%;
+  z-index: 2;
   width: 2.5px;
   border-radius: 2px;
   background-color: transparent;
   transition:
-    background-color 200ms ease,
-    top 200ms var(--ease-editorial),
-    bottom 200ms var(--ease-editorial);
+    background-color 220ms ease,
+    top 260ms var(--ease-editorial),
+    bottom 260ms var(--ease-editorial);
 }
 
 .ui-chip-card:hover:not(:disabled)::before {
+  top: 18%;
+  bottom: 18%;
   background-color: var(--border-jade-active);
 }
 
@@ -348,7 +512,7 @@
   color: var(--text-secondary);
 }
 
-/* ==================== UI PRIMITIVES: FORM CONTROLS ==================== */
+/* ==================== UI PRIMITIVES: FORM CONTROLS & SWITCH ==================== */
 @keyframes field-nudge {
   0%,
   100% {
@@ -369,8 +533,9 @@
   background-color: var(--bg-canvas-deep);
   color: var(--text-primary);
   transition:
-    border-color 200ms ease,
-    background-color 200ms ease;
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 260ms var(--ease-editorial);
 }
 
 .ui-field-control::placeholder {
@@ -378,9 +543,14 @@
   opacity: 0.65;
 }
 
+.ui-field-control:hover:not(:disabled):not(:focus) {
+  border-color: var(--border-jade-active);
+}
+
 .ui-field-control:focus {
   outline: none;
   border-color: var(--accent-jade);
+  box-shadow: 0 0 0 3px var(--tint-jade-subtle);
 }
 
 .ui-field-control[data-error="true"] {
@@ -404,9 +574,15 @@
   border: 1px solid var(--border-neutral-subtle);
   background-color: var(--bg-canvas);
   transition:
-    background-color 200ms ease,
-    border-color 200ms ease;
+    background-color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
   cursor: pointer;
+}
+
+.ui-switch-track:hover:not(:disabled) {
+  border-color: var(--border-jade-active);
+  box-shadow: 0 0 0 3px var(--tint-jade-subtle);
 }
 
 .ui-switch-track-on {
@@ -421,8 +597,13 @@
   border-radius: 9999px;
   background-color: var(--text-secondary);
   transition:
-    transform 220ms var(--ease-editorial),
-    background-color 200ms ease;
+    transform 240ms var(--ease-editorial),
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.ui-switch-track:hover:not(:disabled) .ui-switch-thumb {
+  box-shadow: 0 0 0 3px var(--tint-jade-subtle);
 }
 
 .ui-switch-track-on .ui-switch-thumb {

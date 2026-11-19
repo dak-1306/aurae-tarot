@@ -125,3 +125,12 @@
     transparent 100%
   );
 }
+.editorial-vertical-divider {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--border-jade-subtle) 22%,
+    var(--border-jade-subtle) 78%,
+    transparent 100%
+  );
+}

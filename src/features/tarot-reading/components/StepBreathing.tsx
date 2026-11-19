@@ -26,31 +26,47 @@ export function StepBreathing({
 }: StepBreathingProps) {
   return (
     <section className="mx-auto flex h-full max-w-xl flex-col items-center justify-center overflow-hidden px-6 text-center">
-      <div className="relative flex h-44 w-44 sm:h-52 sm:w-52 items-center justify-center shrink-0">
+      {/* Vùng sóng đồng tâm tỏa chậm từ nội dung trung tâm */}
+      <div className="relative flex h-56 w-56 sm:h-64 sm:w-64 items-center justify-center shrink-0">
+        {/* Quầng sáng nền thở theo nhịp */}
         <div
           className={cn(
-            "absolute inset-0 rounded-full breathing-aura blur-2xl transition-transform duration-1000 ease-in-out",
+            "absolute inset-6 rounded-full breathing-aura blur-2xl transition-transform duration-1000 ease-in-out",
             phase === "inhale" && "scale-110",
             phase === "hold" && "scale-125",
             phase === "exhale" && "scale-90",
           )}
         />
 
+        {/* 3 đợt sóng nước tĩnh lặng lan tỏa nối tiếp từ tâm */}
+        <span aria-hidden="true" className="breathing-wave breathing-wave-1" />
+        <span aria-hidden="true" className="breathing-wave breathing-wave-2" />
+        <span aria-hidden="true" className="breathing-wave breathing-wave-3" />
+
+        {/* Vòng bao ngoài phản hồi theo pha hít / giữ / thở */}
         <div
           className={cn(
-            "flex h-32 w-32 sm:h-36 sm:w-36 items-center justify-center rounded-full breathing-ring-outer transition-transform duration-1000 ease-in-out",
+            "relative z-10 flex h-32 w-32 sm:h-36 sm:w-36 items-center justify-center rounded-full breathing-ring-outer transition-transform duration-1000 ease-in-out",
             phase === "inhale" && "scale-110",
             phase === "hold" && "scale-115",
             phase === "exhale" && "scale-95",
           )}
         >
+          {/* Tâm của cơn sóng ở chính giữa */}
           <div className="h-20 w-20 rounded-full breathing-ring-inner flex items-center justify-center">
-            <span className="h-2.5 w-2.5 rounded-full breathing-core-dot animate-pulse" />
+            <span
+              className={cn(
+                "h-2.5 w-2.5 rounded-full breathing-core-dot transition-transform duration-1000 ease-in-out",
+                phase === "inhale" && "scale-125",
+                phase === "hold" && "scale-150",
+                phase === "exhale" && "scale-90",
+              )}
+            />
           </div>
         </div>
       </div>
 
-      <h2 className="mt-5 font-serif text-2xl sm:text-3xl font-semibold ink-accent">
+      <h2 className="mt-4 font-serif text-2xl sm:text-3xl font-semibold ink-accent">
         {PHASE_TEXT_MAP[phase]}
       </h2>
 
