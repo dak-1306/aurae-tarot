@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { toPng } from "html-to-image";
 import { Check, Download, FileText, Smartphone, X } from "lucide-react";
 import { AuraeLoader } from "@/components/ui/AuraeLoader";
 import { Button } from "@/components/ui/Button";
-import { TAROT_CONFIG } from "@/constants/app";
+import { TAROT_CONFIG, UI_TEXTS } from "@/constants/app";
 import {
   ShareStoryTemplate,
   type ShareExportMode,
 } from "@/features/tarot-reading/components/ShareStoryTemplate";
 import { prepareSessionCardDataUrls } from "@/features/tarot-reading/utils/cardImageToDataUrl";
+import { downloadElementAsPng } from "@/features/tarot-reading/utils/exportCanvasToPng";
 import type { ReadingSession } from "@/types/tarot";
 import { cn } from "@/utils/cn";
 
@@ -44,7 +44,6 @@ export function ShareStoryModal({
     Math.round(TAROT_CONFIG.SHARE_IMAGE_HEIGHT * PREVIEW_SCALE),
   );
 
-  // Khóa định danh bộ lá bài của phiên hiện tại
   const sessionCardsKey = useMemo(() => {
     const ids = [
       ...session.initialCards.map((c) => c.cardId),
@@ -53,18 +52,15 @@ export function ShareStoryModal({
     return `${session.id}:${ids.join(",")}`;
   }, [session]);
 
-  // Suy diễn trực tiếp trạng thái loading & dữ liệu ảnh mà không cần setState đồng bộ trong Effect
   const isPreparingImages =
     isOpen && resolvedCardState?.key !== sessionCardsKey;
   const cardDataUrls =
     resolvedCardState?.key === sessionCardsKey ? resolvedCardState.urls : {};
 
-  // Tải và mã hóa hình ảnh tất cả lá bài sang Base64 khi mở Modal
   useEffect(() => {
     if (!isOpen || resolvedCardState?.key === sessionCardsKey) return;
 
     let isMounted = true;
-
     void prepareSessionCardDataUrls(session).then((urls) => {
       if (isMounted) {
         setResolvedCardState({ key: sessionCardsKey, urls });
@@ -76,7 +72,6 @@ export function ShareStoryModal({
     };
   }, [isOpen, resolvedCardState?.key, session, sessionCardsKey]);
 
-  // Đồng bộ chiều cao khung xem trước theo kích thước thật của mẫu đang chọn
   useEffect(() => {
     if (!isOpen) return;
     const measureTimer = setTimeout(() => {
@@ -106,43 +101,14 @@ export function ShareStoryModal({
     setDownloadDone(false);
 
     try {
-      const images = Array.from(targetNode.querySelectorAll("img"));
-      await Promise.all(
-        images.map((img) =>
-          img.complete
-            ? img.decode().catch(() => undefined)
-            : new Promise<void>((resolve) => {
-                img.onload = () => resolve();
-                img.onerror = () => resolve();
-              }),
-        ),
-      );
-
-      const nodeHeight =
-        targetNode.offsetHeight || TAROT_CONFIG.SHARE_IMAGE_HEIGHT;
-      const safePixelRatio = nodeHeight > 2600 ? 1.5 : 2;
-
-      const pngDataUrl = await toPng(targetNode, {
-        cacheBust: true,
-        pixelRatio: safePixelRatio,
-        width: TAROT_CONFIG.SHARE_IMAGE_WIDTH,
-        height: nodeHeight,
-      });
-
-      const link = document.createElement("a");
       const dateSlug = session.createdAt.slice(0, 10);
-      const modeSlug = exportMode === "full" ? "tron-ven" : "story-9-16";
-      link.download = `aurae-tarot-${modeSlug}-${dateSlug}.png`;
-      link.href = pngDataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const modeSlug = exportMode === "full" ? "day-du" : "story-9-16";
+      const filename = `${UI_TEXTS.CLOSURE.TEMPLATE_FILENAME_PREFIX}${modeSlug}-${dateSlug}.png`;
 
+      await downloadElementAsPng(targetNode, filename);
       setDownloadDone(true);
     } catch {
-      setExportError(
-        "Không thể tạo tệp ảnh lúc này. Vui lòng thử lại sau giây lát.",
-      );
+      setExportError(UI_TEXTS.CLOSURE.IMAGE_ERROR);
     } finally {
       setIsDownloading(false);
     }
@@ -152,34 +118,38 @@ export function ShareStoryModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Lưu thẻ chiêm nghiệm"
+      aria-label={UI_TEXTS.CLOSURE.SHARE_MODAL_TITLE}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
     >
-      <div className="relative flex max-h-[92dvh] w-full max-w-xl flex-col overflow-hidden rounded-2xl surface-glass shadow-2xl">
+      <div className="relative flex max-h-[92dvh] w-full max-w-xl flex-col overflow-hidden rounded-3xl surface-glass shadow-2xl">
         {/* Thanh tiêu đề Modal */}
-        <div className="flex items-center justify-between border-b line-accent-subtle px-5 py-4">
+        <div className="flex items-center justify-between gap-3 px-6 pt-5 pb-3.5">
           <div>
             <h2 className="font-serif text-lg sm:text-xl font-semibold ink-accent">
-              Lưu Thẻ Chiêm Nghiệm
+              {UI_TEXTS.CLOSURE.SHARE_MODAL_TITLE}
             </h2>
             <p className="text-xs ink-secondary mt-0.5">
-              Chọn định dạng lưu trữ phù hợp với nhu cầu của bạn
+              {UI_TEXTS.CLOSURE.SHARE_MODAL_SUBTITLE}
             </p>
           </div>
 
-          <button
-            type="button"
+          <Button
+            variant="icon"
+            size="icon"
             onClick={handleClose}
-            aria-label="Đóng cửa sổ"
-            className="rounded-full p-2 ink-secondary hover:ink-primary cursor-pointer"
-          >
-            <X className="h-5 w-5" />
-          </button>
+            aria-label={UI_TEXTS.ARIA.CLOSE_OVERLAY}
+            icon={<X className="h-4 w-4" />}
+          />
         </div>
 
-        {/* Thanh chuyển đổi 2 chế độ: Bản Trọn Vẹn vs Thẻ Story 9:16 */}
-        <div className="px-5 pt-4">
-          <div className="grid grid-cols-2 gap-2 rounded-xl surface-card p-1">
+        <div
+          aria-hidden="true"
+          className="h-px w-full editorial-guide-divider opacity-65"
+        />
+
+        {/* Thanh chọn định dạng ảnh */}
+        <div className="px-6 pt-4">
+          <div className="grid grid-cols-2 gap-2 rounded-xl surface-inset p-1">
             <button
               type="button"
               onClick={() => {
@@ -195,7 +165,7 @@ export function ShareStoryModal({
               )}
             >
               <FileText className="h-4 w-4 shrink-0" />
-              <span>Bản Trọn Vẹn</span>
+              <span>Bản đầy đủ</span>
             </button>
 
             <button
@@ -213,23 +183,23 @@ export function ShareStoryModal({
               )}
             >
               <Smartphone className="h-4 w-4 shrink-0" />
-              <span>Thẻ Story 9:16</span>
+              <span>Ảnh Story 9:16</span>
             </button>
           </div>
 
           <p className="mt-2.5 text-center text-xs ink-secondary">
             {exportMode === "full"
-              ? "Lưu đầy đủ câu hỏi chính, hình ảnh tất cả lá bài, các câu hỏi phụ và trọn vẹn lời luận giải."
-              : "Khung dọc 9:16 tinh gọn gồm 3 lá bài chính, tóm tắt lá bổ trợ và thông điệp đọng lại để đăng Story."}
+              ? "Lưu trọn vẹn câu hỏi, các lá bài đã rút và toàn bộ lời nhắn dành cho bạn."
+              : "Khung dọc 9:16 tinh gọn để bạn dễ dàng chia sẻ lên Story."}
           </p>
         </div>
 
-        {/* Vùng xem trước thu nhỏ có thanh cuộn */}
-        <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar px-5 py-4 flex justify-center">
+        {/* Vùng xem trước thu nhỏ */}
+        <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar px-6 py-4 flex justify-center">
           {isPreparingImages ? (
             <AuraeLoader
               variant="block"
-              label="Đang chuẩn bị hình ảnh các lá bài..."
+              label={UI_TEXTS.CLOSURE.GENERATING_IMAGE}
             />
           ) : (
             <div
@@ -256,7 +226,7 @@ export function ShareStoryModal({
           )}
         </div>
 
-        {/* Mẫu kích thước thật ẩn ngoài màn hình dùng để xuất ảnh PNG */}
+        {/* Mẫu kích thước thật ẩn ngoài màn hình dùng để xuất PNG */}
         <ShareStoryTemplate
           templateRef={exportTemplateRef}
           session={session}
@@ -264,8 +234,13 @@ export function ShareStoryModal({
           cardDataUrls={cardDataUrls}
         />
 
+        <div
+          aria-hidden="true"
+          className="h-px w-full editorial-guide-divider opacity-65"
+        />
+
         {/* Thanh hành động tải xuống */}
-        <div className="shrink-0 border-t line-accent-subtle px-5 py-4 space-y-2.5">
+        <div className="shrink-0 px-6 py-4 space-y-2.5 safe-area-bottom">
           {exportError && (
             <p className="text-center text-xs ink-warning">{exportError}</p>
           )}
@@ -285,12 +260,12 @@ export function ShareStoryModal({
             }
           >
             {isDownloading
-              ? "Đang kết xuất hình ảnh..."
+              ? "Đang gói ghém hình ảnh..."
               : downloadDone
-                ? "Đã tải ảnh xuống máy"
+                ? UI_TEXTS.CLOSURE.DOWNLOAD_SUCCESS
                 : exportMode === "full"
-                  ? "Tải ảnh Bản Trọn Vẹn (.PNG)"
-                  : "Tải ảnh Thẻ Story 9:16 (.PNG)"}
+                  ? "Tải bản đầy đủ (.PNG)"
+                  : "Tải ảnh Story 9:16 (.PNG)"}
           </Button>
         </div>
       </div>

@@ -134,3 +134,34 @@
     transparent 100%
   );
 }
+
+/* ==================== KHUNG CỔNG CHIÊM NGHIỆM (READING SANCTUARY) ==================== */
+.sanctuary-portal-frame {
+  position: relative;
+  border-radius: 26px 26px 14px 14px;
+  border: 1px solid var(--border-jade-subtle);
+  background: linear-gradient(
+    180deg,
+    var(--surface-card-elevated) 0%,
+    var(--surface-card) 100%
+  );
+}
+
+.sanctuary-portal-frame::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 22px 22px 10px 10px;
+  border: 1px solid var(--border-neutral-subtle);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .sanctuary-portal-frame {
+    border-radius: 34px 34px 16px 16px;
+  }
+
+  .sanctuary-portal-frame::after {
+    border-radius: 30px 30px 12px 12px;
+  }
+}

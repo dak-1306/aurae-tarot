@@ -294,11 +294,11 @@
 @keyframes portal-vertical-sweep {
   0%,
   100% {
-    transform: translate3d(0, 890px, 0);
+    transform: translateY(890px);
   }
   44%,
   58% {
-    transform: translate3d(0, -180px, 0);
+    transform: translateY(-180px);
   }
 }
 

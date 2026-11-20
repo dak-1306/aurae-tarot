@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ImageDown, Send, Sparkles } from "lucide-react";
+import { ImageDown, Send } from "lucide-react";
 import { AuraeLoader } from "@/components/ui/AuraeLoader";
 import { Button } from "@/components/ui/Button";
 import { ChipButton } from "@/components/ui/ChipButton";
@@ -62,30 +62,50 @@ export function ReadingPanel({
   }
 
   return (
-    <aside className="flex flex-1 min-h-0 flex-col surface-reading-aside lg:h-full lg:border-l">
+    <aside className="relative flex flex-1 min-h-0 flex-col surface-reading-aside lg:h-full">
+      {/* Vệt phân tách dọc mờ tan hai đầu trên PC thay cho border-l cứng */}
+      <div
+        aria-hidden="true"
+        className="hidden lg:block absolute left-0 top-10 bottom-10 w-px editorial-vertical-divider"
+      />
+
       {/* Vùng cuộn nội bộ duy nhất của bảng luận giải */}
-      <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar space-y-5 px-4 py-4 sm:px-6 sm:py-5">
-        {/* Luận giải tổng quan 3 lá */}
-        <div className="surface-glass rounded-xl p-4 sm:p-5">
-          <div className="flex items-center justify-between gap-2 border-b line-accent-subtle pb-3 mb-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 ink-accent" />
+      <div className="flex-1 min-h-0 overflow-y-auto mystic-scrollbar space-y-6 px-4 pt-5 pb-6 sm:px-6 sm:pt-6">
+        {/* KHUNG CỔNG CHIÊM NGHIỆM: Lời nhắn tổng quan 3 lá */}
+        <div className="sanctuary-portal-frame px-5 pt-6 pb-5 sm:px-7 sm:pt-7 sm:pb-6">
+          {/* Đỉnh vòm trang trí ngôi sao 4 cánh */}
+          <div className="flex flex-col items-center text-center mb-4">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5 ink-gold mb-2 opacity-85"
+              fill="currentColor"
+            >
+              <path d="M12 1L14.2 9.8L23 12L14.2 14.2L12 23L9.8 14.2L1 12L9.8 9.8L12 1Z" />
+            </svg>
+
+            <div className="flex items-center justify-center gap-2.5">
               <h2 className="font-serif text-lg sm:text-xl font-semibold ink-accent">
                 {UI_TEXTS.SYNTHESIS.PANEL_TITLE}
               </h2>
+
+              {isStreamingSynthesis && (
+                <StatusBadge variant="accent" shape="pill">
+                  {UI_TEXTS.SYNTHESIS.STREAMING_BADGE}
+                </StatusBadge>
+              )}
             </div>
 
-            <StatusBadge variant="accent" shape="pill">
-              {isStreamingSynthesis
-                ? UI_TEXTS.SYNTHESIS.STREAMING_BADGE
-                : UI_TEXTS.SYNTHESIS.COMPLETE_BADGE}
-            </StatusBadge>
+            <div
+              aria-hidden="true"
+              className="mt-3.5 h-px w-3/4 editorial-guide-divider opacity-75"
+            />
           </div>
 
           {isStreamingSynthesis && !session.synthesisText ? (
             <AuraeLoader
               variant="block"
-              label="Đang kết nối mạch liên kết của ba lá bài..."
+              label="Đang kết nối mạch lời nhắn của ba lá bài..."
             />
           ) : session.synthesisText ? (
             <EditorialMarkdown
@@ -93,13 +113,13 @@ export function ReadingPanel({
               isStreaming={isStreamingSynthesis}
             />
           ) : (
-            <p className="text-xs italic ink-secondary">
-              Chưa nhận được nội dung luận giải. Vui lòng thử lại.
+            <p className="text-center text-xs italic ink-secondary">
+              Chưa nhận được nội dung. Bạn thử lại một chút nhé.
             </p>
           )}
         </div>
 
-        {/* Các vòng Đào Sâu cộng dồn */}
+        {/* Các vòng Hỏi Thêm: Trình bày dạng nhật ký mở nối tiếp, không đóng hộp thô */}
         {session.deepDiveRounds.map((round) => {
           const clarifierDef = TAROT_CARD_MAP[round.clarifierCard.cardId];
           const isRoundStreaming = streamingDeepDiveRound === round.round;
@@ -107,9 +127,14 @@ export function ReadingPanel({
           return (
             <div
               key={`round_${round.round}`}
-              className="rounded-xl surface-card p-4 sm:p-5 space-y-3.5 motion-veil-panel"
+              className="px-1.5 sm:px-2 space-y-3 motion-veil-panel"
             >
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b line-accent-subtle pb-2.5">
+              <div
+                aria-hidden="true"
+                className="h-px w-full editorial-guide-divider opacity-65"
+              />
+
+              <div className="pt-1 flex flex-wrap items-center justify-between gap-2">
                 <StatusBadge variant="gold" shape="plaque">
                   {UI_TEXTS.DEEP_DIVE.CLARIFIER_BADGE_PREFIX}
                   {round.round} • {clarifierDef?.nameVi}
@@ -128,7 +153,7 @@ export function ReadingPanel({
               {isRoundStreaming && !round.aiResponse ? (
                 <AuraeLoader
                   variant="inline"
-                  label="Đang soi chiếu lá bài bổ trợ..."
+                  label="Đang soi chiếu lá bài làm rõ..."
                   className="py-2"
                 />
               ) : round.aiResponse ? (
@@ -138,17 +163,22 @@ export function ReadingPanel({
                 />
               ) : (
                 <p className="text-xs italic ink-secondary">
-                  Chưa nhận được phản hồi cho vòng này. Vui lòng bấm Thử lại.
+                  Chưa nhận được phản hồi cho lượt này. Bạn bấm Thử lại nhé.
                 </p>
               )}
             </div>
           );
         })}
 
-        {/* Bảng điều khiển câu hỏi Đào Sâu mở mượt bằng Collapsible dùng chung */}
+        {/* Bảng điều khiển câu hỏi Hỏi Thêm mở mượt bằng Collapsible */}
         <Collapsible isOpen={!isStreamingSynthesis} direction="vertical">
-          <div className="surface-glass rounded-xl p-4 sm:p-5 space-y-4">
-            <div className="flex items-center justify-between gap-2">
+          <div className="pt-1 space-y-3.5">
+            <div
+              aria-hidden="true"
+              className="h-px w-full editorial-guide-divider opacity-65"
+            />
+
+            <div className="pt-1 flex items-center justify-between gap-2">
               <h3 className="font-serif text-lg font-semibold ink-primary">
                 {UI_TEXTS.DEEP_DIVE.SECTION_TITLE}
               </h3>

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { cn } from "@/utils/cn";
 
 interface PortalBackdropProps {
@@ -9,6 +10,16 @@ export function PortalBackdrop({
   variant = "intention",
   className,
 }: PortalBackdropProps) {
+  const uid = useId().replace(/:/g, "");
+
+  const gradMobileId = `portal-sweep-grad-m-${uid}`;
+  const maskMobileId = `portal-sweep-mask-m-${uid}`;
+  const geoMobileId = `portal-geo-m-${uid}`;
+
+  const gradPcId = `portal-sweep-grad-pc-${uid}`;
+  const maskPcId = `portal-sweep-mask-pc-${uid}`;
+  const geoPcId = `portal-geo-pc-${uid}`;
+
   const opacityClass = variant === "altar" ? "opacity-24" : "opacity-36";
 
   return (
@@ -35,14 +46,14 @@ export function PortalBackdrop({
         )}
       >
         <defs>
-          <linearGradient id="portal-sweep-grad-m" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={gradMobileId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="white" stopOpacity="0" />
             <stop offset="20%" stopColor="white" stopOpacity="1" />
             <stop offset="100%" stopColor="white" stopOpacity="1" />
           </linearGradient>
 
           <mask
-            id="portal-sweep-mask-m"
+            id={maskMobileId}
             maskUnits="userSpaceOnUse"
             x="0"
             y="0"
@@ -54,12 +65,12 @@ export function PortalBackdrop({
               y="0"
               width="430"
               height="1060"
-              fill="url(#portal-sweep-grad-m)"
+              fill={`url(#${gradMobileId})`}
               className="portal-sweep-rect"
             />
           </mask>
 
-          <g id="portal-geo-m">
+          <g id={geoMobileId}>
             {/* Vòm cổng ngoài */}
             <g className="ink-accent">
               <path
@@ -238,9 +249,9 @@ export function PortalBackdrop({
           </g>
         </defs>
 
-        <use href="#portal-geo-m" opacity="0.26" />
-        <g mask="url(#portal-sweep-mask-m)">
-          <use href="#portal-geo-m" />
+        <use href={`#${geoMobileId}`} opacity="0.26" />
+        <g mask={`url(#${maskMobileId})`}>
+          <use href={`#${geoMobileId}`} />
         </g>
       </svg>
 
@@ -256,14 +267,14 @@ export function PortalBackdrop({
         )}
       >
         <defs>
-          <linearGradient id="portal-sweep-grad-pc" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={gradPcId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="white" stopOpacity="0" />
             <stop offset="20%" stopColor="white" stopOpacity="1" />
             <stop offset="100%" stopColor="white" stopOpacity="1" />
           </linearGradient>
 
           <mask
-            id="portal-sweep-mask-pc"
+            id={maskPcId}
             maskUnits="userSpaceOnUse"
             x="0"
             y="0"
@@ -275,12 +286,12 @@ export function PortalBackdrop({
               y="0"
               width="900"
               height="1060"
-              fill="url(#portal-sweep-grad-pc)"
+              fill={`url(#${gradPcId})`}
               className="portal-sweep-rect"
             />
           </mask>
 
-          <g id="portal-geo-pc">
+          <g id={geoPcId}>
             {/* Lớp vòm ngoài cùng */}
             <g className="ink-accent">
               <path
@@ -498,9 +509,9 @@ export function PortalBackdrop({
           </g>
         </defs>
 
-        <use href="#portal-geo-pc" opacity="0.26" />
-        <g mask="url(#portal-sweep-mask-pc)">
-          <use href="#portal-geo-pc" />
+        <use href={`#${geoPcId}`} opacity="0.26" />
+        <g mask={`url(#${maskPcId})`}>
+          <use href={`#${geoPcId}`} />
         </g>
       </svg>
     </div>

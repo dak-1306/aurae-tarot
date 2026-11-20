@@ -40,48 +40,78 @@ export function AltarStage({
         "relative flex flex-col justify-between overflow-hidden celestial-stage-bg",
         isDrawingPhase
           ? "h-full"
-          : "shrink-0 border-b line-accent-subtle lg:border-b-0 lg:h-full lg:overflow-y-auto mystic-scrollbar",
+          : "shrink-0 lg:h-full lg:overflow-y-auto mystic-scrollbar",
       )}
     >
       <PortalBackdrop variant="altar" />
 
-      {/* CHẾ ĐỘ THU GỌN TRÊN MOBILE KHI ĐÃ RÚT XONG 3 LÁ (Chừa khoảng trống bên trái cho Logo thu gọn) */}
+      {/* CHẾ ĐỘ MOBILE SAU KHI RÚT BÀI: Tách 2 tầng thoáng đãng thay vì ép 1 hàng ngang */}
       {!isDrawingPhase && (
-        <div className="relative z-10 flex flex-col gap-2 pl-16 pr-4 py-2.5 lg:hidden safe-area-top">
-          <div className="flex items-center justify-between gap-2.5">
-            <p className="font-serif text-sm font-medium ink-primary line-clamp-2 flex-1">
+        <div className="relative z-10 flex flex-col lg:hidden safe-area-top">
+          {/* Tầng 1: Câu hỏi trải rộng (chừa góc trái cho nút logo thu gọn) */}
+          <div className="pl-16 pr-4 pt-3 pb-2">
+            <p className="font-serif text-[15px] leading-snug font-medium ink-primary line-clamp-2">
               &ldquo;{session.question}&rdquo;
             </p>
+          </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
-              {session.initialCards.map((card, idx) => (
+          {/* Tầng 2: Sân khấu 3 lá bài chính + lá làm rõ căn giữa toàn màn hình */}
+          <div className="flex items-end justify-center gap-3.5 px-4 pt-1.5 pb-2.5 overflow-x-auto">
+            {session.initialCards.map((card, idx) => (
+              <div
+                key={`mini_initial_${idx}`}
+                className="flex flex-col items-center gap-1.5 shrink-0"
+              >
                 <TarotCardVisual
-                  key={`mini_initial_${idx}`}
                   drawnCard={card}
                   size="xs"
                   hideTopLabel
                   onClick={() => onInspectCard(card)}
                 />
-              ))}
-              {clarifierCards.map((clarifier) => (
+                <span className="text-[10px] font-medium tracking-wider uppercase ink-secondary">
+                  {spreadPositions[idx]}
+                </span>
+              </div>
+            ))}
+
+            {clarifierCards.length > 0 && (
+              <div
+                aria-hidden="true"
+                className="h-12 w-px editorial-vertical-divider shrink-0 self-center mx-0.5"
+              />
+            )}
+
+            {clarifierCards.map((clarifier) => (
+              <div
+                key={`mini_clarifier_${clarifier.clarifierRound}`}
+                className="flex flex-col items-center gap-1.5 shrink-0"
+              >
                 <TarotCardVisual
-                  key={`mini_clarifier_${clarifier.clarifierRound}`}
                   drawnCard={clarifier}
                   size="xs"
                   hideTopLabel
                   onClick={() => onInspectCard(clarifier)}
                 />
-              ))}
-            </div>
+                <span className="text-[10px] font-medium tracking-wider uppercase ink-gold">
+                  #{clarifier.clarifierRound}
+                </span>
+              </div>
+            ))}
           </div>
 
-          <p className="text-[11px] ink-secondary">
+          <p className="pb-2.5 text-center text-[11px] ink-secondary opacity-85">
             {UI_TEXTS.SYNTHESIS.TAP_CARD_HINT}
           </p>
+
+          {/* Đường kẻ mờ tan hai đầu thay cho border cứng */}
+          <div
+            aria-hidden="true"
+            className="h-px w-full editorial-guide-divider opacity-65"
+          />
         </div>
       )}
 
-      {/* BỐ CỤC CHÍNH */}
+      {/* BỐ CỤC CHÍNH (MOBILE LÚC RÚT BÀI + TOÀN BỘ PC) */}
       <div
         className={cn(
           "relative z-10 flex-1 min-h-0 flex-col items-center justify-center px-4 pt-14 pb-2 sm:pt-16 lg:px-8 lg:pt-14",
@@ -166,7 +196,12 @@ export function AltarStage({
         {/* HÀNG LÁ BỔ TRỢ ĐÀO SÂU */}
         {!isDrawingPhase &&
           (clarifierCards.length > 0 || isClarifierFanActive) && (
-            <div className="mt-5 w-full max-w-3xl border-t line-accent-subtle pt-4">
+            <div className="mt-5 w-full max-w-3xl pt-4">
+              <div
+                aria-hidden="true"
+                className="mb-4 h-px w-full editorial-guide-divider opacity-65"
+              />
+
               <div className="mb-2.5 flex items-center justify-center gap-2 text-xs font-medium tracking-wider uppercase ink-accent">
                 <Layers className="h-3.5 w-3.5" />
                 <span>{UI_TEXTS.COMMON.CLARIFIER_SPREAD_LABEL}</span>
@@ -211,7 +246,11 @@ export function AltarStage({
 
       {/* BỘ BÀI PHỤ KHI HỎI ĐÀO SÂU */}
       {!isDrawingPhase && isClarifierFanActive && (
-        <div className="relative z-20 border-t line-accent-active surface-header pt-3 motion-veil-panel">
+        <div className="relative z-20 surface-header pt-3 motion-veil-panel">
+          <div
+            aria-hidden="true"
+            className="mb-3 h-px w-full editorial-guide-divider"
+          />
           <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4">
             <div className="min-w-0">
               <p className="font-serif text-sm sm:text-lg font-semibold ink-accent">
