@@ -92,32 +92,48 @@ export function useTarotFlow() {
   }, [abortStreams, clearTransitionTimer]);
 
   // Khôi phục dữ liệu an toàn từ localStorage khi mở ứng dụng
+  // Khôi phục dữ liệu an toàn từ localStorage khi mở ứng dụng
   useEffect(() => {
     let isMounted = true;
+    const savedTheme = readPersistedTheme();
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
+    // Chốt an toàn: đảm bảo không bao giờ kẹt màn hình loading nếu storage bị treo hoặc dữ liệu cũ lỗi
+    const fallbackTimer = setTimeout(() => {
+      if (isMounted && !useTarotStore.getState().isHydrated) {
+        hydrateStore(null, [], savedTheme);
+      }
+    }, 1200);
 
     async function loadPersistedState() {
-      const savedTheme = readPersistedTheme();
-      document.documentElement.setAttribute("data-theme", savedTheme);
+      try {
+        const [currentRes, historyRes] = await Promise.all([
+          getCurrentSession(),
+          getReadingHistory(),
+        ]);
 
-      const [currentRes, historyRes] = await Promise.all([
-        getCurrentSession(),
-        getReadingHistory(),
-      ]);
+        if (!isMounted) return;
 
-      if (!isMounted) return;
+        const restoredSession = repairRestoredSession(currentRes.data);
+        const validHistory = Array.isArray(historyRes.data)
+          ? historyRes.data.filter(isValidReadingSession)
+          : [];
 
-      const restoredSession = repairRestoredSession(currentRes.data);
-      const validHistory = Array.isArray(historyRes.data)
-        ? historyRes.data.filter(isValidReadingSession)
-        : [];
-
-      hydrateStore(restoredSession, validHistory, savedTheme);
+        hydrateStore(restoredSession, validHistory, savedTheme);
+      } catch {
+        if (isMounted) {
+          hydrateStore(null, [], savedTheme);
+        }
+      } finally {
+        clearTimeout(fallbackTimer);
+      }
     }
 
     void loadPersistedState();
 
     return () => {
       isMounted = false;
+      clearTimeout(fallbackTimer);
       abortAllTasks();
     };
   }, [abortAllTasks, hydrateStore]);

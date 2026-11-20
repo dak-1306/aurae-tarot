@@ -178,3 +178,7 @@
   rotate: none;
   transform: rotateY(180deg);
 }
+.fan-arc-slot {
+  will-change: transform;
+  contain: layout style;
+}

@@ -119,7 +119,7 @@ export function AltarStage({
         )}
       >
         <div className="mb-3 sm:mb-5 max-w-2xl text-center">
-          <h1 className="font-serif text-xl sm:text-3xl lg:text-4xl font-medium ink-primary line-clamp-2">
+          <h1 className="font-serif text-xl sm:text-3xl lg:text-4xl font-medium leading-[1.35] pb-1 ink-primary line-clamp-2">
             {session.question}
           </h1>
 

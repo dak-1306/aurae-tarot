@@ -10,11 +10,27 @@ import type {
 } from "@/types/tarot";
 
 /**
+ * Bộ sinh số ngẫu nhiên chuẩn mật mã (Web Crypto API) lấy entropy từ hệ điều hành,
+ * đảm bảo phân phối đồng đều tuyệt đối cho việc xào bài và xác định chiều xuôi/ngược.
+ */
+export function cryptoRandom(): number {
+  if (
+    typeof globalThis.crypto !== "undefined" &&
+    typeof globalThis.crypto.getRandomValues === "function"
+  ) {
+    const buffer = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(buffer);
+    return buffer[0] / 0x100000000;
+  }
+  return Math.random();
+}
+
+/**
  * Xào bộ bài bằng thuật toán Fisher-Yates chuẩn (thuần túy, không mutate mảng gốc).
  */
 export function shuffleDeck(
   deck: readonly TarotCardDefinition[] = TAROT_DECK,
-  randomFn: () => number = Math.random,
+  randomFn: () => number = cryptoRandom,
 ): TarotCardDefinition[] {
   const copy = [...deck];
   for (let i = copy.length - 1; i > 0; i -= 1) {
@@ -31,7 +47,7 @@ export function shuffleDeck(
  */
 export function resolveCardOrientation(
   allowReversed: boolean,
-  randomFn: () => number = Math.random,
+  randomFn: () => number = cryptoRandom,
 ): CardOrientation {
   if (!allowReversed) {
     return "upright";
@@ -48,7 +64,7 @@ export function createShuffledFanPool(
   count: number,
   allowReversed: boolean,
   excludedCardIds: ReadonlySet<string> = new Set(),
-  randomFn: () => number = Math.random,
+  randomFn: () => number = cryptoRandom,
 ): FanCardItem[] {
   const availableCards = TAROT_DECK.filter(
     (card) => !excludedCardIds.has(card.id),
