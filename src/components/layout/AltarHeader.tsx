@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { Collapsible } from "@/components/ui/Collapsible";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { UI_TEXTS } from "@/constants/app";
-import { OracleMascot } from "@/features/tarot-reading/components/OracleMascot";
 import type { ThemeMode } from "@/types/tarot";
 
 interface AltarHeaderProps {
@@ -19,6 +18,26 @@ interface AltarHeaderProps {
   readonly onStartNewReading: () => void;
 }
 
+function BrandLogo() {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        backgroundColor: "var(--accent-jade)",
+        maskImage: 'url("/logo.svg")',
+        WebkitMaskImage: 'url("/logo.svg")',
+        maskSize: "contain",
+        WebkitMaskSize: "contain",
+        maskRepeat: "no-repeat",
+        WebkitMaskRepeat: "no-repeat",
+        maskPosition: "center",
+        WebkitMaskPosition: "center",
+      }}
+      className="inline-block h-5 w-5 shrink-0 transition-colors duration-200"
+    />
+  );
+}
+
 export function AltarHeader({
   theme,
   historyCount,
@@ -28,13 +47,14 @@ export function AltarHeader({
   onOpenHistory,
   onStartNewReading,
 }: AltarHeaderProps) {
-  const [isSmartExpanded, setIsSmartExpanded] = useState(false);
+  const [expandedSessionKey, setExpandedSessionKey] = useState<string | null>(
+    null,
+  );
   const isDark = theme === "dark";
 
-  // Tự động thu gọn thanh điều hướng sang góc trái ngay khi bước vào phiên trải bài
-  useEffect(() => {
-    setIsSmartExpanded(false);
-  }, [sessionKey]);
+  // Suy diễn trạng thái mở menu theo phiên hiện tại (tự động thu gọn khi sang phiên mới)
+  const activeKey = sessionKey ?? "__active__";
+  const isSmartExpanded = hasActiveSession && expandedSessionKey === activeKey;
 
   // Đóng menu phủ khi nhấn ESC
   useEffect(() => {
@@ -42,7 +62,7 @@ export function AltarHeader({
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setIsSmartExpanded(false);
+        setExpandedSessionKey(null);
       }
     }
 
@@ -50,14 +70,14 @@ export function AltarHeader({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isSmartExpanded]);
 
-  // 1. TRẠNG THÁI CHƯA BẮT ĐẦU PHIÊN (Trang đặt câu hỏi): Header đầy đủ chuẩn mực
+  // 1. TRẠNG THÁI CHƯA BẮT ĐẦU PHIÊN (Trang đặt câu hỏi)
   if (!hasActiveSession) {
     return (
       <header className="shrink-0 z-30 surface-header safe-area-top">
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-4 md:px-8">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full brand-orb">
-              <OracleMascot variant="emblem" />
+              <BrandLogo />
             </div>
             <span className="font-serif text-xl sm:text-2xl font-semibold tracking-[0.14em] ink-accent lowercase">
               {UI_TEXTS.HEADER.BRAND_NAME}
@@ -104,27 +124,29 @@ export function AltarHeader({
     );
   }
 
-  // 2. TRẠNG THÁI TRONG PHIÊN TRẢI BÀI (Hít thở -> Xào -> Rút -> Luận giải):
-  // Tự động thu về góc trái chỉ còn Huy hiệu Logo; chạm để bung ngang trên PC hoặc phủ lớp kính mờ trên Mobile
+  // 2. TRẠNG THÁI TRONG PHIÊN TRẢI BÀI (Thu gọn góc trái)
   return (
     <>
       <header className="pointer-events-none fixed top-0 left-0 z-40 px-4 pt-3 md:px-6 md:pt-4 safe-area-top">
         <div className="pointer-events-auto inline-flex items-center rounded-full surface-floating-capsule p-1">
-          {/* Huy hiệu Logo luôn hiện diện ở góc trái */}
           <Button
             variant="icon"
             size="icon"
-            onClick={() => setIsSmartExpanded((prev) => !prev)}
+            onClick={() =>
+              setExpandedSessionKey((prev) =>
+                prev === activeKey ? null : activeKey,
+              )
+            }
             aria-expanded={isSmartExpanded}
             aria-label={
               isSmartExpanded
                 ? UI_TEXTS.HEADER.BTN_COLLAPSE_MENU
                 : UI_TEXTS.HEADER.BTN_EXPAND_MENU
             }
-            icon={<OracleMascot variant="emblem" />}
+            icon={<BrandLogo />}
           />
 
-          {/* PC (>= md): Trải ngang trực tiếp bằng hiệu ứng motion-morph-x dùng chung */}
+          {/* PC (>= md): Trải ngang trực tiếp */}
           <div className="hidden md:block">
             <Collapsible isOpen={isSmartExpanded} direction="horizontal">
               <div className="flex items-center gap-2 pl-2.5 pr-1">
@@ -154,7 +176,7 @@ export function AltarHeader({
                   variant="outline"
                   size="md"
                   onClick={() => {
-                    setIsSmartExpanded(false);
+                    setExpandedSessionKey(null);
                     onOpenHistory();
                   }}
                   icon={<History className="h-4 w-4 ink-accent" />}
@@ -173,7 +195,7 @@ export function AltarHeader({
                   variant="subtle"
                   size="md"
                   onClick={() => {
-                    setIsSmartExpanded(false);
+                    setExpandedSessionKey(null);
                     onStartNewReading();
                   }}
                   icon={<RotateCcw className="h-4 w-4 ink-accent" />}
@@ -184,7 +206,7 @@ export function AltarHeader({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsSmartExpanded(false)}
+                  onClick={() => setExpandedSessionKey(null)}
                   aria-label={UI_TEXTS.HEADER.BTN_COLLAPSE_MENU}
                   icon={<ChevronLeft className="h-4 w-4" />}
                 />
@@ -194,7 +216,7 @@ export function AltarHeader({
         </div>
       </header>
 
-      {/* MOBILE (< md): Mở lớp phủ menu kính mờ đè lên trên khi chạm Logo */}
+      {/* MOBILE (< md): Lớp phủ menu kính mờ */}
       {isSmartExpanded && (
         <div
           className="fixed inset-0 z-50 md:hidden flex flex-col justify-start p-4 safe-area-top"
@@ -204,7 +226,7 @@ export function AltarHeader({
         >
           <div
             aria-hidden="true"
-            onClick={() => setIsSmartExpanded(false)}
+            onClick={() => setExpandedSessionKey(null)}
             className="fixed inset-0 surface-overlay-backdrop motion-veil-backdrop cursor-pointer"
           />
 
@@ -212,7 +234,7 @@ export function AltarHeader({
             <div className="flex items-center justify-between border-b line-accent-subtle pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full brand-orb">
-                  <OracleMascot variant="emblem" />
+                  <BrandLogo />
                 </div>
                 <span className="font-serif text-xl font-semibold tracking-[0.14em] ink-accent lowercase">
                   {UI_TEXTS.HEADER.BRAND_NAME}
@@ -222,7 +244,7 @@ export function AltarHeader({
               <Button
                 variant="icon"
                 size="icon"
-                onClick={() => setIsSmartExpanded(false)}
+                onClick={() => setExpandedSessionKey(null)}
                 aria-label={UI_TEXTS.HEADER.BTN_COLLAPSE_MENU}
                 icon={<X className="h-4 w-4" />}
               />
@@ -234,7 +256,7 @@ export function AltarHeader({
                 size="lg"
                 fullWidth
                 onClick={() => {
-                  setIsSmartExpanded(false);
+                  setExpandedSessionKey(null);
                   onOpenHistory();
                 }}
                 icon={<History className="h-4 w-4 ink-accent" />}
@@ -255,7 +277,7 @@ export function AltarHeader({
                 fullWidth
                 onClick={() => {
                   onToggleTheme();
-                  setIsSmartExpanded(false);
+                  setExpandedSessionKey(null);
                 }}
                 icon={
                   isDark ? (
@@ -275,7 +297,7 @@ export function AltarHeader({
                 size="lg"
                 fullWidth
                 onClick={() => {
-                  setIsSmartExpanded(false);
+                  setExpandedSessionKey(null);
                   onStartNewReading();
                 }}
                 icon={<RotateCcw className="h-4 w-4" />}
