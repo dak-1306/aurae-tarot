@@ -49,7 +49,7 @@ export function AltarStage({
       {!isDrawingPhase && (
         <div className="relative z-10 flex flex-col lg:hidden safe-area-top">
           {/* Tầng 1: Câu hỏi trải rộng (chừa góc trái cho nút logo thu gọn) */}
-          <div className="pl-16 pr-4 pt-3 pb-2">
+          <div className="text-center pt-3 pb-2">
             <p className="font-serif text-[15px] leading-snug font-medium ink-primary line-clamp-2">
               &ldquo;{session.question}&rdquo;
             </p>

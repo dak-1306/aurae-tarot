@@ -1,5 +1,6 @@
 import dns from 'node:dns';
 import { GoogleGenAI } from '@google/genai';
+import { TAROT_CONFIG } from '@/constants/app';
 import {
   AURAE_SYSTEM_INSTRUCTION,
   buildCumulativeDeepDivePrompt,
@@ -334,15 +335,24 @@ export async function POST(request: Request) {
   const payload = validation.data;
   const normalizedSession = toNormalizedReadingSession(payload.session);
 
-  const userPrompt =
-    payload.mode === 'deep-dive'
-      ? buildCumulativeDeepDivePrompt(
-          normalizedSession,
-          payload.targetRound as DeepDiveRound
-        )
-      : buildSynthesisPrompt(normalizedSession);
+  let userPrompt: string;
+  let maxOutputTokens: number;
 
-  const maxOutputTokens = payload.mode === 'deep-dive' ? 1000 : 1400;
+  if (payload.mode === 'deep-dive') {
+    const targetRound = payload.targetRound as DeepDiveRound;
+    const shouldGenerateSuggestions =
+      targetRound.round < TAROT_CONFIG.MAX_DEEP_DIVE_ROUNDS;
+
+    userPrompt = buildCumulativeDeepDivePrompt(
+      normalizedSession,
+      targetRound,
+      shouldGenerateSuggestions
+    );
+    maxOutputTokens = shouldGenerateSuggestions ? 1150 : 1000;
+  } else {
+    userPrompt = buildSynthesisPrompt(normalizedSession);
+    maxOutputTokens = 1550;
+  }
 
   // Bắt buộc dùng nhánh v1beta để hỗ trợ đầy đủ các model Gemini 3 & preview mới nhất
   const ai = new GoogleGenAI({

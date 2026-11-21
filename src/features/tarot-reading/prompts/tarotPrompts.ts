@@ -1,6 +1,8 @@
-import { TOPIC_PRESETS } from '@/constants/app';
-import { TAROT_CARD_MAP } from '@/constants/tarot-deck';
-import type { DeepDiveRound, DrawnCard, ReadingSession } from '@/types/tarot';
+import { TOPIC_PRESETS } from "@/constants/app";
+import { TAROT_CARD_MAP } from "@/constants/tarot-deck";
+import type { DeepDiveRound, DrawnCard, ReadingSession } from "@/types/tarot";
+
+export const SUGGESTIONS_DELIMITER = "---SUGGESTIONS---";
 
 export const AURAE_SYSTEM_INSTRUCTION = `
 Bạn là người đồng hành lắng nghe và soi chiếu nội tâm tại aurae — một không gian chiêm nghiệm Tarot tĩnh tại, ấm áp và chữa lành.
@@ -19,15 +21,28 @@ QUY TẮC TRÌNH BÀY MARKDOWN:
 - Không dùng chuỗi ký tự *** để ngăn cách đoạn.
 `.trim();
 
+const FOLLOW_UP_SUGGESTIONS_INSTRUCTION = `
+---
+SAU KHI HOÀN THÀNH BÀI VIẾT TRÊN:
+Xuống dòng và viết chính xác chuỗi phân cách sau trên một dòng riêng biệt:
+${SUGGESTIONS_DELIMITER}
+Ngay bên dưới chuỗi phân cách, hãy gợi ý đúng 3 câu hỏi đào sâu tiếp theo (mỗi câu trên 1 dòng, KHÔNG đánh số, KHÔNG gạch đầu dòng, KHÔNG đặt trong ngoặc kép):
+- Ngắn gọn (10–16 từ mỗi câu), xưng "mình" tự nhiên như chính người dùng đang tự hỏi lòng mình.
+- Bám sát trực tiếp vào tên các lá bài vừa rút và nút thắt cảm xúc vừa phân tích ở trên (tránh hỏi chung chung).
+- Chia thành 3 góc nhìn khác nhau: (1) soi chiếu nguyên nhân bên trong, (2) nhìn nhận mối quan hệ/bối cảnh xung quanh, (3) bước đi nhẹ nhàng tiếp theo.
+`.trim();
+
 function formatCardContext(card: DrawnCard): string {
   const def = TAROT_CARD_MAP[card.cardId];
   if (!def) {
-    return `• Khía cạnh "${card.positionLabel}": lá ${card.cardId} (${card.orientation === 'reversed' ? 'chiều ngược' : 'chiều xuôi'})`;
+    return `• Khía cạnh "${card.positionLabel}": lá ${card.cardId} (${card.orientation === "reversed" ? "chiều ngược" : "chiều xuôi"})`;
   }
 
-  const isReversed = card.orientation === 'reversed';
-  const orientationNote = isReversed ? 'chiều ngược' : 'chiều xuôi';
-  const keywords = (isReversed ? def.keywordsReversed : def.keywordsUpright).join(', ');
+  const isReversed = card.orientation === "reversed";
+  const orientationNote = isReversed ? "chiều ngược" : "chiều xuôi";
+  const keywords = (
+    isReversed ? def.keywordsReversed : def.keywordsUpright
+  ).join(", ");
   const coreMeaning = isReversed ? def.meaningReversed : def.meaningUpright;
 
   return `• Khía cạnh "${card.positionLabel}": lá **${def.nameVi}** (*${def.nameEn}*) ở ${orientationNote} — Gợi mở: ${keywords}. (${coreMeaning})`;
@@ -35,7 +50,7 @@ function formatCardContext(card: DrawnCard): string {
 
 export function buildSynthesisPrompt(session: ReadingSession): string {
   const topicPreset = TOPIC_PRESETS[session.topicId] ?? TOPIC_PRESETS.general;
-  const cardsContext = session.initialCards.map(formatCardContext).join('\n');
+  const cardsContext = session.initialCards.map(formatCardContext).join("\n");
 
   return `
 Chủ đề tâm tư: ${topicPreset.label}
@@ -50,22 +65,27 @@ Hãy viết một bài luận giải chữa lành dài khoảng 240 – 320 ch�
 1 đoạn ngắn (2–3 câu) đón nhận băn khoăn của bạn bằng sự đồng cảm nhẹ nhàng và phác họa bức tranh chuyển dịch năng lượng xuyên suốt 3 lá bài.
 
 ### Lắng nghe từng lá bài
-Viết 3 đoạn văn ngắn liền mạch (mỗi đoạn 2–3 câu) tương ứng với 3 khía cạnh (${session.initialCards.map((c) => c.positionLabel).join(', ')}). Lồng ghép tự nhiên tên lá bài **in đậm** (*tên tiếng Anh in nghiêng*) cùng sắc thái xuôi/ngược vào câu chuyện cảm xúc của bạn, tuyệt đối không mở đầu bằng nhãn cứng như "Quá khứ — ...".
+Viết 3 đoạn văn ngắn liền mạch (mỗi đoạn 2–3 câu) tương ứng với 3 khía cạnh (${session.initialCards.map((c) => c.positionLabel).join(", ")}). Lồng ghép tự nhiên tên lá bài **in đậm** (*tên tiếng Anh in nghiêng*) cùng sắc thái xuôi/ngược vào câu chuyện cảm xúc của bạn, tuyệt đối không mở đầu bằng nhãn cứng như "Quá khứ — ...".
 
 ### Một lời nhắn dịu dàng
 1 đoạn ngắn (2 câu) gợi mở sự thả lỏng, tự chăm sóc nội tâm hoặc một bước đi nhẹ nhàng, thực tế để bạn vững tâm hơn.
+
+${FOLLOW_UP_SUGGESTIONS_INSTRUCTION}
 `.trim();
 }
 
 export function buildCumulativeDeepDivePrompt(
   session: ReadingSession,
-  targetRound: DeepDiveRound
+  targetRound: DeepDiveRound,
+  shouldIncludeSuggestions = true,
 ): string {
   const topicPreset = TOPIC_PRESETS[session.topicId] ?? TOPIC_PRESETS.general;
-  const initialCardsContext = session.initialCards.map(formatCardContext).join('\n');
+  const initialCardsContext = session.initialCards
+    .map(formatCardContext)
+    .join("\n");
 
   const priorRounds = session.deepDiveRounds.filter(
-    (r) => r.round < targetRound.round && r.aiResponse.trim().length > 0
+    (r) => r.round < targetRound.round && r.aiResponse.trim().length > 0,
   );
 
   const priorRoundsContext =
@@ -73,10 +93,10 @@ export function buildCumulativeDeepDivePrompt(
       ? priorRounds
           .map(
             (r) =>
-              `Nhịp hỏi trước (#${r.round}): "${r.question}" -> ${formatCardContext(r.clarifierCard)}\nChia sẻ trước đó: ${r.aiResponse}`
+              `Nhịp hỏi trước (#${r.round}): "${r.question}" -> ${formatCardContext(r.clarifierCard)}\nChia sẻ trước đó: ${r.aiResponse}`,
           )
-          .join('\n\n')
-      : 'Chưa có nhịp hỏi bổ trợ trước đó.';
+          .join("\n\n")
+      : "Chưa có nhịp hỏi bổ trợ trước đó.";
 
   return `
 Bối cảnh trải bài ban đầu:
@@ -86,7 +106,7 @@ Bối cảnh trải bài ban đầu:
 ${initialCardsContext}
 
 Mạch chia sẻ ban đầu:
-${session.synthesisText || '(Tham chiếu trực tiếp từ 3 lá bài nền tảng)'}
+${session.synthesisText || "(Tham chiếu trực tiếp từ 3 lá bài nền tảng)"}
 
 Các nhịp hỏi sâu trước đó:
 ${priorRoundsContext}
@@ -100,5 +120,7 @@ Hãy viết lời phản hồi chữa lành dài khoảng 160 – 230 chữ:
 - Đi thẳng vào điều bạn vừa hỏi với giọng văn ấm áp, thủ thỉ và thấu cảm.
 - Kết nối thông điệp của lá bài bổ trợ vừa rút với mạch câu chuyện từ 3 lá bài nền tảng để tháo gỡ nút thắt hoặc soi sáng một góc nhìn mới mẻ, nhẹ nhõm hơn.
 - Có thể dùng 1 tiêu đề phụ ngắn (### ...) nếu cần tách ý, trình bày thành 2–3 đoạn văn ngắn giàu khoảng thở.
+
+${shouldIncludeSuggestions ? FOLLOW_UP_SUGGESTIONS_INSTRUCTION : ""}
 `.trim();
 }

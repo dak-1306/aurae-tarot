@@ -33,6 +33,12 @@ export function ReadingPanel({
   const [customFollowUp, setCustomFollowUp] = useState("");
 
   const preset = TOPIC_PRESETS[session.topicId];
+  const deepDiveSuggestions =
+    session.suggestedDeepDiveQuestions &&
+    session.suggestedDeepDiveQuestions.length > 0
+      ? session.suggestedDeepDiveQuestions
+      : preset.deepDiveSuggestions;
+
   const remainingRounds =
     TAROT_CONFIG.MAX_DEEP_DIVE_ROUNDS - session.deepDiveRounds.length;
   const isBusyStreaming =
@@ -192,16 +198,16 @@ export function ReadingPanel({
             {remainingRounds > 0 ? (
               <>
                 <div className="grid grid-cols-1 gap-2">
-                  {preset.deepDiveSuggestions.map((suggestion) => (
-                    <ChipButton
-                      key={suggestion}
-                      variant="card"
-                      disabled={!canDeepDive}
-                      onClick={() => handleChipClick(suggestion)}
-                    >
-                      {suggestion}
-                    </ChipButton>
-                  ))}
+                  {deepDiveSuggestions.map((suggestion) => (
+    <ChipButton
+      key={suggestion}
+      variant="card"
+      disabled={!canDeepDive}
+      onClick={() => handleChipClick(suggestion)}
+    >
+      {suggestion}
+    </ChipButton>
+  ))}
                 </div>
 
                 <form onSubmit={handleCustomSubmit} className="flex gap-2">

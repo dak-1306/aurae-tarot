@@ -63,6 +63,18 @@ interface TarotStoreState {
   readonly setHistoryOpen: (isOpen: boolean) => void;
   readonly setShareModalOpen: (isOpen: boolean) => void;
   readonly setErrorMessage: (message: string | null) => void;
+
+  readonly setSynthesisStreamOutput: (
+    synthesisText: string,
+    suggestedQuestions: readonly string[] | undefined,
+    updatedAtIso: string,
+  ) => void;
+  readonly setDeepDiveStreamOutput: (
+    roundNumber: DeepDiveRoundNumber,
+    aiResponse: string,
+    suggestedQuestions: readonly string[] | undefined,
+    updatedAtIso: string,
+  ) => void;
 }
 
 export const useTarotStore = create<TarotStoreState>((set) => ({
@@ -215,4 +227,42 @@ export const useTarotStore = create<TarotStoreState>((set) => ({
   setShareModalOpen: (isOpen) => set({ isShareModalOpen: isOpen }),
 
   setErrorMessage: (message) => set({ errorMessage: message }),
+
+  setSynthesisStreamOutput: (synthesisText, suggestedQuestions, updatedAtIso) =>
+    set((state) => {
+      if (!state.session) return state;
+      return {
+        session: {
+          ...state.session,
+          synthesisText,
+          ...(suggestedQuestions && suggestedQuestions.length > 0
+            ? { suggestedDeepDiveQuestions: suggestedQuestions }
+            : {}),
+          updatedAt: updatedAtIso,
+        },
+      };
+    }),
+
+  setDeepDiveStreamOutput: (
+    roundNumber,
+    aiResponse,
+    suggestedQuestions,
+    updatedAtIso,
+  ) =>
+    set((state) => {
+      if (!state.session) return state;
+      const updatedRounds = state.session.deepDiveRounds.map((item) =>
+        item.round === roundNumber ? { ...item, aiResponse } : item,
+      );
+      return {
+        session: {
+          ...state.session,
+          deepDiveRounds: updatedRounds,
+          ...(suggestedQuestions && suggestedQuestions.length > 0
+            ? { suggestedDeepDiveQuestions: suggestedQuestions }
+            : {}),
+          updatedAt: updatedAtIso,
+        },
+      };
+    }),
 }));

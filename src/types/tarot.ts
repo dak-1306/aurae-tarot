@@ -74,6 +74,7 @@ export interface ReadingSession {
   readonly initialCards: readonly DrawnCard[];
   readonly synthesisText: string;
   readonly deepDiveRounds: readonly DeepDiveRound[];
+  readonly suggestedDeepDiveQuestions?: readonly string[];
   readonly pendingDeepDiveQuestion: string | null;
   readonly clarifierFanPool: readonly FanCardItem[];
   readonly createdAt: string;
