@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ChevronLeft, History, Moon, RotateCcw, Sun, X } from "lucide-react";
+import { AmbientSoundButton } from "@/components/ui/AmbientSoundButton";
 import { Button } from "@/components/ui/Button";
 import { Collapsible } from "@/components/ui/Collapsible";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -85,6 +86,8 @@ export function AltarHeader({
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
+            <AmbientSoundButton variant="icon" />
+
             <Button
               variant="icon"
               size="icon"
@@ -153,6 +156,8 @@ export function AltarHeader({
                 <span className="font-serif text-lg font-semibold tracking-[0.14em] ink-accent lowercase pr-2 border-r line-neutral-subtle">
                   {UI_TEXTS.HEADER.BRAND_NAME}
                 </span>
+
+                <AmbientSoundButton variant="icon" />
 
                 <Button
                   variant="icon"
@@ -270,6 +275,11 @@ export function AltarHeader({
                   )}
                 </span>
               </Button>
+
+              <AmbientSoundButton
+                variant="menu-row"
+                onAfterToggle={() => setExpandedSessionKey(null)}
+              />
 
               <Button
                 variant="outline"

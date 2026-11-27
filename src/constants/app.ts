@@ -4,6 +4,7 @@ export const STORAGE_KEYS = {
   ACTIVE_SESSION: "aurae_active_session_v1",
   READING_HISTORY: "aurae_history_v1",
   PREFERENCES: "aurae_preferences_v1",
+  SOUND_PREF: "aurae_sound_pref_v1",
   // Alias giữ lại để tương thích nếu file cũ còn gọi
   CURRENT_SESSION: "aurae_active_session_v1",
   HISTORY: "aurae_history_v1",
@@ -25,6 +26,13 @@ export const TAROT_CONFIG = {
   STREAM_CHUNK_DELAY_MS: 24,
   SHARE_IMAGE_WIDTH: 1080,
   SHARE_IMAGE_HEIGHT: 1920,
+} as const;
+
+export const AUDIO_CONFIG = {
+  SRC: "/audio/ambient-ritual.mp3",
+  TARGET_VOLUME: 0.28,
+  FADE_IN_DURATION_MS: 1800,
+  FADE_OUT_DURATION_MS: 850,
 } as const;
 
 export const TOPIC_PRESETS: Record<TopicId, TopicPreset> = {
@@ -263,5 +271,11 @@ export const UI_TEXTS = {
   ARIA: {
     CLOSE_OVERLAY: "Đóng cửa sổ",
     TOGGLE_REVERSED: "Bật hoặc tắt lá bài ngược",
+  },
+  AUDIO: {
+    BTN_MUTE: "Tắt nhạc nền",
+    BTN_UNMUTE: "Bật nhạc nền",
+    LABEL_ON: "Nhạc nền: Bật",
+    LABEL_OFF: "Nhạc nền: Tắt",
   },
 } as const;

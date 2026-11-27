@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { UI_TEXTS } from "@/constants/app";
+import { AmbientAudioProvider } from "@/contexts/AmbientAudioContext";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["vietnamese", "latin"],
@@ -48,7 +49,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
       </head>
-      <body className="app-body">{children}</body>
+      <body className="app-body">
+        <AmbientAudioProvider>{children}</AmbientAudioProvider>
+      </body>
     </html>
   );
 }
